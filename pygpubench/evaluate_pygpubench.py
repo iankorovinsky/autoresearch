@@ -11,12 +11,14 @@ os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
 PYGPUBENCH_VERSION = "0.0.3"
 CONFIG_ENV = "KB_PYGPUBENCH_CONFIG"
+PRECHECK_MARKER = "KB_PRECHECK_RESULT:"
 SCRIPT_DIR = Path(__file__).resolve().parent
 MODULE_NAME = Path(__file__).stem
 LOCAL_KERNELBENCH = SCRIPT_DIR.parent / "KernelBench"
 SUPPORTED_DTYPES = ("torch.float32", "torch.float16", "torch.bfloat16")
 
 _cache = {}
+_reference_cache = {}
 
 
 def _config():
@@ -116,15 +118,45 @@ def reference_kernel(out, *inputs):
         out.copy_(model(*inputs))
 
 
-def _precompile():
-    import torch
-    model, get_inputs, _, precision, device = _load_reference()
+def _precheck():
     kb_eval, _ = _kernelbench()
+    model, get_inputs, _, precision, device = _load_reference()
     candidate = _load_candidate()
-    kb_eval.set_seed(_config()["init_seed"])
-    inputs = [kb_eval._process_input_tensor(x, device, "cuda", precision) for x in get_inputs()]
-    candidate(*inputs)
-    torch.cuda.synchronize(device)
+    cfg = _config()
+    metadata = {}
+    check = kb_eval.run_and_check_correctness(
+        model, candidate, get_inputs, metadata,
+        num_correct_trials=cfg["kb_trials"], seed=cfg["init_seed"], device=device,
+        backend="cuda", precision=precision,
+    )
+    payload = {"correctness": check.correctness, "metadata": check.metadata}
+    print(PRECHECK_MARKER + json.dumps(payload, default=str), flush=True)
+
+
+def _parse_precheck(stdout):
+    for line in reversed(stdout.splitlines()):
+        if line.startswith(PRECHECK_MARKER):
+            return json.loads(line[len(PRECHECK_MARKER):])
+    return None
+
+
+def _describe_kb_failure(metadata, tolerance):
+    if "runtime_error" in metadata:
+        text = f"runtime error in ModelNew: {metadata['runtime_error']}"
+        tb = metadata.get("runtime_error_traceback")
+        if tb:
+            text += "\n" + tb[-2500:]
+        return text
+    issue = metadata.get("correctness_issue")
+    if issue:
+        text = f"KernelBench correctness check failed: {issue}"
+        if metadata.get("max_difference"):
+            text += (f" (max abs diff {metadata['max_difference'][-1]}, "
+                     f"mean abs diff {metadata['avg_difference'][-1]}, tolerance {tolerance})")
+        if metadata.get("correctness_trials"):
+            text += f"; trials passed {metadata['correctness_trials']}"
+        return text
+    return "KernelBench correctness check failed: " + json.dumps(metadata, default=str)[:2000]
 
 
 def _stats(time_us):
@@ -152,7 +184,7 @@ def _bench(qualname, repeats, seed, timeout):
 
 
 def evaluate_pygpubench(task_id, level, kernel_path, repeats=10, seed=42, init_seed=42, precision="fp32",
-                        measure_reference=True, timeout=900, build_dir="/tmp/kb_build"):
+                        kb_trials=1, measure_reference=True, timeout=900, build_dir="/tmp/kb_build"):
     import torch
     kb_eval, kb_dataset = _kernelbench()
     problem = kb_dataset.construct_kernelbench_dataset(level).get_problem_by_id(task_id)
@@ -165,58 +197,84 @@ def evaluate_pygpubench(task_id, level, kernel_path, repeats=10, seed=42, init_s
         "init_seed": init_seed,
         "precision": precision,
         "build_dir": build_dir,
+        "kb_trials": kb_trials,
     })
+    gpu = torch.cuda.get_device_name(0)
+    tolerance = kb_eval.get_tolerance_for_precision(precision)
     result = {
         "task_id": task_id,
         "level": level,
         "task_name": problem.name,
         "kernel_path": kernel_path,
-        "gpu": torch.cuda.get_device_name(0),
+        "gpu": gpu,
         "precision": precision,
-        "tolerance": kb_eval.get_tolerance_for_precision(precision),
+        "tolerance": tolerance,
         "repeats": repeats,
         "compiled": False,
         "correct": False,
+        "feedback": None,
+        "kernelbench_check": None,
         "errors": None,
-        "error_message": None,
         "latency_us": None,
         "time_us": None,
         "event_overhead_us": None,
         "reference_latency_us": None,
+        "reference_cached": False,
         "speedup": None,
     }
     pythonpath = os.pathsep.join(p for p in _import_paths() + [os.environ.get("PYTHONPATH", "")] if p)
     env = dict(os.environ, PYTHONPATH=pythonpath)
-    compile_run = subprocess.run(
-        [sys.executable, "-c", f"import {MODULE_NAME} as m; m._precompile()"],
+    precheck_run = subprocess.run(
+        [sys.executable, "-c", f"import {MODULE_NAME} as m; m._precheck()"],
         env=env, capture_output=True, text=True, timeout=timeout,
     )
-    if compile_run.returncode != 0:
-        result["error_message"] = "candidate failed to compile or run:\n" + compile_run.stderr[-4000:]
+    precheck = _parse_precheck(precheck_run.stdout)
+    if precheck_run.returncode != 0 or precheck is None:
+        result["feedback"] = "candidate failed to compile or load:\n" + precheck_run.stderr[-4000:]
         return result
     result["compiled"] = True
+    result["kernelbench_check"] = precheck
+    if not precheck["correctness"]:
+        result["feedback"] = _describe_kb_failure(precheck["metadata"], tolerance)
+        return result
     try:
         res = _bench(f"{MODULE_NAME}.kernel", repeats, seed, timeout)
     except Exception:
-        result["error_message"] = "benchmark failed:\n" + traceback.format_exc()[-4000:]
+        result["feedback"] = "PyGPUBench benchmark failed:\n" + traceback.format_exc()[-4000:]
         return result
     result["correct"] = res.success
     result["errors"] = res.errors or 0
     result["time_us"] = res.time_us
     result["event_overhead_us"] = res.event_overhead_us
     result["latency_us"] = _stats(res.time_us)
-    if not res.full:
-        result["error_message"] = "benchmark did not complete all repeats; timings are informational only"
     if res.errors:
-        result["error_message"] = f"{res.errors} sampled output elements exceeded tolerance {result['tolerance']}"
+        result["feedback"] = (f"KernelBench check passed but PyGPUBench flagged {res.errors} output elements outside "
+                              f"tolerance {tolerance} across {len(res.time_us)} timed runs; "
+                              "check for stream, synchronization or uninitialized-memory issues")
+        return result
+    if not res.full:
+        result["feedback"] = "PyGPUBench did not complete all repeats; timings are informational only"
+        return result
     if measure_reference:
-        try:
-            ref = _bench(f"{MODULE_NAME}.reference_kernel", repeats, seed, timeout)
-            result["reference_latency_us"] = _stats(ref.time_us)
-            if result["latency_us"] and result["reference_latency_us"] and result["correct"]:
-                result["speedup"] = result["reference_latency_us"]["mean"] / result["latency_us"]["mean"]
-        except Exception:
-            result["reference_error"] = traceback.format_exc()[-2000:]
+        key = (level, task_id, gpu, repeats, seed, init_seed, precision)
+        if key in _reference_cache:
+            result["reference_latency_us"] = _reference_cache[key]
+            result["reference_cached"] = True
+        else:
+            try:
+                ref = _bench(f"{MODULE_NAME}.reference_kernel", repeats, seed, timeout)
+                result["reference_latency_us"] = _stats(ref.time_us)
+                if ref.success and result["reference_latency_us"]:
+                    _reference_cache[key] = result["reference_latency_us"]
+            except Exception:
+                result["reference_error"] = traceback.format_exc()[-2000:]
+    s = result["latency_us"]
+    if s and result["reference_latency_us"]:
+        result["speedup"] = result["reference_latency_us"]["mean"] / s["mean"]
+        result["feedback"] = (f"correct; {s['mean']:.1f} us vs torch {result['reference_latency_us']['mean']:.1f} us "
+                              f"({result['speedup']:.2f}x)")
+    elif s:
+        result["feedback"] = f"correct; {s['mean']:.1f} us"
     return result
 
 
@@ -230,11 +288,18 @@ def print_summary(result):
         print(f"  latency:  {s['mean']:.1f} +/- {s['std']:.1f} us  [best {s['best']:.1f} / median {s['median']:.1f} / worst {s['worst']:.1f}]  ({s['runs']}/{s['expected']} runs)")
     if result["reference_latency_us"]:
         r = result["reference_latency_us"]
-        print(f"  torch:    {r['mean']:.1f} +/- {r['std']:.1f} us  [best {r['best']:.1f} / median {r['median']:.1f} / worst {r['worst']:.1f}]")
+        cached = " (cached)" if result["reference_cached"] else ""
+        print(f"  torch:    {r['mean']:.1f} +/- {r['std']:.1f} us  [best {r['best']:.1f} / median {r['median']:.1f} / worst {r['worst']:.1f}]{cached}")
     if result["speedup"]:
         print(f"  speedup:  {result['speedup']:.2f}x")
-    if result["error_message"]:
-        print(f"  error:    {result['error_message']}")
+    print(f"  feedback: {result['feedback']}")
+
+
+def _write_output(results, output):
+    if output:
+        data = results[0] if len(results) == 1 else results
+        Path(output).write_text(json.dumps(data, indent=2))
+        print(f"  saved:    {output}")
 
 
 try:
@@ -265,7 +330,7 @@ if modal is not None:
     )
     app = modal.App("kernelbench-pygpubench", image=image)
 
-    @app.function(gpu="L4", timeout=3600)
+    @app.function(gpu="L4", timeout=3600, scaledown_window=300)
     def evaluate_remote(task_id: int, level: int, kernel_name: str, kernel_src: str, repeats: int, measure_reference: bool):
         kernel_dir = Path("/tmp/candidates")
         kernel_dir.mkdir(parents=True, exist_ok=True)
@@ -276,12 +341,13 @@ if modal is not None:
     @app.local_entrypoint()
     def main(task_id: int = 1, level: int = 1, kernel_path: str = "candidates/correct_cuda.py", repeats: int = 10,
              skip_reference: bool = False, output: str = ""):
-        path = Path(kernel_path)
-        result = evaluate_remote.remote(task_id, level, path.name, path.read_text(), repeats, not skip_reference)
-        print_summary(result)
-        if output:
-            Path(output).write_text(json.dumps(result, indent=2))
-            print(f"  saved:    {output}")
+        results = []
+        for item in kernel_path.split(","):
+            path = Path(item.strip())
+            result = evaluate_remote.remote(task_id, level, path.name, path.read_text(), repeats, not skip_reference)
+            print_summary(result)
+            results.append(result)
+        _write_output(results, output)
 
 
 if __name__ == "__main__":
@@ -293,9 +359,11 @@ if __name__ == "__main__":
     parser.add_argument("--skip-reference", action="store_true")
     parser.add_argument("--output", default="")
     args = parser.parse_args()
-    result = evaluate_pygpubench(args.task_id, args.level, args.kernel_path, repeats=args.repeats,
-                                 measure_reference=not args.skip_reference)
-    print_summary(result)
-    if args.output:
-        Path(args.output).write_text(json.dumps(result, indent=2))
-    raise SystemExit(0 if result["correct"] else 1)
+    results = []
+    for item in args.kernel_path.split(","):
+        result = evaluate_pygpubench(args.task_id, args.level, item.strip(), repeats=args.repeats,
+                                     measure_reference=not args.skip_reference)
+        print_summary(result)
+        results.append(result)
+    _write_output(results, args.output)
+    raise SystemExit(0 if all(r["correct"] for r in results) else 1)
