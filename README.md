@@ -123,3 +123,42 @@ uv run python scripts/check_candidate.py 1 1 \
 ```
 
 `--gpu` selects a Modal GPU; it does not select local hardware.
+
+## PyGPUBench evaluation
+
+`pygpubench/evaluate_pygpubench.py` evaluates a candidate `ModelNew` against a
+KernelBench task through [PyGPUBench](https://github.com/gpu-mode/pygpubench),
+the adversarial benchmarking harness. It needs only the `modal` package locally;
+PyTorch, PyGPUBench and this repository's `KernelBench/` folder are set up in
+the Modal image (CUDA 13, Python 3.12, L4 GPU).
+
+```bash
+cd pygpubench
+modal run evaluate_pygpubench.py --task-id 1 --level 1 --kernel-path candidates/correct_cuda.py
+```
+
+Options: `--task-id`, `--level`, `--kernel-path` (one file or several separated
+by commas), `--repeats` (default 10), `--skip-reference`, `--output result.json`.
+Several kernels in one call share one container and one cached PyTorch baseline.
+
+Each candidate goes through these stages, stopping at the first failure:
+
+1. Compile and load `ModelNew` with KernelBench's `load_custom_model` in a subprocess.
+2. KernelBench's `run_and_check_correctness` on random inputs. A failure returns
+   the reason (shape mismatch, max and mean absolute difference, or traceback).
+3. PyGPUBench benchmark in an isolated worker: expected outputs are hidden from
+   the candidate, every output element is checked on the GPU, and latency is
+   measured with CUDA events after clearing L2.
+4. PyTorch reference timed the same way, once per task and GPU, then cached.
+
+The result is a dict with `compiled`, `correct`, `speedup`, a one-line `feedback`
+string, and the full latency statistics. `candidates/correct_cuda.py` is a tiled
+CUDA matmul that passes task 1 at about 0.10x of cuBLAS, `candidates/incorrect_cuda.py`
+is the same kernel with one tile dropped and fails at stage 2, and
+`candidates/torch_matmul.py` is a plain PyTorch candidate for checking the setup.
+
+Notes: PyGPUBench's published wheel targets compute capability 8.0 and 9.0, so
+a T4 will not run it. Landlock and mseal are disabled on Modal, as in PyGPUBench's
+own CI. The `supervisor: connection closed unexpectedly` traceback printed after
+each result is PyGPUBench's helper process exiting on Modal's sandbox and does not
+affect the result. PyGPUBench checks only fp32, fp16 and bf16 single-tensor outputs.
