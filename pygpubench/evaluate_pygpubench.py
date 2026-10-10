@@ -120,16 +120,14 @@ def reference_kernel(out, *inputs):
 
 def _precheck():
     kb_eval, _ = _kernelbench()
-    model, get_inputs, _, precision, device = _load_reference()
-    candidate = _load_candidate()
     cfg = _config()
-    metadata = {}
-    check = kb_eval.run_and_check_correctness(
-        model, candidate, get_inputs, metadata,
-        num_correct_trials=cfg["kb_trials"], seed=cfg["init_seed"], device=device,
-        backend="cuda", precision=precision,
+    check = kb_eval.eval_kernel_against_ref(
+        cfg["ref_src"], cfg["kernel_src"],
+        seed_num=cfg["init_seed"], num_correct_trials=cfg["kb_trials"], measure_performance=False,
+        build_dir=cfg["build_dir"], device=_device(), backend="cuda",
+        precision=kb_eval.get_torch_dtype_from_string(cfg["precision"]),
     )
-    payload = {"correctness": check.correctness, "metadata": check.metadata}
+    payload = None if check is None else check.model_dump()
     print(PRECHECK_MARKER + json.dumps(payload, default=str), flush=True)
 
 
@@ -141,6 +139,8 @@ def _parse_precheck(stdout):
 
 
 def _describe_kb_failure(metadata, tolerance):
+    if "compilation_error" in metadata:
+        return f"candidate failed to compile: {metadata['compilation_error']}"[:4000]
     if "runtime_error" in metadata:
         text = f"runtime error in ModelNew: {metadata['runtime_error']}"
         tb = metadata.get("runtime_error_traceback")
@@ -229,12 +229,15 @@ def evaluate_pygpubench(task_id, level, kernel_path, repeats=10, seed=42, init_s
         env=env, capture_output=True, text=True, timeout=timeout,
     )
     precheck = _parse_precheck(precheck_run.stdout)
-    if precheck_run.returncode != 0 or precheck is None:
-        result["feedback"] = "candidate failed to compile or load:\n" + precheck_run.stderr[-4000:]
+    if precheck_run.returncode != 0:
+        result["feedback"] = "KernelBench check crashed:\n" + precheck_run.stderr[-4000:]
         return result
-    result["compiled"] = True
+    if precheck is None:
+        result["feedback"] = "KernelBench reported a build lock error; retry the evaluation"
+        return result
+    result["compiled"] = precheck["compiled"]
     result["kernelbench_check"] = precheck
-    if not precheck["correctness"]:
+    if not precheck["compiled"] or not precheck["correctness"]:
         result["feedback"] = _describe_kb_failure(precheck["metadata"], tolerance)
         return result
     try:
