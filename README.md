@@ -162,3 +162,7 @@ a T4 will not run it. Landlock and mseal are disabled on Modal, as in PyGPUBench
 own CI. The `supervisor: connection closed unexpectedly` traceback printed after
 each result is PyGPUBench's helper process exiting on Modal's sandbox and does not
 affect the result. PyGPUBench checks only fp32, fp16 and bf16 single-tensor outputs.
+
+## Run kernel autoresearch with Harbor
+
+A Harbor task for optimizing the level 1 square matrix multiplication kernel is in [harbor/README.md](harbor/README.md). It runs the agent and correctness/performance verifier in a Modal L4 environment. The starter kernel is based on the existing tiled CUDA example.
