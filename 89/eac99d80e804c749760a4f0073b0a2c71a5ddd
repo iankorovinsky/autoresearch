@@ -1,0 +1,23 @@
+pygpubench/candidates/correct_cuda.py
+  s_b5c704cf8ee201::t_70be7def5bc766 1-69
+pygpubench/candidates/incorrect_cuda.py
+  s_b5c704cf8ee201::t_6e7f20ed9404cc 1-69
+pygpubench/candidates/torch_matmul.py
+  s_b5c704cf8ee201::t_4162cd0015a7af 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "89eac99d80e804c749760a4f0073b0a2c71a5ddd",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
