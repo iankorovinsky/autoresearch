@@ -1,0 +1,62 @@
+{
+  "task_id": 1,
+  "level": 1,
+  "task_name": "1_Square_matrix_multiplication_.py",
+  "kernel_path": "/workspace/candidate.py",
+  "gpu": "NVIDIA L4",
+  "precision": "fp32",
+  "tolerance": 0.0001,
+  "repeats": 10,
+  "compiled": true,
+  "correct": true,
+  "feedback": "correct; 80612.4 us vs torch 10549.9 us (0.13x)",
+  "kernelbench_check": {
+    "compiled": true,
+    "correctness": true,
+    "metadata": {
+      "hardware": "NVIDIA L4",
+      "device": "cuda:0",
+      "correctness_trials": "(1 / 1)"
+    },
+    "runtime": -1.0,
+    "runtime_stats": {},
+    "ref_runtime": -1.0,
+    "ref_runtime_stats": {}
+  },
+  "errors": 0,
+  "latency_us": {
+    "runs": 10,
+    "expected": 10,
+    "best": 77085.7,
+    "worst": 83919.9,
+    "median": 80471.0,
+    "mean": 80612.36,
+    "std": 1803.2799420315553,
+    "err": 570.2471875716117
+  },
+  "time_us": [
+    80471.0,
+    82335.8,
+    77085.7,
+    80217.1,
+    80471.0,
+    80382.0,
+    79798.3,
+    79725.6,
+    83919.9,
+    81717.2
+  ],
+  "event_overhead_us": 2.048,
+  "reference_latency_us": {
+    "runs": 10,
+    "expected": 10,
+    "best": 8990.72,
+    "worst": 11616.3,
+    "median": 11154.4,
+    "mean": 10549.86,
+    "std": 1008.1326380106052,
+    "err": 318.79953196675524
+  },
+  "reference_cached": false,
+  "speedup": 0.1308714941480438
+}

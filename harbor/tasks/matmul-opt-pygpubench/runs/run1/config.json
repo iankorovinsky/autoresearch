@@ -1,0 +1,22 @@
+{
+    "job_name": "run1",
+    "jobs_dir": "harbor/tasks/matmul-opt-pygpubench/runs",
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "modal"
+    },
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "openai/gpt-6-luna",
+            "kwargs": {
+                "reasoning_effort": "none"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "harbor/tasks/matmul-opt-pygpubench"
+        }
+    ]
+}

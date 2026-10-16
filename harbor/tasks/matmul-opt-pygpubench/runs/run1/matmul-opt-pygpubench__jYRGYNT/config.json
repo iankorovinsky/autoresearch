@@ -1,0 +1,18 @@
+{
+    "task": {
+        "path": "harbor/tasks/matmul-opt-pygpubench"
+    },
+    "trial_name": "matmul-opt-pygpubench__jYRGYNT",
+    "trials_dir": "harbor/tasks/matmul-opt-pygpubench/runs/run1",
+    "agent": {
+        "name": "codex",
+        "model_name": "openai/gpt-6-luna",
+        "kwargs": {
+            "reasoning_effort": "none"
+        }
+    },
+    "environment": {
+        "type": "modal"
+    },
+    "job_id": "8494a91a-189c-4901-8a10-1b0e092ceb63"
+}
