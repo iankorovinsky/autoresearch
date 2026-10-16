@@ -1,4 +1,28 @@
+# Local environments and caches
 .venv/
-node_modules/
+venv/
 __pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+.DS_Store
 pygpubench/*.json
+node_modules/
+
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+.modal.toml
+.aws/
+.ssh/
+*.pem
+*.key
+
+# Generated Harbor runs (logs can contain local paths and credentials)
+/jobs/
