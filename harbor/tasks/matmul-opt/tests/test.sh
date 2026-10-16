@@ -31,9 +31,4 @@ if [[ -z "$SPEEDUP" ]]; then
   exit 0
 fi
 
-python3 - "$SPEEDUP" > /logs/verifier/reward.txt <<'PY'
-import sys
-speedup = float(sys.argv[1])
-# Reward is 0 for incorrect kernels, otherwise capped at 1.0x eager speed.
-print(f"{min(max(speedup, 0.0), 1.0):.4f}")
-PY
+awk -v s="$SPEEDUP" 'BEGIN { if (s < 0) s = 0; if (s > 1) s = 1; printf "%.4f\n", s }' > /logs/verifier/reward.txt
