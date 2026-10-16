@@ -163,6 +163,30 @@ own CI. The `supervisor: connection closed unexpectedly` traceback printed after
 each result is PyGPUBench's helper process exiting on Modal's sandbox and does not
 affect the result. PyGPUBench checks only fp32, fp16 and bf16 single-tensor outputs.
 
+### Harbor task verified by PyGPUBench
+
+`harbor/tasks/matmul-opt-pygpubench/` is the same matrix multiplication task with
+`evaluate_pygpubench.py` as the verifier. The agent iterates with that script and
+the final candidate is scored by it; the reward is the PyGPUBench speedup capped at 1.0.
+
+```bash
+CODEX_FORCE_AUTH_JSON=1 harbor run \
+  --path ./harbor/tasks/matmul-opt-pygpubench \
+  --agent codex \
+  --model openai/gpt-6-luna \
+  --agent-kwarg reasoning_effort=none \
+  --env modal \
+  --n-attempts 1 \
+  --n-concurrent 1 \
+  --jobs-dir ./harbor/tasks/matmul-opt-pygpubench/runs \
+  --job-name run1
+```
+
+`CODEX_FORCE_AUTH_JSON=1` makes Harbor use the Codex login in `~/.codex/auth.json`.
+Results land in `harbor/tasks/matmul-opt-pygpubench/runs/run1/`, with the agent's
+trajectory under `agent/`, the scored kernel under `artifacts/`, and the PyGPUBench
+output under `verifier/`.
+
 ## Run kernel autoresearch with Harbor
 
 A Harbor task for optimizing the level 1 square matrix multiplication kernel is in [harbor/README.md](harbor/README.md). It runs the agent and correctness/performance verifier in a Modal L4 environment. The starter kernel is based on the existing tiled CUDA example.
