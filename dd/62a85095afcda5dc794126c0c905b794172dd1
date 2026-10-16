@@ -1,0 +1,29 @@
+harbor/tasks/matmul-opt-pygpubench/solution/solve.sh
+  s_b5c704cf8ee201::t_c085ac96c38f99 1-4
+harbor/tasks/matmul-opt-pygpubench/instruction.md
+  s_b5c704cf8ee201::t_e60f25909bd052 1-23
+harbor/tasks/matmul-opt-pygpubench/environment/Dockerfile
+  s_b5c704cf8ee201::t_8a9add9c830e27 1-26
+.gitattributes
+  s_b5c704cf8ee201::t_b0b8fb4bcad673 1-5
+harbor/tasks/matmul-opt-pygpubench/task.toml
+  s_b5c704cf8ee201::t_e3f43ef62fd292 1-29
+harbor/tasks/matmul-opt-pygpubench/tests/test.sh
+  s_b5c704cf8ee201::t_cb9d6869ec55f5 1-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dd62a85095afcda5dc794126c0c905b794172dd1",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
