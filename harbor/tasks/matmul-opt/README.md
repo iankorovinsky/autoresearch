@@ -9,17 +9,25 @@ Harbor provisions an L4 through Modal. The verifier independently checks correct
 From the repository root:
 
 ~~~bash
+RUNS_DIR="./harbor/tasks/matmul-opt/runs"
+RUN_NUMBER=1
+while [ -e "$RUNS_DIR/run$RUN_NUMBER" ]; do
+  RUN_NUMBER=$((RUN_NUMBER + 1))
+done
+
 harbor run \
   --path ./harbor/tasks/matmul-opt \
   --agent codex \
   --model openai/gpt-6-luna \
   --agent-kwarg reasoning_effort=none \
   --env modal \
+  --jobs-dir "$RUNS_DIR" \
+  --job-name "run$RUN_NUMBER" \
   --n-attempts 1 \
   --n-concurrent 1
 ~~~
 
-Authenticate Modal and the selected model provider before launching. One trial uses an L4 and model usage; the first run also builds the CUDA image.
+Authenticate Modal and the selected model provider before launching. One trial uses an L4 and model usage; the first run also builds the CUDA image. Each invocation picks the next unused name (`run1`, `run2`, ...) and stores its output in a separate folder under `harbor/tasks/matmul-opt/runs/`.
 
 ## Files
 

@@ -1,0 +1,27 @@
+Working directory: /opt/autoresearch/KernelBench
+PYTHONPATH=/opt/autoresearch/KernelBench/src:/pkg/:/root/
+uv run python scripts/run_and_check.py ref_origin=kernelbench dataset_src=local level=1 problem_id=1 kernel_src_path=/workspace/candidate.py eval_mode=local num_correct_trials=2 num_perf_trials=10 'gpu_arch=["Turing"]'
+Running with config ScriptConfig({'ref_origin': 'kernelbench', 'ref_arch_src_path': '', 'dataset_src': 'local', 'dataset_name': 'ScalingIntelligence/KernelBench', 'level': 1, 'problem_id': 1, 'kernel_src_path': '/workspace/candidate.py', 'eval_mode': 'local', 'gpu': 'L40S', 'num_correct_trials': 2, 'num_perf_trials': 10, 'timeout': 300, 'verbose': False, 'measure_performance': True, 'timing_method': 'cuda_event', 'build_dir_prefix': '', 'clear_cache': False, 'gpu_arch': ['Turing'], 'precision': 'fp32', 'backend': 'cuda', 'check_kernel': True})
+Fetched problem 1 from KernelBench level 1: 1_Square_matrix_multiplication_.py
+[INFO] Evaluating kernel against reference code (LOCAL)
+[Profiling] Using timing method: cuda_event
+[Profiling] Using device: cuda:0 NVIDIA L4, warm up 3, trials 10
+[Profiling] Using timing method: cuda_event
+[Profiling] Using device: cuda:0 NVIDIA L4, warm up 3, trials 10
+[INFO] Measuring reference program time
+Using PyTorch Eager Execution on Reference Program
+[Profiling] Using timing method: cuda_event
+[Profiling] Using device: cuda:0 NVIDIA L4, warm up 5, trials 10
+Using torch.compile to compile model Reference Program with inductor backend and default mode
+[Profiling] Using timing method: cuda_event
+[Profiling] Using device: cuda:0 NVIDIA L4, warm up 5, trials 10
+========================================
+[Eval] Kernel eval result: compiled=True correctness=True metadata={'hardware': 'NVIDIA L4', 'device': 'cuda:0', 'correctness_trials': '(2 / 2)'} runtime=3.52 runtime_stats={'mean': 3.52, 'std': 0.275, 'min': 3.35, 'max': 4.32, 'num_trials': 10, 'hardware': 'NVIDIA L4', 'device': 'cuda:0'} ref_runtime=10.3 ref_runtime_stats={'mean': 10.3, 'std': 0.285, 'min': 9.61, 'max': 10.4, 'num_trials': 10, 'hardware': 'NVIDIA L4', 'device': 'cuda:0'}
+----------------------------------------
+[Timing] PyTorch Reference Eager exec time: 10.4 ms
+[Timing] PyTorch Reference torch.compile time: 10.3 ms
+[Timing] Custom Kernel exec time: 3.52 ms
+----------------------------------------
+[Speedup] Speedup over eager: 2.95x
+[Speedup] Speedup over torch.compile: 2.93x
+========================================

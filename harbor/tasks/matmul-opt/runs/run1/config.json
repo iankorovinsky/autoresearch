@@ -1,0 +1,25 @@
+{
+    "job_name": "se390-matmul-test-20261016-retry",
+    "jobs_dir": "/tmp/autoresearch-harbor-jobs",
+    "n_concurrent_trials": 1,
+    "environment": {
+        "type": "modal"
+    },
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "openai/gpt-6-luna",
+            "kwargs": {
+                "reasoning_effort": "none"
+            },
+            "env": {
+                "CODEX_AUTH_JSON_PATH": "/Use****son"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "harbor/tasks/matmul-opt"
+        }
+    ]
+}
