@@ -1,0 +1,21 @@
+pygpubench/evaluate_pygpubench.py
+  s_b5c704cf8ee201::t_4e17b48d982017 142-143
+  s_b5c704cf8ee201::t_405d5a0cd5d620 232-236,238,240
+  s_b5c704cf8ee201::t_217ddecd2555cd 124-128,130
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ac9c530cbe501b2508265bd3854d21e8f2fa31e3",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
