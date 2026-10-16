@@ -233,7 +233,8 @@ def evaluate_pygpubench(task_id, level, kernel_path, repeats=10, seed=42, init_s
         result["feedback"] = "KernelBench check crashed:\n" + precheck_run.stderr[-4000:]
         return result
     if precheck is None:
-        result["feedback"] = "KernelBench reported a build lock error; retry the evaluation"
+        result["feedback"] = ("KernelBench could not evaluate the candidate (build lock or missing file):\n"
+                              + precheck_run.stderr[-4000:])
         return result
     result["compiled"] = precheck["compiled"]
     result["kernelbench_check"] = precheck
