@@ -1,0 +1,21 @@
+pygpubench/evaluate_pygpubench.py
+  s_b5c704cf8ee201::t_5125927efda0e9 236-237
+pygpubench/candidates/cublas_tf32.py
+  s_b5c704cf8ee201::t_30cc78a24b2af5 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "10db612211dbe0078ccfa2c419f0a8fac83b049c",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
