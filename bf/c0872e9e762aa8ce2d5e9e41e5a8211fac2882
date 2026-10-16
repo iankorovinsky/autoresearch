@@ -1,0 +1,42 @@
+pygpubench/README.md
+  s_b5c704cf8ee201::t_2db3fc0d0fc88e 20-26
+  s_b5c704cf8ee201::t_63ad5342a054d0 65-66
+  s_b5c704cf8ee201::t_61a441dfe15f70 17-19
+  s_b5c704cf8ee201::t_40b3a4d57375ee 27-29,62-64
+  s_b5c704cf8ee201::t_3ec88a60bdecab 67-69
+  s_b5c704cf8ee201::t_e71d19e544f29f 1-16,30-61
+pygpubench/evaluate_pygpubench.py
+  s_b5c704cf8ee201::t_95007c7609f0b2 15
+  s_b5c704cf8ee201::t_cc2310e1c89b9c 138
+  s_b5c704cf8ee201::t_11a41fb8bdd2dd 14,16-36
+  s_b5c704cf8ee201::t_154791923b1432 188
+  s_b5c704cf8ee201::t_9ca23e2e3182f0 214
+  s_b5c704cf8ee201::t_f7d56eeb029a7a 199
+  s_b5c704cf8ee201::t_e9d20b2bb17fe4 249-264
+  s_b5c704cf8ee201::t_550dcf5be9573e 11-13
+  s_b5c704cf8ee201::t_dd91479037798d 37-39,135-137
+  s_b5c704cf8ee201::t_057e46d7672c2b 139-141,185-187
+  s_b5c704cf8ee201::t_ad59f5e83ed245 189-191,196-198
+  s_b5c704cf8ee201::t_74f64ec22fc00b 200-202,211-213
+  s_b5c704cf8ee201::t_ddee1f01f2157e 215-217,246-248
+  s_b5c704cf8ee201::t_150442a5b02e79 265-267
+  s_b5c704cf8ee201::t_3468f4904a20c2 1-10,40-134,142-184,192-195,203-210,218-245,268-301
+pygpubench/.gitignore
+  s_b5c704cf8ee201::t_c16677233e4288 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bfc0872e9e762aa8ce2d5e9e41e5a8211fac2882",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
