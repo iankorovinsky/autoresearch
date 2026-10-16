@@ -1,1 +1,125 @@
-# autoresearch
+# Run your first KernelBench candidate
+
+This guide evaluates an existing kernel against a PyTorch task using a remote
+NVIDIA T4 on Modal. You can launch it from a Mac without a local NVIDIA GPU.
+
+## 1. Get the repository and dependencies
+
+Clone this repository or copy the complete checkout, including the updated
+`scripts/check_candidate.py`. Open a terminal in the repository root (the folder
+containing `pyproject.toml`). Keep `src/`, `scripts/`, and `KernelBench/` together.
+
+You need `uv`, internet access, and a Modal account with access to GPU compute.
+Remote runs use your Modal account's compute allowance or billing.
+
+Install `uv` using the [official installation instructions](https://docs.astral.sh/uv/getting-started/installation/).
+If you already have Python and pip, you can install it with:
+
+```bash
+python3 -m pip install uv
+```
+
+Then install the Python version and dependencies used by this project:
+
+```bash
+uv python install 3.10
+uv sync --locked
+```
+
+`pyproject.toml` defines dependencies and `uv.lock` pins the resolved versions.
+Use these files for setup; `requirements.txt` is archived. You do not need to
+activate the virtual environment when using `uv run`.
+
+For Modal evaluation, the base dependencies are sufficient on your computer.
+The evaluator builds the remote CUDA image and installs the `gpu` extras there.
+LLM provider API keys are not needed to evaluate an existing candidate.
+
+## 2. Authenticate with Modal
+
+```bash
+uv run modal token new
+```
+
+Follow the browser login flow. You only need to do this when the machine does
+not already have working Modal credentials. See the
+[Modal token documentation](https://modal.com/docs/cli/latest/token).
+
+## 3. Run the included example
+
+```bash
+uv run python scripts/check_candidate.py 1 1 \
+  src/kernelbench/prompts/few_shot/model_new_ex_tiled_matmul.py \
+  --eval-mode modal --gpu T4 \
+  --setting num_correct_trials=1 \
+  --setting num_perf_trials=5
+```
+
+This selects level 1, problem 1 (square matrix multiplication), and checks the
+included tiled matrix multiplication candidate. The evaluator automatically
+selects the Turing architecture for a T4. The first run may take longer while
+Modal builds the image and starts a GPU container.
+
+Look for `compiled=True` and `correctness=True` in the output. Timing results
+compare the candidate against PyTorch eager and `torch.compile`. A speedup
+greater than `1.0x` means the candidate is faster; less than `1.0x` means slower.
+The process exit code alone does not establish that correctness passed.
+
+One correctness trial and five timing trials are useful for a quick check.
+Omit those two settings to use the evaluator defaults of five correctness
+trials and 100 timing trials.
+
+## 4. Run your own candidate
+
+```bash
+uv run python scripts/check_candidate.py LEVEL PROBLEM_ID /path/to/candidate.py \
+  --eval-mode modal --gpu T4
+```
+
+Replace `LEVEL` and `PROBLEM_ID` with numbers. Tasks are stored under
+`KernelBench/level<LEVEL>/`; the filename prefix identifies the problem ID.
+Your candidate must define `ModelNew` with constructor and forward arguments
+compatible with the task's `Model`. Paths containing spaces should be quoted.
+Relative candidate paths are resolved from the directory where you launch the command.
+
+| Option | Purpose |
+| --- | --- |
+| `--eval-mode modal` | Execute on Modal instead of your local machine. Local is the default. |
+| `--gpu T4` | Choose the remote GPU. T4 is the wrapper default for Modal. |
+| `--dry-run` | Print the command without starting evaluation. |
+| `--setting backend=triton` | Evaluate a Triton candidate; the default backend is CUDA. |
+| `--setting num_correct_trials=5` | Set the number of correctness trials. |
+| `--setting num_perf_trials=100` | Set the number of timing trials. |
+| `--setting precision=fp32` | Select tensor precision; FP32 is the default. |
+
+Repeat `--setting KEY=VALUE` to pass additional evaluator settings. See
+`ScriptConfig` in `scripts/run_and_check.py` for supported settings.
+
+## Troubleshooting
+
+- **`CUDA is not available` / `Torch not compiled with CUDA enabled`:** Check
+  that your command includes `--eval-mode modal`. Local CUDA execution requires
+  a compatible GPU machine; changing the architecture flag cannot enable CUDA
+  on a Mac.
+- **`No module named kernelbench`:** Use the wrapper from this checkout. It adds
+  the repository's `src` directory to the child process's `PYTHONPATH`. Ensure
+  the full repository is present and run `uv sync --locked`.
+- **`uv` not found:** Install `uv` and ensure its executable is on your `PATH`.
+- **Modal authentication failure:** Run `uv run modal token new` and authenticate
+  with the account you intend to use for GPU execution.
+- **Missing candidate or task:** Check the candidate path and the matching
+  `KernelBench/level<LEVEL>/<PROBLEM_ID>_*.py` task file.
+
+## Optional: run locally on a GPU machine
+
+On a compatible NVIDIA GPU machine with the required drivers and CUDA build
+toolchain installed, install GPU dependencies and select the local architecture.
+For a T4:
+
+```bash
+uv sync --locked --extra gpu
+uv run python scripts/check_candidate.py 1 1 \
+  src/kernelbench/prompts/few_shot/model_new_ex_tiled_matmul.py \
+  --eval-mode local --setting 'gpu_arch=["Turing"]'
+```
+
+`--gpu` selects a Modal GPU; it does not select local hardware.
