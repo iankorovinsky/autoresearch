@@ -1,0 +1,19 @@
+README.md
+  s_b5c704cf8ee201::t_395050002a50f2 166-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2553aaec7e0395ca206e7757ecafc1096fc2d0e0",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
