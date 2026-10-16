@@ -190,3 +190,7 @@ output under `verifier/`.
 ## Run kernel autoresearch with Harbor
 
 A Harbor task for optimizing the level 1 square matrix multiplication kernel is in [harbor/README.md](harbor/README.md). It runs the agent and correctness/performance verifier in a Modal L4 environment. The starter kernel is based on the existing tiled CUDA example.
+
+## Conversation database
+
+The [`data/`](data/README.md) package manages projects, threads, and ordered messages with Prisma migrations for Supabase PostgreSQL. It is separate from the frontend and contains no seed data. See its README for local validation and deployment instructions.
