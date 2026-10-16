@@ -1,0 +1,21 @@
+README.md
+  s_b5c704cf8ee201::t_2eccabc8a48f28 126-164
+.gitignore
+  s_b5c704cf8ee201::t_dd72ae151d245a 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c88b1c31365a49788d86171c030dcb4ab5b5b2a7",
+  "prompts": {},
+  "sessions": {
+    "s_b5c704cf8ee201": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c20998f7-a15a-45bb-851c-f53d4c83d207",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
