@@ -1,0 +1,21 @@
+{
+    "task": {
+        "path": "harbor/tasks/matmul-opt"
+    },
+    "trial_name": "matmul-opt__TsTnJF8",
+    "trials_dir": "/Users/sophia/autoresearch/harbor/tasks/matmul-opt/runs/run1",
+    "agent": {
+        "name": "codex",
+        "model_name": "openai/gpt-6-luna",
+        "kwargs": {
+            "reasoning_effort": "none"
+        },
+        "env": {
+            "CODEX_AUTH_JSON_PATH": "/Use****son"
+        }
+    },
+    "environment": {
+        "type": "modal"
+    },
+    "job_id": "7740a293-371d-4316-b486-6cde37e793e5"
+}

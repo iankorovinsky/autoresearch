@@ -14,17 +14,25 @@ This folder contains a Harbor task where a coding agent creates a CUDA kernel fr
 Authenticate Modal and the selected model provider, then run:
 
 ~~~bash
+RUNS_DIR="./harbor/tasks/matmul-opt/runs"
+RUN_NUMBER=1
+while [ -e "$RUNS_DIR/run$RUN_NUMBER" ]; do
+  RUN_NUMBER=$((RUN_NUMBER + 1))
+done
+
 harbor run \
   --path ./harbor/tasks/matmul-opt \
   --agent codex \
   --model openai/gpt-6-luna \
   --agent-kwarg reasoning_effort=none \
   --env modal \
+  --jobs-dir "$RUNS_DIR" \
+  --job-name "run$RUN_NUMBER" \
   --n-attempts 1 \
   --n-concurrent 1
 ~~~
 
-The task uses an L4; the first run also builds a CUDA image. Model usage and GPU time may incur charges.
+The task uses an L4; the first run also builds a CUDA image. Model usage and GPU time may incur charges. Each invocation picks the next unused name (`run1`, `run2`, ...) and stores its output in a separate folder under `harbor/tasks/matmul-opt/runs/`.
 
 ## Current scope
 
