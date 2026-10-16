@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import os
-os.environ["CXX"] = "/usr/bin/g++-11"
 from torch.utils.cpp_extension import load_inline
 
 
@@ -37,7 +36,7 @@ torch::Tensor matmul_cuda(torch::Tensor A, torch::Tensor B) {
 _cpp_src = "torch::Tensor matmul_cuda(torch::Tensor A, torch::Tensor B);"
 _module = load_inline("square_matmul_cuda", cpp_sources=_cpp_src,
                       cuda_sources=_cuda_src, functions=["matmul_cuda"],
-                      extra_cuda_cflags=["-O3", "-ccbin=/usr/bin/g++-11"], verbose=False)
+                      extra_cuda_cflags=["-O3"], verbose=False)
 
 
 class ModelNew(nn.Module):
