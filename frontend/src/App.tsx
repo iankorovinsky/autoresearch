@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { signOut } from "./app/auth/actions";
 import type { ReactNode } from "react";
 import {
   Activity,
@@ -92,10 +93,21 @@ function loadPreference(key: string, fallback: string) {
     return fallback;
   }
 }
-function loadThreads(): Thread[] {
+function loadThreads(storageKey: string): Thread[] {
   try {
-    const saved = localStorage.getItem("ar-threads-v1");
-    return saved ? JSON.parse(saved) : initialThreads;
+    const saved = localStorage.getItem(storageKey);
+    const parsed: unknown = saved ? JSON.parse(saved) : null;
+    if (!Array.isArray(parsed) || parsed.length === 0) return initialThreads;
+    if (
+      !parsed.every(
+        (thread) =>
+          typeof thread?.id === "string" &&
+          typeof thread?.title === "string" &&
+          Array.isArray(thread?.messages),
+      )
+    )
+      return initialThreads;
+    return parsed as Thread[];
   } catch {
     return initialThreads;
   }
@@ -204,7 +216,13 @@ function Chart({ large = false }: { large?: boolean }) {
     </div>
   );
 }
-export default function App() {
+export default function App({
+  userId,
+  email,
+}: {
+  userId: string;
+  email: string;
+}) {
   const [threads, setThreads] = useState<Thread[]>(initialThreads);
   const [restored, setRestored] = useState(false);
   const [activeId, setActiveId] = useState("matmul");
@@ -233,31 +251,31 @@ export default function App() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
-    setThreads(loadThreads());
-    setModel(loadPreference("ar-model", "Claude Sonnet"));
-    setGpu(loadPreference("ar-gpu", "NVIDIA T4"));
+    setThreads(loadThreads(`ar:${userId}:threads`));
+    setModel(loadPreference(`ar:${userId}:model`, "Claude Sonnet"));
+    setGpu(loadPreference(`ar:${userId}:gpu`, "NVIDIA T4"));
     setSidebar(window.innerWidth > 700);
     setRestored(true);
   }, []);
   useEffect(() => {
     if (!restored) return;
     try {
-      localStorage.setItem("ar-threads-v1", JSON.stringify(threads));
+      localStorage.setItem(`ar:${userId}:threads`, JSON.stringify(threads));
     } catch {
       setToast(
         "Browser storage is unavailable; changes last for this session.",
       );
     }
-  }, [threads, restored]);
+  }, [threads, restored, userId]);
   useEffect(() => {
     if (!restored) return;
     try {
-      localStorage.setItem("ar-model", model);
-      localStorage.setItem("ar-gpu", gpu);
+      localStorage.setItem(`ar:${userId}:model`, model);
+      localStorage.setItem(`ar:${userId}:gpu`, gpu);
     } catch {
       /* Preferences remain in session memory. */
     }
-  }, [model, gpu, restored]);
+  }, [model, gpu, restored, userId]);
   useEffect(() => {
     if (toast) {
       const t = setTimeout(() => setToast(""), 3500);
@@ -534,7 +552,7 @@ export default function App() {
             <button className="profile" onClick={() => setModal("settings")}>
               <div className="avatar">AR</div>
               <span>
-                Research workspace<small>Personal workspace</small>
+                Research workspace<small title={email}>{email}</small>
               </span>
               <Settings2 size={15} />
             </button>
@@ -1465,6 +1483,12 @@ export default function App() {
                       are saved in this browser.
                     </p>
                   </div>
+                </div>
+                <div className="account-actions">
+                  <span title={email}>{email}</span>
+                  <form action={signOut}>
+                    <button type="submit">Sign out</button>
+                  </form>
                 </div>
                 <button
                   className="primary-button"

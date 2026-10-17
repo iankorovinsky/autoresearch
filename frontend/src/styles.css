@@ -2317,3 +2317,24 @@ button:disabled {
   max-width: 300px;
   margin: auto;
 }
+
+.account-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 2px;
+  border-top: 1px solid #e6ecdc;
+  font-size: 10px;
+  color: #8f9f7a;
+  margin-top: 12px;
+}
+.account-actions span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.account-actions button {
+  font-size: 10px;
+  color: #7f9662;
+  white-space: nowrap;
+}
