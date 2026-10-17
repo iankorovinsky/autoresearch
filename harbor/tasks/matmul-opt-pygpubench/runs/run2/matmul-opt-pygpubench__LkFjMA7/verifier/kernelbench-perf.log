@@ -1,0 +1,15 @@
+Working directory: /Users/sophia/autoresearch/KernelBench
+PYTHONPATH=/Users/sophia/autoresearch/KernelBench/src
+uv run python scripts/run_and_check.py ref_origin=kernelbench dataset_src=local level=1 problem_id=1 kernel_src_path=/Users/sophia/autoresearch/harbor/tasks/matmul-opt-pygpubench/runs/run2/matmul-opt-pygpubench__LkFjMA7/artifacts/workspace/candidate.py eval_mode=modal gpu=L4 num_correct_trials=2 num_perf_trials=10
+Running with config ScriptConfig({'ref_origin': 'kernelbench', 'ref_arch_src_path': '', 'dataset_src': 'local', 'dataset_name': 'ScalingIntelligence/KernelBench', 'level': 1, 'problem_id': 1, 'kernel_src_path': '/Users/sophia/autoresearch/harbor/tasks/matmul-opt-pygpubench/runs/run2/matmul-opt-pygpubench__LkFjMA7/artifacts/workspace/candidate.py', 'eval_mode': 'modal', 'gpu': 'L4', 'num_correct_trials': 2, 'num_perf_trials': 10, 'timeout': 300, 'verbose': False, 'measure_performance': True, 'timing_method': 'cuda_event', 'build_dir_prefix': '', 'clear_cache': False, 'gpu_arch': ['Ada'], 'precision': 'fp32', 'backend': 'cuda', 'check_kernel': True})
+Fetched problem 1 from KernelBench level 1: 1_Square_matrix_multiplication_.py
+Traceback (most recent call last):
+  File "/Users/sophia/autoresearch/KernelBench/scripts/run_and_check.py", line 406, in <module>
+    main()
+  File "/Users/sophia/autoresearch/KernelBench/.venv/lib/python3.10/site-packages/pydra/cli.py", line 124, in wrapped_fn
+    return _apply_overrides_and_call(fn, base, args)
+  File "/Users/sophia/autoresearch/KernelBench/.venv/lib/python3.10/site-packages/pydra/cli.py", line 118, in _apply_overrides_and_call
+    return fn(config)
+  File "/Users/sophia/autoresearch/KernelBench/scripts/run_and_check.py", line 292, in main
+    assert static_check_status, f"Static check failed. Errors: {errors}. Warnings: {warnings}"
+AssertionError: Static check failed. Errors: ['Missing __global__ kernel definition']. Warnings: []

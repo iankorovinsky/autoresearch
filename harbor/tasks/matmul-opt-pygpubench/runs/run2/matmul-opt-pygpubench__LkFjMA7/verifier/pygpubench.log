@@ -1,0 +1,28 @@
+WARNING: /proc/self/mem is readable: Running as root?
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/venv/lib/python3.12/site-packages/pygpubench/supervisor.py", line 14, in _supervisor_entry
+    _pygpubench.run_supervisor(sock.fileno())
+RuntimeError: supervisor: connection closed unexpectedly
+WARNING: /proc/self/mem is readable: Running as root?
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/venv/lib/python3.12/site-packages/pygpubench/supervisor.py", line 14, in _supervisor_entry
+    _pygpubench.run_supervisor(sock.fileno())
+RuntimeError: supervisor: connection closed unexpectedly
+[PASS] level 1 task 1 (1_Square_matrix_multiplication_.py) on NVIDIA L4
+  kernel:   /workspace/candidate.py
+  compiled: True  correct: True  errors: 0
+  latency:  10311.1 +/- 1044.3 us  [best 8476.7 / median 10932.2 / worst 11271.2]  (10/10 runs)
+  torch:    10380.5 +/- 1022.4 us  [best 8821.8 / median 10942.5 / worst 11425.8]
+  speedup:  1.01x
+  feedback: correct; 10311.1 us vs torch 10380.5 us (1.01x)
+  saved:    /logs/verifier/result.json

@@ -1,0 +1,19 @@
+Working directory: /Users/sophia/autoresearch/KernelBench
+PYTHONPATH=/Users/sophia/autoresearch/KernelBench/src
+uv run python scripts/run_and_check.py ref_origin=kernelbench dataset_src=local level=1 problem_id=1 kernel_src_path=/Users/sophia/autoresearch/harbor/tasks/matmul-opt-pygpubench/runs/run2/matmul-opt-pygpubench__LkFjMA7/artifacts/workspace/candidate.py eval_mode=modal gpu=L4 num_correct_trials=2 num_perf_trials=10 check_kernel=False
+Running with config ScriptConfig({'ref_origin': 'kernelbench', 'ref_arch_src_path': '', 'dataset_src': 'local', 'dataset_name': 'ScalingIntelligence/KernelBench', 'level': 1, 'problem_id': 1, 'kernel_src_path': '/Users/sophia/autoresearch/harbor/tasks/matmul-opt-pygpubench/runs/run2/matmul-opt-pygpubench__LkFjMA7/artifacts/workspace/candidate.py', 'eval_mode': 'modal', 'gpu': 'L4', 'num_correct_trials': 2, 'num_perf_trials': 10, 'timeout': 300, 'verbose': False, 'measure_performance': True, 'timing_method': 'cuda_event', 'build_dir_prefix': '', 'clear_cache': False, 'gpu_arch': ['Ada'], 'precision': 'fp32', 'backend': 'cuda', 'check_kernel': False})
+Fetched problem 1 from KernelBench level 1: 1_Square_matrix_multiplication_.py
+[INFO] Using GPU: L4 with architecture: ['Ada']
+[INFO] Evaluating kernel against reference code (MODAL)
+[INFO] Measuring reference program time (PyTorch Eager)
+[INFO] Measuring reference program time (torch.compile)
+========================================
+[Eval] Kernel eval result: compiled=True correctness=True metadata={'hardware': 'NVIDIA L4', 'device': 'cuda:0', 'correctness_trials': '(2 / 2)'} runtime=8.55 runtime_stats={'mean': 8.55, 'std': 0.568, 'min': 8.07, 'max': 10.2, 'num_trials': 10, 'hardware': 'NVIDIA L4', 'device': 'cuda:0'} ref_runtime=10.2 ref_runtime_stats={'mean': 10.2, 'std': 0.664, 'min': 8.72, 'max': 10.7, 'num_trials': 10, 'hardware': 'NVIDIA L4', 'device': 'cuda:0'}
+----------------------------------------
+[Timing] PyTorch Reference Eager exec time: 10.4 ms
+[Timing] PyTorch Reference torch.compile time: 10.4 ms
+[Timing] Custom Kernel exec time: 8.55 ms
+----------------------------------------
+[Speedup] Speedup over eager: 1.22x
+[Speedup] Speedup over torch.compile: 1.22x
+========================================
