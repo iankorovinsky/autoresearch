@@ -4,6 +4,9 @@ import { useActionState, useState } from "react";
 import {
   ArrowRight,
   FlaskConical,
+  Check,
+  Terminal,
+  Code2,
   LoaderCircle,
   Mail,
   ShieldCheck,
@@ -25,8 +28,8 @@ const copy: Record<
   { title: string; description: string; button: string }
 > = {
   signin: {
-    title: "Welcome back.",
-    description: "A little curiosity goes a long way.",
+    title: "Welcome back",
+    description: "Sign in to your research workspace.",
     button: "Sign in",
   },
   signup: {
@@ -70,44 +73,95 @@ export default function AuthForm({
   const [mode, setMode] = useState<Mode>(resetPassword ? "reset" : "signin");
   return (
     <main className="auth-page">
-      <header className="auth-brand">
-        <span className="brand-mark" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>
-          auto<span>research</span>
-        </span>
-      </header>
       <section className="auth-layout">
         <aside className="auth-story">
-          <span className="auth-eyebrow">A WORKSPACE FOR DISCOVERY</span>
-          <h1>
-            Good questions.
-            <br />
-            <span>Better experiments.</span>
-          </h1>
-          <p>
-            From an idea to a faster kernel.
-            <br />
-            Keep your research, reasoning, and results together.
-          </p>
-          <div className="auth-story-note">
-            <FlaskConical size={18} />
+          <header className="auth-brand">
+            <span className="brand-mark" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
             <span>
-              Built for the work between
+              Autoresearch<span className="auth-brand-period">.</span>
+            </span>
+          </header>
+          <div className="auth-story-content">
+            <span className="auth-eyebrow">
+              <span />
+              THE RESEARCH WORKSPACE
+            </span>
+            <h1>
+              From hypothesis
               <br />
-              “what if” and “it works.”
-            </span>
+              to <span>working code.</span>
+            </h1>
+            <p>
+              A focused space to explore ideas, run experiments,
+              <br className="auth-desktop-break" /> and follow the evidence.
+            </p>
+            <div className="auth-workspace-preview" aria-hidden="true">
+              <div className="preview-window-bar">
+                <span className="preview-window-dots">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span>
+                  <Terminal size={12} /> kernel-optimization
+                </span>
+                <span className="preview-demo">PREVIEW</span>
+              </div>
+              <div className="preview-tabs">
+                <span>
+                  <Code2 size={12} /> Research
+                </span>
+                <span>Experiments</span>
+                <span>Artifacts</span>
+              </div>
+              <div className="preview-body">
+                <div className="preview-prompt">
+                  <span>❯</span> Optimize matrix multiplication on T4
+                </div>
+                <div className="preview-log">
+                  <span>
+                    <Check size={12} />
+                  </span>{" "}
+                  Baseline established <i>2.99 ms</i>
+                </div>
+                <div className="preview-log">
+                  <span>
+                    <Check size={12} />
+                  </span>{" "}
+                  Candidates evaluated <i>12 / 12</i>
+                </div>
+                <div className="preview-result">
+                  <div>
+                    <span>BEST CANDIDATE</span>
+                    <strong>
+                      2.41<span>×</span>
+                      <small>faster</small>
+                    </strong>
+                  </div>
+                  <svg viewBox="0 0 210 68">
+                    <path d="M4 6L32 12L50 27L75 25L99 40L119 35L144 49L169 53L205 61" />
+                    <circle cx="205" cy="61" r="3" />
+                  </svg>
+                  <span className="preview-result-status">
+                    <Check size={11} /> Verified
+                  </span>
+                </div>
+                <div className="preview-input">
+                  <span>What should we explore next?</span>
+                  <ArrowRight size={13} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="auth-orbit" aria-hidden="true">
-            <i />
-            <i />
-            <i />
+          <div className="auth-story-bottom">
             <span>
-              <FlaskConical size={31} strokeWidth={1} />
+              <FlaskConical size={14} /> Built for the next iteration.
             </span>
+            <span>01 — ∞</span>
           </div>
         </aside>
         <section className="auth-card">
@@ -118,11 +172,11 @@ export default function AuthForm({
             initialError={initialError}
             initialMessage={initialMessage}
           />
+          <footer className="auth-footer">
+            <ShieldCheck size={13} /> Secure sign-in with Supabase
+          </footer>
         </section>
       </section>
-      <footer className="auth-footer">
-        <ShieldCheck size={13} /> Secure sign-in, powered by Supabase
-      </footer>
     </main>
   );
 }
@@ -147,7 +201,7 @@ function Form({
     mode === "signin" || mode === "signup" || mode === "reset";
   return (
     <>
-      <span className="auth-card-eyebrow">YOUR RESEARCH STARTS HERE</span>
+      <span className="auth-card-eyebrow">AUTORESEARCH / WORKSPACE</span>
       <h2>{details.title}</h2>
       <p className="auth-description">{details.description}</p>
       {(mode === "signin" || mode === "signup") && (
@@ -268,7 +322,7 @@ function Form({
       <p className="auth-switch">
         {mode === "signin" ? (
           <>
-            New to Auto Research?{" "}
+            New to Autoresearch?{" "}
             <button disabled={pending} onClick={() => setMode("signup")}>
               Create an account
             </button>
