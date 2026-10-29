@@ -1,0 +1,450 @@
+.experiment-chart {
+  margin: 16px 0 10px;
+  border: 1px solid #e8dfd5;
+  border-radius: 10px;
+  background: #fffdfa;
+  padding: 14px;
+}
+.ec-toolbar,
+.ec-actions,
+.ec-legend,
+.ec-range-label,
+.ec-comparison-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ec-segment {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid #e7ddd2;
+  border-radius: 7px;
+  background: #f5f1eb;
+}
+.ec-segment button {
+  font-size: 10px;
+  padding: 6px 9px;
+  border-radius: 4px;
+  color: #968371;
+}
+.ec-segment button[aria-pressed="true"] {
+  background: #fffdfa;
+  color: #a5481e;
+  box-shadow: 0 1px 4px #49302015;
+}
+.ec-segment button span {
+  font: 9px var(--font-mono);
+  margin-left: 3px;
+  opacity: 0.65;
+}
+.ec-actions {
+  gap: 3px;
+}
+.ec-actions button {
+  height: 28px;
+  width: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  color: #9a8069;
+}
+.ec-actions button:hover,
+.ec-actions button[aria-pressed="true"] {
+  background: #fff0e3;
+  color: #ad4b20;
+}
+.ec-legend {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-size: 9px;
+  margin: 16px 0;
+  color: #846f5b;
+  gap: 12px;
+}
+.ec-legend > span,
+.ec-legend button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.ec-legend i {
+  display: block;
+  width: 10px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.ec-legend .ec-baseline-key {
+  background: none;
+  border-top: 1px dashed #9c9387;
+  height: 0;
+  border-radius: 0;
+}
+.ec-legend .ec-best-key {
+  background: #6d8673;
+}
+.ec-legend button {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.ec-legend button[aria-pressed="true"] {
+  opacity: 1;
+  text-decoration: none;
+}
+.ec-legend small {
+  margin-left: auto;
+  font-size: 8px;
+  color: #a79380;
+}
+.ec-readout {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  padding: 13px 0 17px;
+  border-bottom: 1px solid #f0e8df;
+  min-height: 77px;
+}
+.ec-readout > div {
+  flex-shrink: 0;
+}
+.ec-readout span {
+  display: block;
+  font: 8px var(--font-mono);
+  color: #a08770;
+  margin-bottom: 5px;
+}
+.ec-readout strong {
+  font: 22px var(--font-mono);
+  letter-spacing: -1px;
+  color: #69442c;
+}
+.ec-readout strong small {
+  font-size: 11px;
+  letter-spacing: 0;
+  color: #a48b76;
+}
+.ec-readout p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #8a715c;
+  margin: 0 0 0 auto;
+  max-width: 175px;
+}
+.ec-readout p span {
+  margin: 5px 0 0;
+  font: 8px var(--font-ui);
+  color: #b1977f;
+}
+.ec-plot {
+  margin-top: 14px;
+  border-radius: 5px;
+}
+.ec-plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: pan-y;
+  cursor: crosshair;
+  user-select: none;
+}
+.ec-plot svg text {
+  font: 10px var(--font-mono);
+  fill: #a18c76;
+}
+.ec-grid {
+  stroke: #ece5dc;
+  stroke-dasharray: 3 4;
+}
+.ec-line {
+  fill: none;
+  stroke: var(--accent-action);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.ec-best {
+  fill: none;
+  stroke: #718879;
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.ec-baseline {
+  stroke: #aaa093;
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+.ec-crosshair {
+  stroke: #c7a78c;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.ec-point {
+  fill: #fffdfa;
+  stroke: var(--accent-action);
+  stroke-width: 1.7;
+}
+.ec-point.pinned {
+  fill: var(--accent-action);
+  stroke: #fffdfa;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 2px #b15b28);
+}
+.ec-brush {
+  fill: #e66a2b25;
+  stroke: #d48247;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+.ec-range-label {
+  margin: 8px 0;
+  font: 9px var(--font-mono);
+  color: #9d8067;
+}
+.ec-range-label > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ec-range-label small {
+  color: #c3ad98;
+  font-size: 8px;
+}
+.ec-range-label button {
+  color: var(--accent-strong);
+  font: 9px var(--font-ui);
+}
+.ec-range-label button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.ec-range {
+  display: flex;
+  gap: 24px;
+  margin: 13px 0;
+}
+.ec-range label {
+  flex: 1;
+  min-width: 0;
+  font: 9px var(--font-mono);
+  color: #ad927b;
+}
+.ec-range output {
+  float: right;
+  color: #9a6138;
+}
+.ec-range input {
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: 5px 0 0;
+  accent-color: var(--accent-action);
+  cursor: ew-resize;
+}
+.ec-help {
+  font-size: 8px;
+  line-height: 1.7;
+  color: #ae9780;
+  margin: 9px 0 0;
+}
+.experiment-chart button:focus-visible,
+.ec-plot:focus-visible,
+.ec-range input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.ec-comparison {
+  margin: 18px 0 0;
+  border-top: 1px solid #eee3d7;
+  padding-top: 15px;
+}
+.ec-comparison-heading strong {
+  font-size: 10px;
+  font-weight: 500;
+  color: #7d6049;
+}
+.ec-comparison-heading button {
+  color: #a58467;
+  font-size: 9px;
+}
+.ec-comparison-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+.ec-comparison-cards > div {
+  position: relative;
+  border: 1px solid #ebcfb8;
+  border-radius: 7px;
+  padding: 12px;
+  background: #fff5eb;
+}
+.ec-comparison-cards span {
+  display: block;
+  font: 9px var(--font-mono);
+  color: #a47c5c;
+  margin-bottom: 8px;
+}
+.ec-comparison-cards strong {
+  font: 19px var(--font-mono);
+  color: #965025;
+}
+.ec-comparison-cards strong small {
+  font-size: 10px;
+}
+.ec-comparison-cards p {
+  font-size: 9px;
+  margin: 7px 0;
+  color: #a77b55;
+}
+.ec-unpin {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: #ba9679;
+  font-size: 17px;
+}
+.ec-inspect {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  margin-top: 12px;
+  color: #a05525;
+}
+.ec-delta {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #9c7e62;
+  margin: 12px 0 2px;
+}
+.ec-delta strong {
+  font-weight: 500;
+  color: #a24d21;
+}
+.ec-bars {
+  border-top: 1px solid #eee3d7;
+  margin-top: 20px;
+  padding-top: 17px;
+}
+.ec-bars h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  color: #795a40;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.ec-bars h3 span {
+  font: 8px var(--font-mono);
+  color: #b09881;
+}
+.ec-bars > button {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 40px;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 7px 5px;
+  border-radius: 4px;
+  font: 9px var(--font-mono);
+  color: #ab8b6e;
+  text-align: left;
+}
+.ec-bars > button:hover,
+.ec-bars > button[aria-pressed="true"] {
+  background: #fff0e1;
+  color: #a05024;
+}
+.ec-bar-track {
+  height: 8px;
+  background: #f2ebe1;
+  border-radius: 2px;
+}
+.ec-bar-track i {
+  display: block;
+  height: 100%;
+  background: #dfa474;
+  border-radius: 2px;
+}
+.ec-bars > button[aria-pressed="true"] i {
+  background: var(--accent-action);
+}
+.ec-bars strong {
+  font-weight: 500;
+  text-align: right;
+}
+.ec-table-wrap {
+  overflow: auto;
+  margin-top: 20px;
+  border-top: 1px solid #eee3d7;
+}
+.ec-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.ec-table-wrap caption {
+  text-align: left;
+  font-size: 9px;
+  line-height: 1.6;
+  color: #ab8b6f;
+  padding: 12px 0;
+}
+.ec-table-wrap th,
+.ec-table-wrap td {
+  text-align: left;
+  padding: 9px 8px;
+  border-bottom: 1px solid #f0e6dd;
+  color: #93755c;
+  font-weight: 400;
+}
+.ec-table-wrap thead th {
+  font-size: 9px;
+  color: #b1977f;
+}
+.ec-table-wrap button {
+  border: 1px solid #e5c9b1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 9px;
+  color: #ad7143;
+}
+.ec-table-wrap button[aria-pressed="true"] {
+  background: #ffead8;
+  color: #a34e1e;
+}
+@media (max-width: 500px) {
+  .experiment-chart {
+    padding: 11px;
+  }
+  .ec-legend {
+    gap: 9px;
+  }
+  .ec-readout {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ec-readout p {
+    flex-basis: 100%;
+    max-width: none;
+    margin: 0;
+    font-size: 9px;
+  }
+  .ec-readout p span {
+    display: inline;
+    margin-left: 8px;
+  }
+  .ec-readout strong {
+    font-size: 20px;
+  }
+  .ec-legend small {
+    display: none;
+  }
+  .ec-help {
+    font-size: 8px;
+  }
+}
