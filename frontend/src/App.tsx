@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ThreadSearch from "./components/ThreadSearch";
+import ExperimentChart from "./components/ExperimentChart";
+import type { SearchResult } from "./lib/search/thread-search";
 import { signOut } from "./app/auth/actions";
 import type { ReactNode } from "react";
 import {
@@ -112,110 +115,6 @@ function loadThreads(storageKey: string): Thread[] {
     return initialThreads;
   }
 }
-function Chart({ large = false }: { large?: boolean }) {
-  const [point, setPoint] = useState<number | null>(null);
-  const vals = [
-    2.99, 2.73, 2.51, 2.12, 2.24, 1.93, 1.67, 1.79, 1.48, 1.61, 1.38, 1.24,
-  ];
-  return (
-    <div className={`chart ${large ? "large" : ""}`}>
-      <div className="chart-key">
-        <span>
-          <i className="dot olive" /> Candidate
-        </span>
-        <span>
-          <i className="dash" /> PyTorch baseline
-        </span>
-        <span className="chart-unit">Runtime (ms) ↓</span>
-      </div>
-      <svg
-        viewBox="0 0 620 210"
-        role="img"
-        aria-label="Candidate runtime improves from 2.99 milliseconds to 1.24 over 12 experiments, against a 2.99 millisecond PyTorch baseline"
-        onMouseLeave={() => setPoint(null)}
-      >
-        {[3, 2.5, 2, 1.5, 1].map((n, i) => (
-          <g key={n}>
-            <text x="0" y={25 + i * 38}>
-              {n.toFixed(1)}
-            </text>
-            <line
-              className="grid-line"
-              x1="35"
-              x2="602"
-              y1={21 + i * 38}
-              y2={21 + i * 38}
-            />
-          </g>
-        ))}
-        <line className="baseline" x1="35" y1="23" x2="602" y2="23" />
-        <defs>
-          <linearGradient id="chart-fill" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#7b8558" stopOpacity=".18" />
-            <stop offset="100%" stopColor="#7b8558" stopOpacity=".015" />
-          </linearGradient>
-        </defs>
-        <path
-          d={`M 35 175 L ${vals.map((v, i) => `${35 + i * 51.2} ${21 + (3 - v) * 76}`).join(" L ")} L 598 175 Z`}
-          fill="url(#chart-fill)"
-        />
-        <polyline
-          points={vals
-            .map((v, i) => `${35 + i * 51.2},${21 + (3 - v) * 76}`)
-            .join(" ")}
-          fill="none"
-          stroke="#7d8657"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-        {vals.map((v, i) => (
-          <g key={i} onMouseEnter={() => setPoint(i)}>
-            <circle
-              cx={35 + i * 51.2}
-              cy={21 + (3 - v) * 76}
-              r="13"
-              fill="transparent"
-            />
-            <circle
-              cx={35 + i * 51.2}
-              cy={21 + (3 - v) * 76}
-              r={point === i || i === 11 ? 4.5 : 3}
-              fill={i === 11 ? "#7d8657" : "#fff"}
-              stroke="#7d8657"
-              strokeWidth="1.6"
-            />
-          </g>
-        ))}
-        {[1, 3, 6, 9, 12].map((n) => (
-          <text key={n} x={35 + (n - 1) * 51.2} y="201" textAnchor="middle">
-            {n.toString().padStart(2, "0")}
-          </text>
-        ))}
-        {point !== null && (
-          <g>
-            <rect
-              x={Math.min(495, 35 + point * 51.2)}
-              y="60"
-              width="106"
-              height="26"
-              rx="5"
-              fill="#30382e"
-            />
-            <text
-              className="chart-tooltip"
-              x={Math.min(495, 35 + point * 51.2) + 53}
-              y="77"
-              textAnchor="middle"
-            >
-              Run {point + 1} · {vals[point]} ms
-            </text>
-          </g>
-        )}
-      </svg>
-      <div className="chart-caption">Experiment</div>
-    </div>
-  );
-}
 export default function App({
   userId,
   email,
@@ -231,8 +130,11 @@ export default function App({
   const [sidebar, setSidebar] = useState(true);
   const [panel, setPanel] = useState(true);
   const [expanded, setExpanded] = useState(false);
-  const [query, setQuery] = useState("");
   const [search, setSearch] = useState(false);
+  const [searchTarget, setSearchTarget] = useState<{
+    threadId: string;
+    messageIndex: number;
+  } | null>(null);
   const [draft, setDraft] = useState("");
   const [auto, setAuto] = useState(true);
   const [running, setRunning] = useState(false);
@@ -293,7 +195,8 @@ export default function App({
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setSidebar(true);
+        setModal(null);
+        setModelOpen(false);
         setSearch((s) => !s);
       }
       if ((e.metaKey || e.ctrlKey) && e.key === "n") {
@@ -342,7 +245,39 @@ export default function App({
       previousFocus?.focus();
     };
   }, [modal]);
+  useEffect(() => {
+    if (!searchTarget || active.id !== searchTarget.threadId) return;
+    const element = document.querySelector<HTMLElement>(
+      `.messages [data-message-index="${searchTarget.messageIndex}"]`,
+    );
+    if (!element) return;
+    element.scrollIntoView({ block: "center", behavior: "smooth" });
+    element.classList.add("search-message-target");
+    const timer = setTimeout(() => {
+      element.classList.remove("search-message-target");
+      setSearchTarget(null);
+    }, 2200);
+    return () => {
+      clearTimeout(timer);
+      element.classList.remove("search-message-target");
+    };
+  }, [searchTarget, active.id]);
+  function selectSearchResult(result: SearchResult) {
+    setActiveId(result.threadId);
+    setExpanded(false);
+    setPanel(true);
+    setDraft("");
+    setAttachments([]);
+    setSearch(false);
+    setSearchTarget(
+      result.messageIndex === undefined
+        ? null
+        : { threadId: result.threadId, messageIndex: result.messageIndex },
+    );
+  }
   function newThread() {
+    setSearch(false);
+    setSearchTarget(null);
     const id = crypto.randomUUID();
     setThreads((ts) => [
       {
@@ -416,7 +351,7 @@ export default function App({
     }
     const blob = new Blob(
       [
-        `# Auto Research — ${active.task}\n\nSample report — demo data, no evaluations were executed.\n\nBest speedup: 2.41x\nRuntime: 1.24 ms\nBaseline: 2.99 ms\nCorrectness: 5/5\n\n${experiments.map((e) => `${e.id}: ${e.name} — ${e.time} ms (${e.speed}x)`).join("\n")}`,
+        `# Autoresearch — ${active.task}\n\nSample report — demo data, no evaluations were executed.\n\nBest speedup: 2.41x\nRuntime: 1.24 ms\nBaseline: 2.99 ms\nCorrectness: 5/5\n\n${experiments.map((e) => `${e.id}: ${e.name} — ${e.time} ms (${e.speed}x)`).join("\n")}`,
       ],
       { type: "text/markdown" },
     );
@@ -437,7 +372,7 @@ export default function App({
           <div className="brand">
             <Brand />
             <span>
-              auto<span className="brand-light">research</span>
+              Auto<span className="brand-light">research</span>
             </span>
             <IconButton
               label="Collapse sidebar"
@@ -450,6 +385,16 @@ export default function App({
             <Plus size={17} />
             <span>New thread</span>
             <kbd>⌘ N</kbd>
+          </button>
+          <button
+            className="workspace-search-trigger"
+            aria-label="Search workspace"
+            aria-keyshortcuts="Meta+K Control+K"
+            onClick={() => setSearch(true)}
+          >
+            <Search size={15} />
+            <span>Search workspace</span>
+            <kbd>⌘ K</kbd>
           </button>
           <button
             className="nav-link"
@@ -502,46 +447,26 @@ export default function App({
               <Search size={13} />
             </IconButton>
           </div>
-          {search && (
-            <div className="search-field">
-              <Search size={14} />
-              <input
-                autoFocus
-                aria-label="Search threads"
-                placeholder="Search threads…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
-          )}
           <div className="thread-list">
-            {threads
-              .filter((t) =>
-                t.title.toLowerCase().includes(query.toLowerCase()),
-              )
-              .map((t) => (
-                <button
-                  key={t.id}
-                  className={`thread ${active.id === t.id ? "active" : ""}`}
-                  onClick={() => {
-                    setActiveId(t.id);
-                    setExpanded(false);
-                    setPanel(true);
-                    setDraft("");
-                    setAttachments([]);
-                  }}
-                >
-                  <span
-                    className={`thread-dot ${t.id === active.id ? "current" : ""}`}
-                  />
-                  <span>{t.title}</span>
-                  {t.id === active.id && <Ellipsis size={14} />}
-                </button>
-              ))}
-            {query &&
-              !threads.some((t) =>
-                t.title.toLowerCase().includes(query.toLowerCase()),
-              ) && <p className="muted empty-search">No matching threads</p>}
+            {threads.map((t) => (
+              <button
+                key={t.id}
+                className={`thread ${active.id === t.id ? "active" : ""}`}
+                onClick={() => {
+                  setActiveId(t.id);
+                  setExpanded(false);
+                  setPanel(true);
+                  setDraft("");
+                  setAttachments([]);
+                }}
+              >
+                <span
+                  className={`thread-dot ${t.id === active.id ? "current" : ""}`}
+                />
+                <span>{t.title}</span>
+                {t.id === active.id && <Ellipsis size={14} />}
+              </button>
+            ))}
           </div>
           <div className="sidebar-bottom">
             <div className="workspace-status">
@@ -572,6 +497,13 @@ export default function App({
             <span className="crumb-current">{active.title}</span>
           </div>
           <div className="top-actions">
+            <button
+              className="top-search-button"
+              aria-label="Open workspace search"
+              onClick={() => setSearch(true)}
+            >
+              <Search size={16} />
+            </button>
             <span className="demo-indicator">
               <i /> Demo workspace
             </span>
@@ -637,7 +569,11 @@ export default function App({
                 ) : (
                   <>
                     {active.messages.slice(0, 1).map((m, i) => (
-                      <div className="user-message" key={i}>
+                      <div
+                        className="user-message"
+                        key={i}
+                        data-message-index={0}
+                      >
                         <div className="message-eyebrow">
                           YOU<span>Just now</span>
                         </div>
@@ -654,7 +590,7 @@ export default function App({
                       <div className="assistant-message">
                         <div className="assistant-label">
                           <Brand small />
-                          <strong>Auto Research</strong>
+                          <strong>Autoresearch</strong>
                           <span>Research complete</span>
                         </div>
                         <p>
@@ -716,7 +652,7 @@ export default function App({
                           <div>
                             <strong>{active.task}</strong>
                             <span>
-                              <i className="dot olive" /> Completed{" "}
+                              <i className="dot accent" /> Completed{" "}
                               <span className="middle-dot">·</span> 12
                               experiments
                             </span>
@@ -751,6 +687,7 @@ export default function App({
                     {active.messages.slice(1).map((m, i) => (
                       <div
                         key={i}
+                        data-message-index={i + 1}
                         className={
                           m.role === "user"
                             ? "user-message followup"
@@ -1038,7 +975,12 @@ export default function App({
                           <h2>Performance over iterations</h2>
                           <span className="subtle">12 experiments</span>
                         </div>
-                        <Chart />
+                        <ExperimentChart
+                          onInspect={(id) => {
+                            setSelectedExperiment(id);
+                            setTab("Code");
+                          }}
+                        />
                         <div className="block-heading candidate-heading">
                           <h2>Top candidates</h2>
                           <button
@@ -1305,34 +1247,13 @@ export default function App({
                           title="Every iteration counts"
                           description="Compare candidate latency against the same baseline."
                         />
-                        <div className="metric-summary">
-                          <strong>
-                            −58.5% <span>runtime</span>
-                          </strong>
-                          <span className="complete-badge">
-                            <ArrowDown size={11} /> Lower is better
-                          </span>
-                        </div>
-                        <Chart large />
-                        <div className="block-heading">
-                          <h2>Candidate speedup</h2>
-                          <span className="subtle">Relative to PyTorch</span>
-                        </div>
-                        <div className="bar-chart">
-                          {[...experiments].reverse().map((e) => (
-                            <div key={e.id}>
-                              <span>{e.id}</span>
-                              <div>
-                                <i
-                                  style={{
-                                    width: `${(Number(e.speed) / 2.6) * 100}%`,
-                                  }}
-                                />
-                              </div>
-                              <strong>{e.speed}×</strong>
-                            </div>
-                          ))}
-                        </div>
+                        <ExperimentChart
+                          large
+                          onInspect={(id) => {
+                            setSelectedExperiment(id);
+                            setTab("Code");
+                          }}
+                        />
                         <DemoNotice />
                       </>
                     )}
@@ -1412,7 +1333,7 @@ export default function App({
               </div>
               <footer className="panel-footer">
                 <span>
-                  <i className="dot olive" /> Threads saved in this browser
+                  <i className="dot accent" /> Threads saved in this browser
                 </span>
                 <button onClick={() => setModal("experiments")}>
                   Experiment details
@@ -1423,6 +1344,13 @@ export default function App({
           )}
         </div>
       </main>
+      {search && (
+        <ThreadSearch
+          threads={threads}
+          onSelect={selectSearchResult}
+          onClose={() => setSearch(false)}
+        />
+      )}
       {toast && (
         <div className="toast" role="status">
           <CircleCheck size={16} />
