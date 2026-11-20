@@ -1,0 +1,33 @@
+{
+  "number": 2,
+  "title": "KernelBenchX: A Comprehensive Benchmark for Evaluating LLM-Generated GPU Kernels",
+  "arxiv_id": "2605.04956",
+  "retrieved_date": "2026-11-20",
+  "markdown": "02-kernelbench-x.md",
+  "warnings": [],
+  "version": "2605.04956v2",
+  "authors": [
+    "Wang, Han",
+    "Zhang, Jintao",
+    "Jiang, Kai",
+    "Wang, Haoxu",
+    "Chen, Jianfei",
+    "Zhu, Jun"
+  ],
+  "pdf_pages": 17,
+  "pdf_text_characters": 45124,
+  "pdf": "02-kernelbench-x.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2605.04956v2",
+  "pdf_sha256": "9ad10e25655bb7a5f5eaa11f6870e2f5dd2dee35efb2e538681273a460b16c8f",
+  "math_expressions": 49,
+  "data_tables": 6,
+  "code_listings": 3,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 2,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2605.04956v2",
+  "original_html": "sources/02-kernelbench-x.html",
+  "source_url": "https://arxiv.org/abs/2605.04956",
+  "markdown_characters": 49772
+}

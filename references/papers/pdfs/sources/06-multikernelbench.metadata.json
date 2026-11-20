@@ -1,0 +1,33 @@
+{
+  "number": 6,
+  "title": "MultiKernelBench: A Multi-Platform Benchmark for Kernel Generation",
+  "arxiv_id": "2507.17773",
+  "retrieved_date": "2026-11-20",
+  "markdown": "06-multikernelbench.md",
+  "warnings": [],
+  "version": "2507.17773v2",
+  "authors": [
+    "Wen, Zhongzhen",
+    "Zhang, Yinghui",
+    "Li, Zhong",
+    "Liu, Zhongxin",
+    "Xie, Linna",
+    "Zhang, Tian"
+  ],
+  "pdf_pages": 12,
+  "pdf_text_characters": 72119,
+  "pdf": "06-multikernelbench.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2507.17773v2",
+  "pdf_sha256": "08963c30e7afd8560a255b782bdc9026e7474c496593e8fa2f0296b01dec5a73",
+  "math_expressions": 54,
+  "data_tables": 10,
+  "code_listings": 0,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 1,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2507.17773v2",
+  "original_html": "sources/06-multikernelbench.html",
+  "source_url": "https://arxiv.org/abs/2507.17773",
+  "markdown_characters": 91257
+}

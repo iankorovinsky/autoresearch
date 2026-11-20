@@ -1,0 +1,1319 @@
+{
+  "schema_version": 1,
+  "collection_date": "2026-11-20",
+  "index_date": "2026-11-20",
+  "path_base": "references/papers/analysis/ (all relative paths resolve from this directory)",
+  "entry_count": 22,
+  "review_status_definition": "reviewed = full-text reading by assigned analyst, editorial/structural checks, and targeted source spot-checks; not experimental reproduction or independent verification of every claim",
+  "entries": [
+    {
+      "paper_id": "01",
+      "title": "KernelBench: Can LLMs Write Efficient GPU Kernels?",
+      "source_version": "2502.10517v1",
+      "source_markdown": "../pdfs/01-kernelbench.md",
+      "source_pdf": "../pdfs/01-kernelbench.pdf",
+      "source_url": "https://arxiv.org/abs/2502.10517",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "kernelbench",
+        "benchmarking",
+        "cuda",
+        "test-time-compute",
+        "execution-feedback",
+        "profiling",
+        "hardware-awareness",
+        "correctness"
+      ],
+      "summary": "Introduces 250 PyTorch-defined kernel-generation tasks and the correctness-gated fast_p metric, with one-shot, sampling, feedback, and hardware-context experiments.",
+      "analysis_file": "01-kernelbench.md",
+      "source_original_html": "../pdfs/sources/01-kernelbench.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 88,
+      "word_count_approx": 2220
+    },
+    {
+      "paper_id": "02",
+      "title": "KernelBenchX: A Comprehensive Benchmark for Evaluating LLM-Generated GPU Kernels",
+      "source_version": "2605.04956v2",
+      "source_markdown": "../pdfs/02-kernelbench-x.md",
+      "source_pdf": "../pdfs/02-kernelbench-x.pdf",
+      "source_url": "https://arxiv.org/abs/2605.04956",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "triton",
+        "benchmarking",
+        "correctness",
+        "quantization",
+        "hardware-efficiency",
+        "iterative-refinement",
+        "portability"
+      ],
+      "summary": "Category-aware evaluation of Triton generation separates compilation, semantic correctness, repair dynamics, and performance across 176 tasks and six GPUs.",
+      "analysis_file": "02-kernelbench-x.md",
+      "source_original_html": "../pdfs/sources/02-kernelbench-x.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 73,
+      "word_count_approx": 1861
+    },
+    {
+      "paper_id": "03",
+      "title": "KernelBench-Verified: Do LLM-Generated Kernels Actually Beat PyTorch?",
+      "source_version": "2607.16241v1",
+      "source_markdown": "../pdfs/03-kernelbench-verified.md",
+      "source_pdf": "../pdfs/03-kernelbench-verified.pdf",
+      "source_url": "https://arxiv.org/abs/2607.16241",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "benchmarking",
+        "tf32",
+        "hidden-tests",
+        "reward-hacking",
+        "numerical-accuracy",
+        "memory-efficiency",
+        "llm-as-judge",
+        "bf16"
+      ],
+      "summary": "Re-evaluates generated KernelBench candidates using TF32-enabled eager baselines, transformed hidden inputs, memory metrics, and a residual-hack code audit.",
+      "analysis_file": "03-kernelbench-verified.md",
+      "source_original_html": "../pdfs/sources/03-kernelbench-verified.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 91,
+      "word_count_approx": 2371
+    },
+    {
+      "paper_id": "04",
+      "title": "PTXBench: Benchmarking and Adapting LLMs for GPU Kernel Optimization with Architecture-specific PTX",
+      "source_version": "2608.17379v3",
+      "source_markdown": "../pdfs/04-ptxbench.md",
+      "source_pdf": "../pdfs/04-ptxbench.pdf",
+      "source_url": "https://arxiv.org/abs/2608.17379",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "ptx",
+        "hardware-awareness",
+        "dynamic-profiling",
+        "h100",
+        "b200",
+        "supervised-fine-tuning",
+        "repair-learning",
+        "attention",
+        "agent-evaluation"
+      ],
+      "summary": "PTXBench tests runtime use of architecture-specific GPU instructions separately from correctness and speed, and studies repair-conditioned adaptation of Qwen3.6-27B.",
+      "analysis_file": "04-ptxbench.md",
+      "source_original_html": "../pdfs/sources/04-ptxbench.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 95,
+      "word_count_approx": 2410
+    },
+    {
+      "paper_id": "05",
+      "title": "TritonBench: Benchmarking Large Language Model Capabilities for Generating Triton Operators",
+      "source_version": "2502.14752v1",
+      "source_markdown": "../pdfs/05-tritonbench.md",
+      "source_pdf": "../pdfs/05-tritonbench.pdf",
+      "source_url": "https://arxiv.org/abs/2502.14752",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "triton",
+        "benchmarking",
+        "code-generation",
+        "retrieval",
+        "supervised-fine-tuning",
+        "gpu-efficiency",
+        "error-taxonomy"
+      ],
+      "summary": "Dual-channel Triton benchmark contrasts 184 curated GitHub operators with 166 PyTorch-interface tasks using correctness, latency, and hardware-efficiency measurements.",
+      "analysis_file": "05-tritonbench.md",
+      "source_original_html": "../pdfs/sources/05-tritonbench.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 78,
+      "word_count_approx": 1890
+    },
+    {
+      "paper_id": "06",
+      "title": "MultiKernelBench: A Multi-Platform Benchmark for Kernel Generation",
+      "source_version": "2507.17773v2",
+      "source_markdown": "../pdfs/06-multikernelbench.md",
+      "source_pdf": "../pdfs/06-multikernelbench.pdf",
+      "source_url": "https://arxiv.org/abs/2507.17773",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "multi-platform",
+        "gpu-kernels",
+        "ascendc",
+        "pallas",
+        "benchmarking",
+        "category-aware-prompting",
+        "correctness",
+        "hardware-portability"
+      ],
+      "summary": "MultiKernelBench evaluates 285 PyTorch-defined tasks on CUDA, AscendC, and Pallas, exposing platform/category differences and testing category-specific exemplars.",
+      "analysis_file": "06-multikernelbench.md",
+      "source_original_html": "../pdfs/sources/06-multikernelbench.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 93,
+      "word_count_approx": 2217
+    },
+    {
+      "paper_id": "07",
+      "title": "ISO-Bench: Can Coding Agents Optimize Real-World Inference Workloads?",
+      "source_version": "2602.19594v1",
+      "source_markdown": "../pdfs/07-iso-bench.md",
+      "source_pdf": "../pdfs/07-iso-bench.pdf",
+      "source_url": "https://arxiv.org/abs/2602.19594",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "repository-optimization",
+        "inference-serving",
+        "vllm",
+        "sglang",
+        "coding-agents",
+        "llm-as-judge",
+        "correctness",
+        "agent-scaffolding",
+        "benchmarking"
+      ],
+      "summary": "ISO-Bench evaluates agent patches on 54 inference-serving optimization tasks using human-relative performance, judge-rated bottleneck targeting, and selective functional validation.",
+      "analysis_file": "07-iso-bench.md",
+      "source_original_html": "../pdfs/sources/07-iso-bench.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors’ conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 109,
+      "word_count_approx": 2823
+    },
+    {
+      "paper_id": "08",
+      "title": "Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization",
+      "source_version": "2509.14279v1",
+      "source_markdown": "../pdfs/08-robust-agentic-cuda.md",
+      "source_pdf": "../pdfs/08-robust-agentic-cuda.pdf",
+      "source_url": "https://arxiv.org/abs/2509.14279v1",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "benchmarking",
+        "benchmark-validity",
+        "evolutionary-search",
+        "llm-verification",
+        "prompt-optimization",
+        "numerical-correctness",
+        "backpropagation",
+        "performance-generalization"
+      ],
+      "summary": "Introduces robust-kbench and an evolutionary CUDA search pipeline with prompt-tuned LLM screening, measuring benchmark loopholes, forward/backward optimization, and shape/hardware generalization while retaining empirical hardware checks.",
+      "analysis_file": "08-robust-agentic-cuda.md",
+      "source_original_html": "../pdfs/sources/08-robust-agentic-cuda.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 124,
+      "word_count_approx": 5559
+    },
+    {
+      "paper_id": "09",
+      "title": "Bit-Accurate Modeling of GPU Matrix Multiply-Accumulate Units: Demystifying Numerical Discrepancy and Accuracy",
+      "source_version": "2511.10909v3",
+      "source_markdown": "../pdfs/09-bit-accurate-gpu-mma.md",
+      "source_pdf": "../pdfs/09-bit-accurate-gpu-mma.pdf",
+      "source_url": "https://arxiv.org/abs/2511.10909",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "floating-point",
+        "numerical-correctness",
+        "tensor-cores",
+        "matrix-cores",
+        "hardware-semantics",
+        "differential-testing",
+        "mma-sim",
+        "reproducibility"
+      ],
+      "summary": "CLFP derives and differentially tests instruction-level arithmetic models for ten GPU architectures, explaining mixed-precision discrepancies and identifying precision bottlenecks, rounding bias and targeted workarounds.",
+      "analysis_file": "09-bit-accurate-gpu-mma.md",
+      "source_original_html": "../pdfs/sources/09-bit-accurate-gpu-mma.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 112,
+      "word_count_approx": 3525
+    },
+    {
+      "paper_id": "10",
+      "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+      "source_version": "2405.15793v3",
+      "source_markdown": "../pdfs/10-swe-agent.md",
+      "source_pdf": "../pdfs/10-swe-agent.pdf",
+      "source_url": "https://arxiv.org/abs/2405.15793",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "agent-computer-interface",
+        "software-engineering",
+        "tool-design",
+        "context-management",
+        "execution-feedback",
+        "evaluation",
+        "error-recovery"
+      ],
+      "summary": "Studies how search, file viewing, editing guardrails, and context management affect fixed-model software-engineering agents on SWE-bench and HumanEvalFix.",
+      "analysis_file": "10-swe-agent.md",
+      "source_original_html": "../pdfs/sources/10-swe-agent.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 112,
+      "word_count_approx": 3294
+    },
+    {
+      "paper_id": "11",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "source_version": "2210.03629v3",
+      "source_markdown": "../pdfs/11-react.md",
+      "source_pdf": "../pdfs/11-react.pdf",
+      "source_url": "https://arxiv.org/abs/2210.03629",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "reasoning-and-acting",
+        "tool-use",
+        "retrieval",
+        "planning",
+        "grounding",
+        "few-shot-prompting",
+        "agent-evaluation"
+      ],
+      "summary": "Introduces interleaved language reasoning and environment actions, testing prompted and fine-tuned variants on knowledge reasoning and interactive decision tasks.",
+      "analysis_file": "11-react.md",
+      "source_original_html": "../pdfs/sources/11-react.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 102,
+      "word_count_approx": 2865
+    },
+    {
+      "paper_id": "12",
+      "title": "Prometheus: Inducing Fine-grained Evaluation Capability in Language Models",
+      "source_version": "2310.08491v2",
+      "source_markdown": "../pdfs/12-prometheus.md",
+      "source_pdf": "../pdfs/12-prometheus.pdf",
+      "source_url": "https://arxiv.org/abs/2310.08491",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "llm-as-a-judge",
+        "rubrics",
+        "reference-guidance",
+        "judge-training",
+        "synthetic-data",
+        "feedback",
+        "human-alignment",
+        "reward-models"
+      ],
+      "summary": "Trains 7B/13B rubric-conditioned evaluators on synthetic feedback and studies reference materials, human agreement, distribution shift, and preference ranking.",
+      "analysis_file": "12-prometheus.md",
+      "source_original_html": "../pdfs/sources/12-prometheus.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 91,
+      "word_count_approx": 2553
+    },
+    {
+      "paper_id": "13",
+      "title": "From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge",
+      "source_version": "2411.16594v7",
+      "source_markdown": "../pdfs/13-generation-to-judgment.md",
+      "source_pdf": "../pdfs/13-generation-to-judgment.pdf",
+      "source_url": "https://arxiv.org/abs/2411.16594",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "llm-as-a-judge",
+        "survey",
+        "evaluation",
+        "rubrics",
+        "judge-training",
+        "bias",
+        "alignment",
+        "retrieval",
+        "reasoning",
+        "benchmarks",
+        "multilingual-evaluation",
+        "multimodal-evaluation"
+      ],
+      "summary": "Survey taxonomy of judge inputs, outputs, six assessment attributes, training and prompting methods, four application areas, benchmark families, and unresolved bias, efficiency, and robustness problems.",
+      "analysis_file": "13-generation-to-judgment.md",
+      "source_original_html": "../pdfs/sources/13-generation-to-judgment.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 176,
+      "word_count_approx": 5211
+    },
+    {
+      "paper_id": "14",
+      "title": "Lessons from the Trenches on Reproducible Evaluation of Language Models",
+      "source_version": "2405.14782v3",
+      "source_markdown": "../pdfs/14-reproducible-lm-evaluation.md",
+      "source_pdf": "../pdfs/14-reproducible-lm-evaluation.pdf",
+      "source_url": "https://arxiv.org/abs/2405.14782",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "evaluation",
+        "reproducibility",
+        "benchmarking",
+        "statistics",
+        "prompt-sensitivity",
+        "tokenization",
+        "lm-eval",
+        "measurement-validity"
+      ],
+      "summary": "Documents evaluation failure modes and reproducibility practices, with prompt-format case studies and formal descriptions of likelihood, perplexity, and generative scoring.",
+      "analysis_file": "14-reproducible-lm-evaluation.md",
+      "source_original_html": "../pdfs/sources/14-reproducible-lm-evaluation.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 98,
+      "word_count_approx": 2643
+    },
+    {
+      "paper_id": "15",
+      "title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
+      "source_version": "2303.16634v3",
+      "source_markdown": "../pdfs/15-g-eval.md",
+      "source_pdf": "../pdfs/15-g-eval.pdf",
+      "source_url": "https://arxiv.org/abs/2303.16634",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "llm-as-a-judge",
+        "evaluation",
+        "rubrics",
+        "chain-of-thought",
+        "human-alignment",
+        "bias",
+        "summarization"
+      ],
+      "summary": "Prompted NLG evaluation using generated evaluation steps and probability-weighted scores, tested against human judgments on summarization and dialogue.",
+      "analysis_file": "15-g-eval.md",
+      "source_original_html": "../pdfs/sources/15-g-eval.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 77,
+      "word_count_approx": 2152
+    },
+    {
+      "paper_id": "16",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "source_version": "2306.05685v4",
+      "source_markdown": "../pdfs/16-mt-bench-chatbot-arena.md",
+      "source_pdf": "../pdfs/16-mt-bench-chatbot-arena.pdf",
+      "source_url": "https://arxiv.org/abs/2306.05685",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "llm-as-a-judge",
+        "human-preference",
+        "benchmarking",
+        "multi-turn",
+        "bias",
+        "pairwise-evaluation",
+        "judge-training"
+      ],
+      "summary": "Introduces MT-Bench and Chatbot Arena and measures how LLM judges align with human preferences under explicit tie-handling and bias controls.",
+      "analysis_file": "16-mt-bench-chatbot-arena.md",
+      "source_original_html": "../pdfs/sources/16-mt-bench-chatbot-arena.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 93,
+      "word_count_approx": 2574
+    },
+    {
+      "paper_id": "17",
+      "title": "Large Language Models are not Fair Evaluators",
+      "source_version": "2305.17926v2",
+      "source_markdown": "../pdfs/17-fair-evaluators.md",
+      "source_pdf": "../pdfs/17-fair-evaluators.pdf",
+      "source_url": "https://arxiv.org/abs/2305.17926",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "llm-as-a-judge",
+        "position-bias",
+        "calibration",
+        "human-in-the-loop",
+        "uncertainty",
+        "pairwise-evaluation"
+      ],
+      "summary": "A study of response-order bias in pairwise LLM judging, with evidence-first sampling, balanced positions, and entropy-based human review.",
+      "analysis_file": "17-fair-evaluators.md",
+      "source_original_html": "../pdfs/sources/17-fair-evaluators.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 81,
+      "word_count_approx": 2160
+    },
+    {
+      "paper_id": "18",
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "source_version": "2303.17651v2",
+      "source_markdown": "../pdfs/18-self-refine.md",
+      "source_pdf": "../pdfs/18-self-refine.pdf",
+      "source_url": "https://arxiv.org/abs/2303.17651",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "self-feedback",
+        "iterative-refinement",
+        "test-time-compute",
+        "code-optimization",
+        "multi-aspect-evaluation",
+        "llm-as-a-judge",
+        "error-analysis"
+      ],
+      "summary": "Tests a same-model generate–critique–revise loop across seven tasks, with strong task-dependent gains and a major bottleneck in detecting incorrect feedback.",
+      "analysis_file": "18-self-refine.md",
+      "source_original_html": "../pdfs/sources/18-self-refine.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 112,
+      "word_count_approx": 3232
+    },
+    {
+      "paper_id": "19",
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "source_version": "2303.11366v4",
+      "source_markdown": "../pdfs/19-reflexion.md",
+      "source_pdf": "../pdfs/19-reflexion.pdf",
+      "source_url": "https://arxiv.org/abs/2303.11366",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "agents",
+        "reflection",
+        "episodic-memory",
+        "self-generated-tests",
+        "feedback",
+        "program-synthesis",
+        "reasoning",
+        "evaluation"
+      ],
+      "summary": "Reflexion converts trial feedback into bounded textual memories for subsequent attempts, with gains and failures across ALFWorld, HotpotQA, and code generation that depend strongly on evaluation quality.",
+      "analysis_file": "19-reflexion.md",
+      "source_original_html": "../pdfs/sources/19-reflexion.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 109,
+      "word_count_approx": 3348
+    },
+    {
+      "paper_id": "20",
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "source_version": "2302.04761v1",
+      "source_markdown": "../pdfs/20-toolformer.md",
+      "source_pdf": "../pdfs/20-toolformer.pdf",
+      "source_url": "https://arxiv.org/abs/2302.04761",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "tool-use",
+        "self-supervised-learning",
+        "synthetic-data",
+        "api-selection",
+        "retrieval",
+        "language-modeling",
+        "evaluation",
+        "decoding"
+      ],
+      "summary": "Learns API-call placement and arguments by filtering sampled tool annotations for next-token loss improvement, with controlled tool-disabled and decoding-policy evaluations.",
+      "analysis_file": "20-toolformer.md",
+      "source_original_html": "../pdfs/sources/20-toolformer.html",
+      "sections": [
+        "Paper identity and scope",
+        "Concepts and terminology",
+        "Methodology and experimental setup",
+        "Results and evidence",
+        "Authors' conclusions",
+        "Limitations and open questions",
+        "Relevance to this project — interpretation",
+        "Retrieval notes",
+        "Source coverage and verification notes"
+      ],
+      "bullet_count": 95,
+      "word_count_approx": 2796
+    },
+    {
+      "paper_id": "21",
+      "title": "Measuring Automated Kernel Engineering",
+      "source_version": "web snapshot 2026-11-20",
+      "source_markdown": "../pdfs/21-measuring-automated-kernel-engineering.md",
+      "source_pdf": null,
+      "source_url": "https://metr.org/blog/2025-02-14-measuring-automated-kernel-engineering/",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "benchmarking",
+        "agent-scaffolding",
+        "test-time-compute",
+        "benchmark-validity",
+        "cost-effectiveness",
+        "training-data",
+        "kernelbench"
+      ],
+      "summary": "METR evaluates a tree-search kernel agent on a filtered, extended KernelBench suite, reporting speedups and cost tradeoffs while documenting major gaps from expert kernel engineering.",
+      "analysis_file": "21-measuring-automated-kernel-engineering.md",
+      "source_original_html": "../pdfs/sources/21-measuring-automated-kernel-engineering.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 86,
+      "word_count_approx": 3252
+    },
+    {
+      "paper_id": "22",
+      "title": "LARK: Lean-Assisted Reasoning for LLM-Generated GPU Kernels",
+      "source_version": "2611.02028v1",
+      "source_markdown": "../pdfs/22-lark.md",
+      "source_pdf": "../pdfs/22-lark.pdf",
+      "source_url": "https://arxiv.org/abs/2611.02028",
+      "analysis_date": "2026-11-20",
+      "analysis_status": "reviewed",
+      "topics": [
+        "gpu-kernels",
+        "formal-verification",
+        "lean",
+        "exact-arithmetic",
+        "race-freedom",
+        "trust-boundary",
+        "proof-agents",
+        "kernelcraft",
+        "ptx",
+        "cuda",
+        "hip"
+      ],
+      "summary": "LARK uses Lean-checked race-freedom, segmentation and equivalence proofs to certify supported GPU kernels relative to a pinned machine model and task interface, while leaving floating-point fidelity and host-allocation safety outside its theorem.",
+      "analysis_file": "22-lark.md",
+      "source_original_html": "../pdfs/sources/22-lark.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 130,
+      "word_count_approx": 4514
+    }
+  ],
+  "by_topic": {
+    "agent-computer-interface": [
+      "10"
+    ],
+    "agent-evaluation": [
+      "04",
+      "11"
+    ],
+    "agent-scaffolding": [
+      "07",
+      "21"
+    ],
+    "agents": [
+      "19"
+    ],
+    "alignment": [
+      "13"
+    ],
+    "api-selection": [
+      "20"
+    ],
+    "ascendc": [
+      "06"
+    ],
+    "attention": [
+      "04"
+    ],
+    "b200": [
+      "04"
+    ],
+    "backpropagation": [
+      "08"
+    ],
+    "benchmark-validity": [
+      "08",
+      "21"
+    ],
+    "benchmarking": [
+      "01",
+      "02",
+      "03",
+      "05",
+      "06",
+      "07",
+      "08",
+      "14",
+      "16",
+      "21"
+    ],
+    "benchmarks": [
+      "13"
+    ],
+    "bf16": [
+      "03"
+    ],
+    "bias": [
+      "13",
+      "15",
+      "16"
+    ],
+    "calibration": [
+      "17"
+    ],
+    "category-aware-prompting": [
+      "06"
+    ],
+    "chain-of-thought": [
+      "15"
+    ],
+    "code-generation": [
+      "05"
+    ],
+    "code-optimization": [
+      "18"
+    ],
+    "coding-agents": [
+      "07"
+    ],
+    "context-management": [
+      "10"
+    ],
+    "correctness": [
+      "01",
+      "02",
+      "06",
+      "07"
+    ],
+    "cost-effectiveness": [
+      "21"
+    ],
+    "cuda": [
+      "01",
+      "22"
+    ],
+    "decoding": [
+      "20"
+    ],
+    "differential-testing": [
+      "09"
+    ],
+    "dynamic-profiling": [
+      "04"
+    ],
+    "episodic-memory": [
+      "19"
+    ],
+    "error-analysis": [
+      "18"
+    ],
+    "error-recovery": [
+      "10"
+    ],
+    "error-taxonomy": [
+      "05"
+    ],
+    "evaluation": [
+      "10",
+      "13",
+      "14",
+      "15",
+      "19",
+      "20"
+    ],
+    "evolutionary-search": [
+      "08"
+    ],
+    "exact-arithmetic": [
+      "22"
+    ],
+    "execution-feedback": [
+      "01",
+      "10"
+    ],
+    "feedback": [
+      "12",
+      "19"
+    ],
+    "few-shot-prompting": [
+      "11"
+    ],
+    "floating-point": [
+      "09"
+    ],
+    "formal-verification": [
+      "22"
+    ],
+    "gpu-efficiency": [
+      "05"
+    ],
+    "gpu-kernels": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "08",
+      "09",
+      "21",
+      "22"
+    ],
+    "grounding": [
+      "11"
+    ],
+    "h100": [
+      "04"
+    ],
+    "hardware-awareness": [
+      "01",
+      "04"
+    ],
+    "hardware-efficiency": [
+      "02"
+    ],
+    "hardware-portability": [
+      "06"
+    ],
+    "hardware-semantics": [
+      "09"
+    ],
+    "hidden-tests": [
+      "03"
+    ],
+    "hip": [
+      "22"
+    ],
+    "human-alignment": [
+      "12",
+      "15"
+    ],
+    "human-in-the-loop": [
+      "17"
+    ],
+    "human-preference": [
+      "16"
+    ],
+    "inference-serving": [
+      "07"
+    ],
+    "iterative-refinement": [
+      "02",
+      "18"
+    ],
+    "judge-training": [
+      "12",
+      "13",
+      "16"
+    ],
+    "kernelbench": [
+      "01",
+      "21"
+    ],
+    "kernelcraft": [
+      "22"
+    ],
+    "language-modeling": [
+      "20"
+    ],
+    "lean": [
+      "22"
+    ],
+    "llm-as-a-judge": [
+      "12",
+      "13",
+      "15",
+      "16",
+      "17",
+      "18"
+    ],
+    "llm-as-judge": [
+      "03",
+      "07"
+    ],
+    "llm-verification": [
+      "08"
+    ],
+    "lm-eval": [
+      "14"
+    ],
+    "matrix-cores": [
+      "09"
+    ],
+    "measurement-validity": [
+      "14"
+    ],
+    "memory-efficiency": [
+      "03"
+    ],
+    "mma-sim": [
+      "09"
+    ],
+    "multi-aspect-evaluation": [
+      "18"
+    ],
+    "multi-platform": [
+      "06"
+    ],
+    "multi-turn": [
+      "16"
+    ],
+    "multilingual-evaluation": [
+      "13"
+    ],
+    "multimodal-evaluation": [
+      "13"
+    ],
+    "numerical-accuracy": [
+      "03"
+    ],
+    "numerical-correctness": [
+      "08",
+      "09"
+    ],
+    "pairwise-evaluation": [
+      "16",
+      "17"
+    ],
+    "pallas": [
+      "06"
+    ],
+    "performance-generalization": [
+      "08"
+    ],
+    "planning": [
+      "11"
+    ],
+    "portability": [
+      "02"
+    ],
+    "position-bias": [
+      "17"
+    ],
+    "profiling": [
+      "01"
+    ],
+    "program-synthesis": [
+      "19"
+    ],
+    "prompt-optimization": [
+      "08"
+    ],
+    "prompt-sensitivity": [
+      "14"
+    ],
+    "proof-agents": [
+      "22"
+    ],
+    "ptx": [
+      "04",
+      "22"
+    ],
+    "quantization": [
+      "02"
+    ],
+    "race-freedom": [
+      "22"
+    ],
+    "reasoning": [
+      "13",
+      "19"
+    ],
+    "reasoning-and-acting": [
+      "11"
+    ],
+    "reference-guidance": [
+      "12"
+    ],
+    "reflection": [
+      "19"
+    ],
+    "repair-learning": [
+      "04"
+    ],
+    "repository-optimization": [
+      "07"
+    ],
+    "reproducibility": [
+      "09",
+      "14"
+    ],
+    "retrieval": [
+      "05",
+      "11",
+      "13",
+      "20"
+    ],
+    "reward-hacking": [
+      "03"
+    ],
+    "reward-models": [
+      "12"
+    ],
+    "rubrics": [
+      "12",
+      "13",
+      "15"
+    ],
+    "self-feedback": [
+      "18"
+    ],
+    "self-generated-tests": [
+      "19"
+    ],
+    "self-supervised-learning": [
+      "20"
+    ],
+    "sglang": [
+      "07"
+    ],
+    "software-engineering": [
+      "10"
+    ],
+    "statistics": [
+      "14"
+    ],
+    "summarization": [
+      "15"
+    ],
+    "supervised-fine-tuning": [
+      "04",
+      "05"
+    ],
+    "survey": [
+      "13"
+    ],
+    "synthetic-data": [
+      "12",
+      "20"
+    ],
+    "tensor-cores": [
+      "09"
+    ],
+    "test-time-compute": [
+      "01",
+      "18",
+      "21"
+    ],
+    "tf32": [
+      "03"
+    ],
+    "tokenization": [
+      "14"
+    ],
+    "tool-design": [
+      "10"
+    ],
+    "tool-use": [
+      "11",
+      "20"
+    ],
+    "training-data": [
+      "21"
+    ],
+    "triton": [
+      "02",
+      "05"
+    ],
+    "trust-boundary": [
+      "22"
+    ],
+    "uncertainty": [
+      "17"
+    ],
+    "vllm": [
+      "07"
+    ]
+  },
+  "question_routes": [
+    {
+      "name": "Kernel benchmark design and metrics",
+      "paper_ids": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "21"
+      ],
+      "scope": "Task definitions, baselines, sampling budgets, correctness gates, performance aggregation, and hardware/task coverage."
+    },
+    {
+      "name": "Correctness, numerical behavior, and proof boundaries",
+      "paper_ids": [
+        "03",
+        "04",
+        "08",
+        "09",
+        "22"
+      ],
+      "scope": "Hidden tests, runtime instruction checks, soft verification, hardware floating-point models, and formal proof assumptions."
+    },
+    {
+      "name": "Agents, tools, and iterative improvement",
+      "paper_ids": [
+        "10",
+        "11",
+        "18",
+        "19",
+        "20"
+      ],
+      "scope": "Agent interfaces, reasoning/action loops, self-feedback, episodic memory, and learned API selection."
+    },
+    {
+      "name": "Kernel search and optimization feedback",
+      "paper_ids": [
+        "01",
+        "02",
+        "04",
+        "07",
+        "08",
+        "21"
+      ],
+      "scope": "Execution/profiler feedback, refinement trajectories, candidate selection, repository optimization, and resource budgets."
+    },
+    {
+      "name": "LLM judges, rubrics, and bias",
+      "paper_ids": [
+        "12",
+        "13",
+        "15",
+        "16",
+        "17"
+      ],
+      "scope": "Judge training, scoring protocols, agreement measures, order/verbosity/self-preference effects, and survey navigation."
+    },
+    {
+      "name": "Reproducible evaluation and comparison conditions",
+      "paper_ids": [
+        "14",
+        "01",
+        "03",
+        "16",
+        "17",
+        "21"
+      ],
+      "scope": "Prompt/metric implementation, uncertainty, baseline configuration, tie handling, denominators, and aggregation."
+    },
+    {
+      "name": "Inference optimization in larger systems",
+      "paper_ids": [
+        "07",
+        "21",
+        "22"
+      ],
+      "scope": "Repository patches, application-level extrapolation, production-kernel adaptation, and limits of benchmark-to-deployment inference."
+    }
+  ]
+}

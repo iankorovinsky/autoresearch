@@ -1,0 +1,33 @@
+{
+  "number": 15,
+  "title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
+  "arxiv_id": "2303.16634",
+  "retrieved_date": "2026-11-20",
+  "markdown": "15-g-eval.md",
+  "warnings": [],
+  "version": "2303.16634v3",
+  "authors": [
+    "Liu, Yang",
+    "Iter, Dan",
+    "Xu, Yichong",
+    "Wang, Shuohang",
+    "Xu, Ruochen",
+    "Zhu, Chenguang"
+  ],
+  "pdf_pages": 11,
+  "pdf_text_characters": 39805,
+  "pdf": "15-g-eval.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2303.16634v3",
+  "pdf_sha256": "3a822b8646dccda73b01eda9b07420072daf7601cb0d02d9bbc3b38325ab2fd2",
+  "math_expressions": 42,
+  "data_tables": 3,
+  "code_listings": 0,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 2,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2303.16634v3",
+  "original_html": "sources/15-g-eval.html",
+  "source_url": "https://arxiv.org/abs/2303.16634",
+  "markdown_characters": 48347
+}

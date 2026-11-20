@@ -1,0 +1,33 @@
+{
+  "number": 19,
+  "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+  "arxiv_id": "2303.11366",
+  "retrieved_date": "2026-11-20",
+  "markdown": "19-reflexion.md",
+  "warnings": [],
+  "version": "2303.11366v4",
+  "authors": [
+    "Shinn, Noah",
+    "Cassano, Federico",
+    "Berman, Edward",
+    "Gopinath, Ashwin",
+    "Narasimhan, Karthik",
+    "Yao, Shunyu"
+  ],
+  "pdf_pages": 19,
+  "pdf_text_characters": 59395,
+  "pdf": "19-reflexion.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2303.11366v4",
+  "pdf_sha256": "6059b6f89fea9959bd3dab553fbb97756a3dfb1b15e3cbab2fbf3ab6664333bd",
+  "math_expressions": 59,
+  "data_tables": 7,
+  "code_listings": 3,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 0,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2303.11366v4",
+  "original_html": "sources/19-reflexion.html",
+  "source_url": "https://arxiv.org/abs/2303.11366",
+  "markdown_characters": 64621
+}

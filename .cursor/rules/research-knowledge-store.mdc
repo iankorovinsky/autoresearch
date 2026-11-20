@@ -1,0 +1,10 @@
+---
+description: Retrieve and cite the project's paper knowledge store for research questions.
+alwaysApply: true
+---
+
+# Research references
+
+When a question concerns the collected research, follow the repository's [research guidance](../../AGENTS.md) and start with [the analysis catalog](../../references/papers/analysis/README.md). Retrieve only the relevant notes and their source citations. For example, a claim about KernelBench speedup needs its baseline, correctness gate, hardware, sampling budget, and source version.
+
+Use source evidence to support factual claims; distinguish author conclusions from proposed project applications. Inspect repository code separately before claiming a paper's idea is implemented. Keep source snapshots and derived notes version-aligned when updating the library.

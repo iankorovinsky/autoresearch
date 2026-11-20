@@ -1,0 +1,33 @@
+{
+  "number": 8,
+  "title": "Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization",
+  "arxiv_id": "2509.14279",
+  "retrieved_date": "2026-11-20",
+  "markdown": "08-robust-agentic-cuda.md",
+  "warnings": [],
+  "version": "2509.14279v1",
+  "authors": [
+    "Lange, Robert Tjarko",
+    "Sun, Qi",
+    "Prasad, Aaditya",
+    "Faldor, Maxence",
+    "Tang, Yujin",
+    "Ha, David"
+  ],
+  "pdf_pages": 62,
+  "pdf_text_characters": 175021,
+  "pdf": "08-robust-agentic-cuda.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2509.14279v1",
+  "pdf_sha256": "dc2369f7d202fa438ae4b1fd72ddc6e8f6b9515fd8f24aec2f7926c549d3ac1b",
+  "math_expressions": 14,
+  "data_tables": 11,
+  "code_listings": 19,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 4,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2509.14279v1",
+  "original_html": "sources/08-robust-agentic-cuda.html",
+  "source_url": "https://arxiv.org/abs/2509.14279",
+  "markdown_characters": 192314
+}

@@ -1,0 +1,32 @@
+{
+  "number": 9,
+  "title": "Bit-Accurate Modeling of GPU Matrix Multiply-Accumulate Units: Demystifying Numerical Discrepancy and Accuracy",
+  "arxiv_id": "2511.10909",
+  "retrieved_date": "2026-11-20",
+  "markdown": "09-bit-accurate-gpu-mma.md",
+  "warnings": [],
+  "version": "2511.10909v3",
+  "authors": [
+    "Xie, Peichen",
+    "Xu, Shuotao",
+    "Wang, Yang",
+    "Yang, Fan",
+    "Yang, Mao"
+  ],
+  "pdf_pages": 15,
+  "pdf_text_characters": 77855,
+  "pdf": "09-bit-accurate-gpu-mma.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2511.10909v3",
+  "pdf_sha256": "97d3fd4334cbde801e6babed4b1aaa1a75b916f98475f1dffbebc362500045ad",
+  "math_expressions": 500,
+  "data_tables": 12,
+  "code_listings": 11,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 1,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2511.10909v3",
+  "original_html": "sources/09-bit-accurate-gpu-mma.html",
+  "source_url": "https://arxiv.org/abs/2511.10909",
+  "markdown_characters": 108358
+}

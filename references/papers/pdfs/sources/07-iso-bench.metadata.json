@@ -1,0 +1,31 @@
+{
+  "number": 7,
+  "title": "ISO-Bench: Can Coding Agents Optimize Real-World Inference Workloads?",
+  "arxiv_id": "2602.19594",
+  "retrieved_date": "2026-11-20",
+  "markdown": "07-iso-bench.md",
+  "warnings": [],
+  "version": "2602.19594v1",
+  "authors": [
+    "Nangia, Ayush",
+    "Mishra, Shikhar",
+    "Gokrani, Aman",
+    "Chopra, Paras"
+  ],
+  "pdf_pages": 30,
+  "pdf_text_characters": 62526,
+  "pdf": "07-iso-bench.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2602.19594v1",
+  "pdf_sha256": "06e41ec278fc7ca6dfdfcebe72129dcbf9969ee735968253698c39157749a024",
+  "math_expressions": 12,
+  "data_tables": 7,
+  "code_listings": 1,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 7,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2602.19594v1",
+  "original_html": "sources/07-iso-bench.html",
+  "source_url": "https://arxiv.org/abs/2602.19594",
+  "markdown_characters": 71644
+}
