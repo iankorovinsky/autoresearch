@@ -2,7 +2,7 @@
   "schema_version": 1,
   "collection_date": "2026-11-20",
   "index_date": "2026-11-20",
-  "path_base": "references/papers/analysis/ (all relative paths resolve from this directory)",
+  "path_base": "wiki/papers/analysis/ (all relative paths resolve from this directory)",
   "entry_count": 22,
   "review_status_definition": "reviewed = full-text reading by assigned analyst, editorial/structural checks, and targeted source spot-checks; not experimental reproduction or independent verification of every claim",
   "entries": [

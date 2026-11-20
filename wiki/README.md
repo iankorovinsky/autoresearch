@@ -1,6 +1,6 @@
-# Reference library
+# Project wiki
 
-This directory is the project's durable reference library, containing literature sources, reading notes, and project-authored design artifacts.
+This directory is the project's wiki, containing literature sources, reading notes, and project-authored design artifacts.
 
 Start with [the paper analysis guide](papers/analysis/README.md) for literature questions, then follow its citations to the preserved sources. For harness design, start with [the artifacts index](artifacts/README.md) and [possible user inputs](artifacts/user-inputs.md). The literature collection contains 22 selected works: 21 arXiv papers and one METR web article, captured on 2026-11-20.
 

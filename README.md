@@ -5,9 +5,9 @@ NVIDIA T4 on Modal. You can launch it from a Mac without a local NVIDIA GPU.
 
 ## Research and design documentation
 
-- [Reference library](references/README.md): collected papers, source material, and research notes.
-- [Design artifacts](references/artifacts/README.md): project proposals, requirements, and open questions.
-- [Possible user inputs](references/artifacts/user-inputs.md): 13 input categories with example user messages and attachments, clarification requirements, and a review of additional use cases already covered by the taxonomy.
+- [Wiki](wiki/README.md): collected papers, source material, and research notes.
+- [Design artifacts](wiki/artifacts/README.md): project proposals, requirements, and open questions.
+- [Possible user inputs](wiki/artifacts/user-inputs.md): 13 input categories with example user messages and attachments, clarification requirements, and a review of additional use cases already covered by the taxonomy.
 
 The design artifacts describe proposed capabilities, not the current implementation.
 

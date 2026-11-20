@@ -17,7 +17,7 @@ Start here when answering questions about the collected literature. This folder 
 4. Cite the source version and precise locator in the answer. Identify a survey's descriptions as secondary evidence until its cited primary study has been checked.
 5. If the store does not support an answer, say which evidence is missing and consult additional sources. Do not fill gaps with inferred paper results.
 
-Search works with ordinary text tools; no embedding service is required. From the repository root, examples are `rg -n 'best-of|geometric|TF32' references/papers/analysis/` and `rg -n 'position bias|tie|calibration' references/papers/analysis/`. Search the full-text directory when the note is insufficient.
+Search works with ordinary text tools; no embedding service is required. From the repository root, examples are `rg -n 'best-of|geometric|TF32' wiki/papers/analysis/` and `rg -n 'position bias|tie|calibration' wiki/papers/analysis/`. Search the full-text directory when the note is insufficient.
 
 ## Question routing
 
