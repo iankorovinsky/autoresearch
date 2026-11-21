@@ -1,0 +1,63 @@
+frontend/src/lib/claude/agent.ts
+  s_bcb8d198a9c77f::t_335265555e2103 1-20,28-96,98-104,109-110,112-132,136-139
+  s_bcb8d198a9c77f::t_8638a2da77b92b 21-27
+  s_bcb8d198a9c77f::t_22860be0d5e41c 133-135
+  s_bcb8d198a9c77f::t_bb4d8c82c5cdc8 97,105-108,111
+frontend/src/app/api/claude/route.ts
+  s_bcb8d198a9c77f::t_0d6826d4293050 1-11
+frontend/next.config.ts
+  s_ca294b3e491cfa::t_8c963e2a32aa13 3-7
+frontend/src/lib/agents/stream-route.ts
+  s_bcb8d198a9c77f::t_d2656bf1eac4a1 1-162
+frontend/src/lib/claude/events.ts
+  s_bcb8d198a9c77f::t_2ca154982e3a5c 1-74
+frontend/tests/claude-agent.test.mjs
+  s_bcb8d198a9c77f::t_422d8b3f9dace8 1-46
+frontend/README.md
+  s_bcb8d198a9c77f::t_b403dc944616d8 32-41,56-62
+frontend/src/App.tsx
+  s_bcb8d198a9c77f::t_22860be0d5e41c 60-65,158-159,169-170,188,192,336,343-344,390-391,397-399,781,881-893,1451-1461
+frontend/.env.example
+  s_bcb8d198a9c77f::t_4a485b43692797 11-15
+  s_bcb8d198a9c77f::t_8c061f0b29bad7 10
+frontend/.gitignore
+  s_bcb8d198a9c77f::t_4a485b43692797 28-30
+frontend/src/app/api/codex/route.ts
+  s_bcb8d198a9c77f::t_0bfb8dbdbe582f 1,6-19
+frontend/package-lock.json
+  s_74bfb3fa8f2461::t_00fab7899dc5e0 11,32-191,202-213,715-755,890-905,991,1079,1094-1139,1152-1226,1253-1274,1288-1327,1335-1360,1371-1374,1376-1380,1382,1385-1389,1391-1905,1920-1948,2030-2103,2110-2118,2135-2195,2201,2211,2225-2259,2266-2316,2380-2472,2482-2500,2524-2538,2545-2575,2596-2653
+frontend/package.json
+  s_bcb8d198a9c77f::t_bb2137ea9a8b54 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9aed39a77f6cf7534c295f0fdb9a48c2e7522bca",
+  "prompts": {},
+  "sessions": {
+    "s_74bfb3fa8f2461": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a423620b-aca3-4fd9-8b7a-2de26afa2b42",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_bcb8d198a9c77f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b427e664-dfb9-4a1f-ab4f-519615feb1d9",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_ca294b3e491cfa": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "520a8f18-d077-4758-bc85-ef99d901017e",
+        "model": "claude-fable-5-2"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
