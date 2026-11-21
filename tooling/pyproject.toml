@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "autoresearch-devtools"
+version = "0.1.0"
+description = "Isolated repository tasks, environment checks, and documentation validation"
+requires-python = ">=3.12"
+dependencies = ["markdown-it-py>=4,<5"]
+
+[project.scripts]
+repo-dev = "repo_dev.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/repo_dev"]
+
+[dependency-groups]
+dev = ["pytest>=8.4,<10", "ruff>=0.14"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

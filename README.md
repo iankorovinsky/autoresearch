@@ -1,5 +1,13 @@
 # Run your first KernelBench candidate
 
+## Local development utilities
+
+Use `./dev setup`, `./dev doctor`, `./dev check`, `./dev test`, and `./dev docs`
+from the repository root. The [tooling guide](tooling/README.md) documents component
+selection, JSON output, optional SSH checks, and documentation validation.
+Tooling and compute have separate Python environments; frontend and data retain
+their own Node dependencies. Start with `./dev setup --dry-run` to preview setup.
+
 ## Queue and profile kernels on Waterloo
 
 The new [compute CLI](compute/README.md) runs CUDA/PyTorch kernel workloads on
@@ -13,6 +21,11 @@ username as described in its README, then use
 `uv run kcompute run examples/vector-add/task.toml`.
 
 ## Existing Modal evaluation guide
+
+**Historical guide:** the numbered instructions below reference helper scripts
+absent from the current checkout. Use the tooling/component guides above for
+current local setup and GPU execution. These earlier instructions remain as
+reference; `./dev docs --prose-paths` reports their unresolved file references.
 
 This guide evaluates an existing kernel against a PyTorch task using a remote
 NVIDIA T4 on Modal. You can launch it from a Mac without a local NVIDIA GPU.

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Bootstrap only the tooling environment. Component environments stay separate.
+set -eu
+repo_root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if ! command -v uv >/dev/null 2>&1; then
+    echo "uv is required; see tooling/README.md for setup." >&2
+    exit 127
+fi
+unset VIRTUAL_ENV PYTHONPATH PYTHONHOME UV_PROJECT UV_WORKING_DIR UV_NO_SYNC UV_FROZEN UV_ACTIVE
+export PYTHONNOUSERSITE=1
+export UV_PROJECT_ENVIRONMENT="$repo_root/tooling/.venv"
+exec uv run --directory "$repo_root/tooling" --locked repo-dev --root "$repo_root" "$@"
