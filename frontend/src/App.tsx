@@ -57,6 +57,12 @@ const tabs = [
   "Code",
 ] as const;
 type Tab = (typeof tabs)[number];
+/** Local chat providers served by `src/app/api/<id>/route.ts`. */
+type AgentId = "claude" | "codex";
+const agentLabels: Record<AgentId, string> = {
+  claude: "Claude",
+  codex: "Codex",
+};
 function Brand({ small = false }: { small?: boolean }) {
   return (
     <span className={`brand-mark ${small ? "small" : ""}`} aria-hidden="true">
@@ -149,6 +155,8 @@ export default function App({
     { name: string; content: string }[]
   >([]);
   const [gpu, setGpu] = useState("NVIDIA T4");
+  const [agent, setAgent] = useState<AgentId>("claude");
+  const agentLabel = agentLabels[agent];
   const [selectedExperiment, setSelectedExperiment] = useState("EXP-012");
   const dialogRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -158,6 +166,8 @@ export default function App({
   useEffect(() => {
     setThreads(loadThreads(`ar:${userId}:threads`));
     setGpu(loadPreference(`ar:${userId}:gpu`, "NVIDIA T4"));
+    const savedAgent = loadPreference(`ar:${userId}:agent`, "claude");
+    setAgent(savedAgent === "codex" ? "codex" : "claude");
     setSidebar(window.innerWidth > 700);
     setRestored(true);
   }, []);
@@ -175,10 +185,11 @@ export default function App({
     if (!restored) return;
     try {
       localStorage.setItem(`ar:${userId}:gpu`, gpu);
+      localStorage.setItem(`ar:${userId}:agent`, agent);
     } catch {
       /* Preferences remain in session memory. */
     }
-  }, [gpu, restored, userId]);
+  }, [gpu, agent, restored, userId]);
   useEffect(() => {
     if (toast) {
       const t = setTimeout(() => setToast(""), 3500);
@@ -322,14 +333,15 @@ export default function App({
     setRunningThreadId(id);
 
     try {
-      const response = await fetch("/api/codex", {
+      const response = await fetch(`/api/${agent}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ threadId: id, input: message.text }),
         signal: controller.signal,
       });
       if (!response.ok) throw new Error(await response.text());
-      if (!response.body) throw new Error("Codex did not return a response.");
+      if (!response.body)
+        throw new Error(`${agentLabel} did not return a response.`);
 
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
@@ -375,13 +387,16 @@ export default function App({
       } finally {
         await reader.cancel().catch(() => {});
       }
-      if (!completed) throw new Error("The Codex response disconnected.");
+      if (!completed)
+        throw new Error(`The ${agentLabel} response disconnected.`);
     } catch (error) {
       if (!controller.signal.aborted) {
         setResponseError({
           threadId: id,
           message:
-            error instanceof Error ? error.message : "Could not reach Codex.",
+            error instanceof Error
+              ? error.message
+              : `Could not reach ${agentLabel}.`,
         });
       }
     } finally {
@@ -763,7 +778,7 @@ export default function App({
                 )}
                 {runningThreadId === active.id && (
                   <div className="thinking" role="status">
-                    <LoaderCircle size={15} className="spin" /> Codex is
+                    <LoaderCircle size={15} className="spin" /> {agentLabel} is
                     responding…
                   </div>
                 )}
@@ -863,7 +878,19 @@ export default function App({
                       </span>
                       Auto research
                     </button>
-                    <span className="model-button">Codex</span>
+                    <button
+                      type="button"
+                      className="model-button"
+                      title="Switch assistant"
+                      aria-label={`Assistant: ${agentLabel}. Switch assistant`}
+                      disabled={running}
+                      onClick={() =>
+                        setAgent(agent === "claude" ? "codex" : "claude")
+                      }
+                    >
+                      {agentLabel}
+                      <ChevronDown size={11} />
+                    </button>
                     <button
                       className={`send-button ${running ? "running" : ""}`}
                       disabled={!running && !draft.trim()}
@@ -1419,6 +1446,17 @@ export default function App({
                   <select value={gpu} onChange={(e) => setGpu(e.target.value)}>
                     <option>NVIDIA T4</option>
                     <option>NVIDIA A100</option>
+                  </select>
+                </label>
+                <label className="field-label">
+                  Assistant
+                  <select
+                    value={agent}
+                    disabled={running}
+                    onChange={(e) => setAgent(e.target.value as AgentId)}
+                  >
+                    <option value="claude">Claude</option>
+                    <option value="codex">Codex</option>
                   </select>
                 </label>
                 <div className="connection-state">

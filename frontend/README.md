@@ -29,6 +29,16 @@ compatible Codex CLI if you have multiple installations. Restart Next.js after
 changing these settings. App Server checks the ChatGPT sign-in before sending a
 turn, so model usage goes through that account.
 
+To enable local Claude chat, set `AUTORESEARCH_CLAUDE_ENABLED=1` in `.env.local`
+and restart Next.js. The route uses the [Claude Agent SDK](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk),
+which runs its bundled Claude Code binary as a subprocess with your existing
+Claude Code sign-in, `CLAUDE_CODE_OAUTH_TOKEN`, or `ANTHROPIC_API_KEY`. Set
+`AUTORESEARCH_CLAUDE_MODEL` to pin a model and `AUTORESEARCH_CLAUDE_BIN` to use a
+specific Claude Code executable. The assistant can read repository files (Read,
+Glob, Grep) but cannot edit files or run commands. Pick Claude or Codex with the
+assistant button next to Send or in Workspace settings; the choice is saved per
+account in this browser.
+
 ## Included
 
 - Project and thread navigation, workspace search (Cmd/Ctrl+K), and new threads (Cmd/Ctrl+N). Search ranks thread titles, tasks, projects, and saved messages with TanStack match-sorter utilities. TanStack Virtual renders only the visible result rows; a memoized index and deferred updates keep typing responsive. Arrow keys select results, Enter opens the thread or matching message, and Escape closes search. Search currently covers browser-saved workspace data, not Supabase.
@@ -43,11 +53,13 @@ turn, so model usage goes through that account.
 
 ## Demo boundary and backend integration
 
-Codex App Server handles chat and stores the conversation in its local session
-history. The Next.js backend stores the mapping from workspace thread to Codex
-thread under `frontend/.codex-local/`, keyed by workspace account and thread.
-Keep that directory and the Codex session store if you want to resume a chat
-after restarting the backend. The browser sends only the new prompt. The
+Codex App Server or the Claude Agent SDK handles chat and stores the
+conversation in its own local session history. The Next.js backend stores the
+mapping from workspace thread to provider conversation under
+`frontend/.codex-local/` or `frontend/.claude-local/`, keyed by workspace account
+and thread. Keep those directories and the provider session stores if you want
+to resume a chat after restarting the backend. Each thread keeps separate Claude
+and Codex conversations. The browser sends only the new prompt. The
 backend opens Codex in read-only mode for this chat integration.
 
 Seeded experiment measurements, workers, timelines, and code excerpts are

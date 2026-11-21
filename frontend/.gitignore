@@ -25,3 +25,6 @@ next-env.d.ts
 
 # Local Codex thread mappings
 .codex-local/
+
+# Local Claude session mappings
+.claude-local/
