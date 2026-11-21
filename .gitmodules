@@ -1,0 +1,40 @@
+[submodule "wiki/codebases/KernelBench"]
+	path = wiki/codebases/KernelBench
+	url = https://github.com/ScalingIntelligence/KernelBench.git
+	branch = main
+[submodule "wiki/codebases/KernelBenchX"]
+	path = wiki/codebases/KernelBenchX
+	url = https://github.com/BonnieW05/KernelBenchX.git
+	branch = main
+[submodule "wiki/codebases/kernel_bench_verified"]
+	path = wiki/codebases/kernel_bench_verified
+	url = https://github.com/facebookresearch/kernel_bench_verified.git
+	branch = main
+[submodule "wiki/codebases/pygpubench"]
+	path = wiki/codebases/pygpubench
+	url = https://github.com/gpu-mode/pygpubench.git
+	branch = master
+[submodule "wiki/codebases/robust-kbench"]
+	path = wiki/codebases/robust-kbench
+	url = https://github.com/SakanaAI/robust-kbench.git
+	branch = main
+[submodule "wiki/codebases/KernelBenchFiltered"]
+	path = wiki/codebases/KernelBenchFiltered
+	url = https://github.com/METR/KernelBenchFiltered.git
+	branch = main
+[submodule "wiki/codebases/MMA-Sim"]
+	path = wiki/codebases/MMA-Sim
+	url = https://github.com/microsoft/MMA-Sim.git
+	branch = main
+[submodule "wiki/codebases/PTXBench"]
+	path = wiki/codebases/PTXBench
+	url = https://github.com/zhang677/PTXBench.git
+	branch = main
+[submodule "wiki/codebases/caesar"]
+	path = wiki/codebases/caesar
+	url = https://github.com/ScalingIntelligence/caesar.git
+	branch = master
+[submodule "wiki/codebases/reference-kernels"]
+	path = wiki/codebases/reference-kernels
+	url = https://github.com/gpu-mode/reference-kernels.git
+	branch = main

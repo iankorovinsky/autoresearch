@@ -177,6 +177,7 @@ def discover(root, selected=(), include_sources=False):
                     if name not in SKIP_DIRS
                     and not name.startswith(".")
                     and not (Path(directory) / name).is_symlink()
+                    and not (Path(directory) / name / ".git").exists()
                 ]
                 paths.extend(Path(directory) / name for name in files)
     result = []

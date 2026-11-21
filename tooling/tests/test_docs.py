@@ -96,6 +96,16 @@ def test_source_snapshots_and_generated_dirs_excluded(tmp_path):
     assert "missing-link" in codes(check(tmp_path, include_sources=True))
 
 
+def test_wiki_scan_skips_upstream_checkouts(tmp_path):
+    write(tmp_path, "wiki/codebases/README.md", "[upstream](benchmark/)")
+    write(tmp_path, "wiki/codebases/benchmark/.git", "gitdir: ../../../.git/modules/benchmark")
+    write(tmp_path, "wiki/codebases/benchmark/README.md", "[upstream link](missing.md)")
+
+    assert check(tmp_path)["ok"]
+    assert check(tmp_path, ["wiki/codebases"])["ok"]
+    assert "missing-link" in codes(check(tmp_path, ["wiki/codebases/benchmark/README.md"]))
+
+
 def test_catalog_paths_and_count(tmp_path):
     write(
         tmp_path,

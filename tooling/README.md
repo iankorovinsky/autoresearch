@@ -95,7 +95,7 @@ There are **no default network probes**. `--ssh` explicitly invokes the existing
 ./dev docs --include-sources
 ```
 
-Default scope: root README/agent instructions, `compute/`, `frontend/`, `data/`, `tooling/`, and `wiki/`. Generated/dependency/cache directories and hidden files are excluded. Vendored KernelBench/Harbor code is outside the default roots. Preserved paper Markdown under `wiki/papers/pdfs/` is excluded except its README; use `--include-sources` to inspect converted source text explicitly. JSON inventories/metadata remain included by default.
+Default scope: root README/agent instructions, `compute/`, `frontend/`, `data/`, `tooling/`, and `wiki/`. Directory scans skip generated/dependency/cache directories, hidden files, and nested Git checkouts such as the research submodules. Vendored KernelBench/Harbor code is outside the default roots. Preserved paper Markdown under `wiki/papers/pdfs/` is excluded except its README; use `--include-sources` to inspect converted source text explicitly. JSON inventories/metadata remain included by default.
 
 Checks include:
 

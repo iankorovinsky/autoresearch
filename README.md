@@ -229,3 +229,7 @@ A Harbor task for optimizing the level 1 square matrix multiplication kernel is 
 ## Conversation database
 
 The [`data/`](data/README.md) package manages projects, threads, and ordered messages with Prisma migrations for Supabase PostgreSQL. It is separate from the frontend and contains no seed data. See its README for local validation and deployment instructions.
+
+## Upstream research code
+
+See the [reference repository guide](wiki/codebases/README.md) for the upstream benchmark, verifier, and agent codebases tracked as Git submodules.

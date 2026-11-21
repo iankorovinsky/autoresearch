@@ -9,7 +9,7 @@ Start with [the paper analysis guide](papers/analysis/README.md) for literature 
 - [papers/](papers/README.md): the literature collection, its original evidence, and structured reading notes.
 - [papers/pdfs/](papers/pdfs/README.md): original PDFs, LLM-readable full-text Markdown, saved source HTML, figures, and a provenance manifest. Despite the directory name, it also holds the non-PDF article and supporting formats.
 - [papers/analysis/](papers/analysis/README.md): one detailed analysis per work, a human-readable catalog and question-routing guide, a machine-readable index, and a review record.
-- `codebases/`: reserved for reference implementations and external code snapshots; currently empty. The papers' repository links do not mean those repositories have been downloaded or audited here.
+- [codebases/](codebases/README.md): upstream benchmark, verifier, and agent codebases tracked as Git submodules.
 - [artifacts/](artifacts/README.md): project-authored design explorations and other research artifacts. Start with the [user input taxonomy](artifacts/user-inputs.md) for possible harness inputs and the requirements each leaves to resolve. These are design proposals; no paper experiments were reproduced as part of this collection.
 
 ## How to use the knowledge store
