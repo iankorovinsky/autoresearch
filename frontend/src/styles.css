@@ -512,6 +512,10 @@ button:disabled {
 .assistant-message p {
   margin-bottom: 17px;
 }
+.codex-response {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .activity-disclosure {
   display: flex;
   align-items: center;

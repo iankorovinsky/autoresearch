@@ -22,31 +22,42 @@ npm run typecheck # Check TypeScript without building
 npm run format    # Format source files
 ```
 
+To enable local Codex chat, sign in with ChatGPT using `codex login` and set
+`AUTORESEARCH_CODEX_ENABLED=1` in `.env.local`. The app uses `codex` from
+your PATH by default. Set `AUTORESEARCH_CODEX_BIN` to the absolute path of a
+compatible Codex CLI if you have multiple installations. Restart Next.js after
+changing these settings. App Server checks the ChatGPT sign-in before sending a
+turn, so model usage goes through that account.
+
 ## Included
 
 - Project and thread navigation, workspace search (Cmd/Ctrl+K), and new threads (Cmd/Ctrl+N). Search ranks thread titles, tasks, projects, and saved messages with TanStack match-sorter utilities. TanStack Virtual renders only the visible result rows; a memoized index and deferred updates keep typing responsive. Arrow keys select results, Enter opens the thread or matching message, and Escape closes search. Search currently covers browser-saved workspace data, not Supabase.
 
   Implementation follows the official [TanStack Virtual React API](https://tanstack.com/virtual/latest/docs/framework/react/react-virtual) and [fuzzy matching guide](https://tanstack.com/table/v8/docs/guide/fuzzy-filtering).
-- Research composer with Shift+Enter for newlines, text/code attachments (up to 1 MB each), a model preference, auto-research toggle, and cancellable simulated replies.
+- Research composer with Shift+Enter for newlines, text/code attachments (up to 1 MB each), an auto-research preference, and cancellable streamed Codex replies when enabled.
 - Overview, Timeline, Plan, Workers, Compute, Metrics, and Code views.
 - Interactive runtime chart, candidate selection, code excerpt copying, and Markdown report downloads.
 - Expandable experiment panel, collapsible sidebar, responsive stacked layout, keyboard focus states, and focus-contained dialogs.
 - Supabase email/password authentication, verification resend, password recovery, cookie sessions, and protected workspace access.
-- Threads and model/GPU preferences saved in this browser using localStorage, scoped by signed-in user ID.
+- Threads and the GPU preference saved in this browser using localStorage, scoped by signed-in user ID.
 
 ## Demo boundary and backend integration
 
-**This is a frontend prototype.** All seeded experiment measurements, workers, timelines, and code excerpts are illustrative. Authentication connects to Supabase, but research data remains local. The app does not call an LLM, provision GPUs, query the research database, or execute kernels. New messages receive a clearly labeled simulated response; new threads display an empty experiment state instead of fabricated completed runs. Model, GPU, and auto-research controls are preferences for the future backend.
+Codex App Server handles chat and stores the conversation in its local session
+history. The Next.js backend stores the mapping from workspace thread to Codex
+thread under `frontend/.codex-local/`, keyed by workspace account and thread.
+Keep that directory and the Codex session store if you want to resume a chat
+after restarting the backend. The browser sends only the new prompt. The
+backend opens Codex in read-only mode for this chat integration.
 
-`src/data.ts` contains the typed thread/message models, sample threads, candidate results, and illustrative CUDA excerpt. Start the backend integration there, then replace the simulated response in `App.tsx` with an API/streaming adapter. Add server-supplied experiment IDs, run status, events, metrics, workers, and candidate artifacts. Credentials and database access should live on the server.
-
-Attachments are read locally and displayed as context chips; only their filenames are retained in saved messages. No file content is transmitted. Report export currently exports the sample candidate summary. Fonts load from Google Fonts, with system fallbacks if offline.
-
-Local browser storage is for prototype convenience, not a durable database. To reset the prototype, remove that user’s `ar:<user-id>:threads`, `ar:<user-id>:model`, and `ar:<user-id>:gpu` keys from this site's browser storage.
+Seeded experiment measurements, workers, timelines, and code excerpts are
+illustrative. The GPU and auto-research controls are preferences. Text and code
+attachments stay in the browser and only their filenames are saved in messages.
+The current report export contains the sample candidate summary.
 
 ## Verification
 
-The production build type-checks the application. Browser smoke checks covered all seven experiment tabs, creating and sending a new thread, the simulated response and empty experiment state, thread persistence after reload, and desktop/phone layouts. The frontend can be evaluated without any Python or GPU dependencies.
+The production build type-checks the application. To check the Codex integration, start a new thread and ask Codex to remember a unique synthetic label. Wait for the streamed reply to complete, restart Next.js, and ask for the label in the same thread without including it in the follow-up. The frontend can be evaluated without any Python or GPU dependencies.
 
 ## Next.js structure and environment
 
