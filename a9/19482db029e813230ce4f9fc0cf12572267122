@@ -1,0 +1,19 @@
+"process/Full Steps for Kernel Autoresearch.excalidraw"
+  s_bcb8d198a9c77f::t_ac31c3ae6b1f8e 1-5577
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a919482db029e813230ce4f9fc0cf12572267122",
+  "prompts": {},
+  "sessions": {
+    "s_bcb8d198a9c77f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b427e664-dfb9-4a1f-ab4f-519615feb1d9",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
