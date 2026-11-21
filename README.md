@@ -1,5 +1,19 @@
 # Run your first KernelBench candidate
 
+## Queue and profile kernels on Waterloo
+
+The new [compute CLI](compute/README.md) runs CUDA/PyTorch kernel workloads on
+`gpu-8-vm` through the Waterloo Data Science Cluster provider. It supports durable
+submission, status/logs, cancellation, correctness checks, latency/memory metrics,
+and JSON results. Its execution library and GPU worker can be reused by a future
+server or additional provider adapters. See the [live-test report](wiki/artifacts/compute-cli-validation.md).
+
+From `compute/`, install with `uv sync --locked --python 3.12`, configure your SSH
+username as described in its README, then use
+`uv run kcompute run examples/vector-add/task.toml`.
+
+## Existing Modal evaluation guide
+
 This guide evaluates an existing kernel against a PyTorch task using a remote
 NVIDIA T4 on Modal. You can launch it from a Mac without a local NVIDIA GPU.
 
@@ -9,7 +23,7 @@ NVIDIA T4 on Modal. You can launch it from a Mac without a local NVIDIA GPU.
 - [Design artifacts](wiki/artifacts/README.md): project proposals, requirements, and open questions.
 - [Possible user inputs](wiki/artifacts/user-inputs.md): 13 input categories with example user messages and attachments, clarification requirements, and a review of additional use cases already covered by the taxonomy.
 
-The design artifacts describe proposed capabilities, not the current implementation.
+Design artifacts label proposals separately from implementation and test evidence.
 
 ## 1. Get the repository and dependencies
 

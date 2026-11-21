@@ -1,0 +1,18 @@
+schema_version = 1
+name = "cuda-vector-add-fp32"
+entrypoint = "task.py:build"
+files = ["task.py", "kernel.cu"]
+environment = "cuda-pytorch-v1"
+
+[case]
+n = 1048576
+seed = 42
+
+[resources]
+min_gpu_memory_gib = 80
+wall_time_s = 120
+
+[validation]
+mode = "reference"
+rtol = 0.00001
+atol = 0.000001

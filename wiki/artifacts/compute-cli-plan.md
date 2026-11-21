@@ -2,6 +2,8 @@
 
 **Status:** implementation proposal, 2026-11-21. This document plans the tool; it does not claim that the CLI or a new provider has been implemented.
 
+**Implementation follow-up:** the Waterloo-first CLI is now implemented in [`compute/`](../../compute/README.md). See the [implementation and live-test report](compute-cli-validation.md) for observed behavior, test evidence, and differences from this original proposal. The proposal below is preserved as design history.
+
 ## Decision
 
 Build a small Python package with a reusable execution service and a thin CLI, provisionally named **`kcompute`**. Its first provider is **Waterloo Data Science Cluster**, with identifier **`waterloo-datasci`**. Providers control where work runs; a shared GPU worker controls how a kernel is executed and measured.

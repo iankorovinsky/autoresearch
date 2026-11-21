@@ -1,0 +1,16 @@
+schema_version = 1
+name = "model-new-relu"
+entrypoint = "task.py:build"
+files = ["task.py"]
+
+[case]
+n = 1048576
+seed = 42
+
+[resources]
+wall_time_s = 90
+
+[validation]
+mode = "reference"
+rtol = 0.0
+atol = 0.0

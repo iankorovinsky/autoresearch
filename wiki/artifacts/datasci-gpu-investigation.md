@@ -4,6 +4,8 @@
 
 Running investigation for the SE390 kernel benchmarking project. Facts below are either live observations, earlier email statements, documentation claims, or explicitly labeled interpretations. Cluster availability can change immediately; these are not benchmark results.
 
+**Follow-up:** the [compute CLI implementation and live-test report](compute-cli-validation.md) records the subsequent PyTorch environment installation, successful CUDA compilation/execution on `gpu-8-vm`, profiling results, and failure/cancellation tests. Statements below about packages not being installed or kernels not being executed refer to the original inventory inspection, not the later implementation work.
+
 ## Outcome
 
 SSH authentication succeeded as `ikorovin` to `datasci-gpu.cs.uwaterloo.ca` (login host: `slurm-login`). Four short Slurm inspection jobs successfully ran on `gpu-8-vm`, `gpu-1-vm`, and `gpu-6-vm`; all completed with exit code `0:0`. The final user queue was empty.
