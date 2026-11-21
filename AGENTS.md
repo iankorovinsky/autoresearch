@@ -1,3 +1,11 @@
+# Commit messages and pull request titles
+
+- Always use Conventional Commits for every commit message and pull request title: `type(scope): message`.
+- Both the type and scope are required. Use a lowercase, imperative summary.
+- Choose a type such as `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, or `chore`, and a scope identifying the affected component.
+- Examples: `feat(compute): add kernel profiling`, `fix(tooling): handle missing dependencies`, `docs(repo): document commit conventions`.
+- Check the format before creating each commit or pull request.
+
 # Research knowledge store
 
 For questions about the collected literature, kernel benchmarking, numerical verification, agent methods, or LLM judges, start at [wiki/papers/analysis/README.md](wiki/papers/analysis/README.md). Use [index.json](wiki/papers/analysis/index.json) to retrieve relevant notes, then check their linked sources for consequential claims.
