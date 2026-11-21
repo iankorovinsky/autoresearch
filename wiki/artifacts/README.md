@@ -7,6 +7,7 @@ Project-authored notes and design explorations for the automated GPU kernel rese
 - [Harness axioms](axioms.md): principles for specifying tasks, validating oracles, interpreting proofs, and accepting research results.
 - [Task intake schema](intake-schema.md): a proposed structured record of user intent, source evidence, behavioral requirements, evaluation criteria, and constraints, with readiness requirements before formalization, algorithm research, and implementation optimization.
 - [Possible user inputs](user-inputs.md): 13 input categories, from natural-language ideas and papers to benchmark tasks, proprietary kernels, and formal specifications. Each row includes an example user message and any required attachments. Covers accompanying constraints, request intent, and a coverage review explaining how additional use cases fit the existing categories.
+- [Kernel benchmark landscape](kernel-benchmark-landscape/kernel-benchmark-landscape.md): a 2026-11-21 research snapshot covering 44 directly relevant benchmark entries, 45 related benchmarks and resources, and 6 unverified leads. Includes hardware/language targets, task counts where verified, source links, and data-availability and licensing notes. Also available as a [searchable HTML report](kernel-benchmark-landscape/kernel-benchmark-landscape.html) and [structured JSON](kernel-benchmark-landscape/kernel-benchmark-landscape.json). Sources are live links; no benchmark experiments were run.
 
 ## Adding artifacts
 
