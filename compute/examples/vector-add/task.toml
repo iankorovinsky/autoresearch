@@ -9,7 +9,7 @@ n = 1048576
 seed = 42
 
 [resources]
-min_gpu_memory_gib = 80
+min_gpu_memory_gib = 1
 wall_time_s = 120
 
 [validation]
