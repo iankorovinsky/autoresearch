@@ -1,0 +1,43 @@
+frontend/.env.example
+  s_b4c1f72c19feae::t_66ec9c9ce91eb4 6-11
+frontend/.gitignore
+  s_b4c1f72c19feae::t_c48be7c54ea993 25-27
+frontend/README.md
+  s_b4c1f72c19feae::t_ed34db3cedcc3e 25-32,38,43,47-53,55-58,62
+frontend/next.config.ts
+  s_b4c1f72c19feae::t_e72275a3c87ba9 3-7
+frontend/package-lock.json
+  s_b4c1f72c19feae::t_6b3801ae38bd56 11,32-191,202-213,715-755,890-905,991,1079,1094-1139,1152-1226,1253-1274,1288-1327,1335-1360,1371-1374,1376-1380,1382,1385-1389,1391-1905,1920-1948,2030-2103,2110-2118,2135-2195,2201,2211,2225-2259,2266-2316,2380-2472,2482-2500,2524-2538,2545-2575,2596-2653
+frontend/package.json
+  s_b4c1f72c19feae::t_70683178181b68 15
+frontend/src/App.tsx
+  s_b4c1f72c19feae::t_c6c0f23f6a6db6 60-61,142-147,159,183,216,300-303,323-396,751-759,770-773,776-780,872-874,881,1435
+frontend/src/app/api/claude/route.ts
+  s_b4c1f72c19feae::t_0b22c83c69211e 1-11
+frontend/src/lib/agents/stream-route.ts
+  s_b4c1f72c19feae::t_7620c9db22ecff 1-162
+frontend/src/lib/claude/agent.ts
+  s_b4c1f72c19feae::t_c1160d29d97154 1-139
+frontend/src/lib/claude/events.ts
+  s_b4c1f72c19feae::t_9b71dda74dda4d 1-79
+frontend/src/styles.css
+  s_b4c1f72c19feae::t_844c19300d5816 515-518
+frontend/tests/claude-agent.test.mjs
+  s_b4c1f72c19feae::t_eabea8a9582c2b 1-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "86b60e5a2b37f114f7600fa223d31e092a5ff487",
+  "prompts": {},
+  "sessions": {
+    "s_b4c1f72c19feae": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e4458da5-9e0d-4da3-94a5-edf14fe5469f",
+        "model": "grok-4.7"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
