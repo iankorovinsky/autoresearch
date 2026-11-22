@@ -1,0 +1,36 @@
+frontend/tests/claude-agent.test.mjs
+  s_bcb8d198a9c77f::t_f84c40220c2d92 36,39-50
+  s_bcb8d198a9c77f::t_cc88d8fd7cb50c 32-33,35
+  s_b4c1f72c19feae::t_07a637b109e27f 37-38
+frontend/src/lib/claude/events.ts
+  s_bcb8d198a9c77f::t_bab73585d2e203 30-38,42-43,55-57,62,67-68,71,74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5ebf5dbb3501554fe9b2efb099b037806014c895",
+  "prompts": {},
+  "humans": {
+    "h_7b758897e8740d": {
+      "author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b4c1f72c19feae": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e4458da5-9e0d-4da3-94a5-edf14fe5469f",
+        "model": "grok-4.7"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_bcb8d198a9c77f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b427e664-dfb9-4a1f-ab4f-519615feb1d9",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
