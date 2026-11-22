@@ -29,8 +29,25 @@ test('later assistant messages get new item IDs so earlier text is kept', () => 
   const map = createClaudeTextMapper();
   map(assistant([{ type: 'text', text: 'First' }]));
   assert.deepEqual(map(delta('Sec')), [{ type: 'delta', itemId: `${session}:1:0`, text: 'Sec' }]);
+  // The complete text lands on the streamed item even though it sits after a
+  // tool block in the message, so the partial stream is replaced, not repeated.
   assert.deepEqual(map(assistant([{ type: 'tool_use', name: 'Read' }, { type: 'text', text: 'Second' }])), [
-    { type: 'message', itemId: `${session}:1:1`, text: 'Second' },
+    { type: 'message', itemId: `${session}:1:0`, text: 'Second' },
+  ]);
+});
+
+test('the complete message reuses the streamed item ID when block indexes differ', () => {
+  const map = createClaudeTextMapper();
+  // Thinking occupies block 0 in the stream, so the text streams at index 1,
+  // but Claude Code emits the completed text as its own single-block message.
+  assert.deepEqual(map(delta('Ans', 1)), [{ type: 'delta', itemId: `${session}:0:1`, text: 'Ans' }]);
+  assert.deepEqual(map(delta('wer', 1)), [{ type: 'delta', itemId: `${session}:0:1`, text: 'wer' }]);
+  assert.deepEqual(map(assistant([{ type: 'text', text: 'Answer' }])), [
+    { type: 'message', itemId: `${session}:0:1`, text: 'Answer' },
+  ]);
+  // The next turn starts clean: no stale streamed IDs leak into it.
+  assert.deepEqual(map(assistant([{ type: 'text', text: 'Next' }])), [
+    { type: 'message', itemId: `${session}:1:0`, text: 'Next' },
   ]);
 });
 
