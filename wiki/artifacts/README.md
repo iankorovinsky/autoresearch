@@ -13,6 +13,7 @@ Project-authored notes and design explorations for the automated GPU kernel rese
 - [Provider-agnostic compute CLI plan](compute-cli-plan.md): a proposed Waterloo-first CLI and shared GPU worker for queued kernel execution, basic profiling, durable run tracking, and later provider/server integration. Includes task/provider/result contracts, implementation milestones, and acceptance tests; preserved as the original proposal with a link to its implementation follow-up.
 - [Compute CLI implementation and live tests](compute-cli-validation.md): implemented Waterloo provider and shared worker, installation/usage links, measured `gpu-8-vm` results, failure/cancellation/recovery evidence, and remaining limitations.
 - [Modal compute provider investigation](compute/modal.md): GPU selection, Sandbox execution and artifact retrieval, live T4 benchmark and profiler results, the PyTorch Profiler diagnosis and workaround, and post-test billing observations.
+- [Baseten compute provider investigation](compute/baseten.md) records Training Jobs integration, T4 rejection, live A10G profiling results, and the hardware-counter permission limit.
 - [Development tooling implementation and validation](development-tooling-validation.md): isolated task runner, environment doctor, offline documentation checker, usage links, local test results, and known documentation/dependency findings.
 
 ## Adding artifacts

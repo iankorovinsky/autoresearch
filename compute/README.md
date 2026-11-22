@@ -1,6 +1,6 @@
 # Kernel compute CLI
 
-`kcompute` queues kernel workloads on a compute provider and retrieves versioned profiling results. The default provider is **Waterloo Data Science Cluster** (`waterloo-datasci`), pinned to **`gpu-8-vm`**. **Modal** (`modal`) provides selectable GPU types. A shared Python worker performs execution and measurement. The provider handles scheduling and transport. The coordinator runs on Mac/Linux without PyTorch or a GPU.
+`kcompute` queues kernel workloads on a compute provider and retrieves versioned profiling results. The default provider is **Waterloo Data Science Cluster** (`waterloo-datasci`), pinned to **`gpu-8-vm`**. **Modal** (`modal`) and **Baseten** (`baseten`) provide selectable GPU types. A shared Python worker performs execution and measurement. The provider handles scheduling and transport. The coordinator runs on Mac/Linux without PyTorch or a GPU.
 
 ## Install and configure
 
@@ -90,6 +90,55 @@ Modal submissions survive CLI exit. The scheduler reports a Sandbox as pending
 or running until it exits. Final worker results, samples, and logs are retained
 on the configured Modal Volume. The CLI reads worker logs after they have been
 published and can fetch the artifacts in a separate process.
+
+## Use Baseten
+
+For local development, put your workspace key with access to Training Jobs in
+`compute/.env` as `BASETEN_API_KEY=your_key_here`. The repository ignores this
+file. From the `compute` directory, use `--env-file .env` to load it.
+
+```bash
+uv sync --locked --extra baseten
+uv run --extra baseten --env-file .env kcompute providers list --provider baseten
+uv run --extra baseten --env-file .env kcompute setup --provider baseten
+uv run --extra baseten --env-file .env kcompute probe --provider baseten --gpu A10G
+uv run --extra baseten --env-file .env kcompute run examples/vector-add/task.toml --provider baseten --gpu A10G
+```
+
+```toml
+[providers.baseten]
+gpu = "A10G"
+project_name = "kcompute"
+# project_id = "your-existing-project-id"
+```
+
+The first submission or `setup` creates the project if needed. Set `project_id`
+to use a specific existing project. Each job requests one GPU, with CPU and host
+memory from the task manifest. Use `mig = "allow"` or `mig = "require"` for the
+`H100MIG` selector. Workspace access and Training Jobs capacity determine which
+GPU requests Baseten accepts.
+
+`providers list` shows the public NVIDIA GPU families and additional NVIDIA
+selectors from Truss. With a key it also shows the workspace's instance sizes
+and prices from the Management API. Baseten publishes the T4 at $0.01052/min.
+The Training Jobs API rejected T4 in our workspace and suggested A10G or H100.
+The default is A10G at $0.02012/min, the cheaper of those two. The probe
+requests one GPU with 4 vCPUs and 16 GiB of host RAM.
+[GPU catalog](https://docs.baseten.co/deployment/resources#instance-type-reference) ·
+[Pricing](https://www.baseten.co/pricing/) ·
+[Training Jobs guide](https://docs.baseten.co/training/concepts/basics#compute-resources)
+
+The JSON probe reports the actual GPU and tests `nvidia-smi`, CUDA event
+timing, CUDA compilation, a Triton kernel, PyTorch Profiler, Nsight Systems,
+and Nsight Compute. Nsight Compute only passes when it reads a numeric hardware
+counter. Baseten installs the hash-locked worker dependencies in each job.
+Benchmark results, samples, and worker logs are retrieved from job checkpoints
+after completion. Use the Baseten dashboard for container startup and dependency
+installation logs.
+
+In a live A10G probe, CUDA event timing, `nvcc`, Triton, PyTorch Profiler,
+Nsight Systems CUDA tracing, and `nvidia-smi` passed. Nsight Compute started
+but the runtime denied access to GPU counters (`ERR_NVGPUCTRPERM`).
 
 ## Run or queue tasks
 

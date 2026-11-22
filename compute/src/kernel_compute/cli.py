@@ -10,16 +10,19 @@ from kernel_compute.common import TERMINAL, digest
 from kernel_compute.models import WaterlooConfig
 from kernel_compute.providers import environment_lock
 from kernel_compute.providers.base import ProviderError
+from kernel_compute.providers.baseten_backend import BasetenConfig, BasetenProvider
 from kernel_compute.providers.modal_backend import ModalConfig, ModalProvider
 from kernel_compute.providers.waterloo_datasci import WaterlooProvider
 from kernel_compute.service import ExecutionService
 from kernel_compute.store import RunStore
 
-PROBE_PROVIDERS = ("modal",)
+PROBE_PROVIDERS = ("modal", "baseten")
 PROVIDERS = ("waterloo-datasci", *PROBE_PROVIDERS)
 
 
 def provider_factory(provider_id, config):
+    if provider_id == "baseten":
+        return BasetenProvider(BasetenConfig.model_validate(config))
     if provider_id == "modal":
         return ModalProvider(ModalConfig.model_validate(config))
     if provider_id != "waterloo-datasci":
@@ -39,7 +42,7 @@ def configuration(args, provider_id=None):
         config["user"] = os.environ["KCOMPUTE_SSH_USER"]
     if getattr(args, "gpu", None) is not None:
         if provider_id not in PROBE_PROVIDERS:
-            raise ValueError("--gpu requires --provider modal")
+            raise ValueError("--gpu requires --provider modal or baseten")
         config["gpu"] = args.gpu
     return provider_factory(provider_id, config)
 
@@ -59,10 +62,10 @@ def parser():
     providers = subs.add_parser("providers", parents=[shared])
     providers.add_argument("action", choices=["list"])
     gpu_selection = argparse.ArgumentParser(add_help=False)
-    gpu_selection.add_argument("--gpu", help="GPU type for Modal (see providers list)")
+    gpu_selection.add_argument("--gpu", help="GPU type for Modal or Baseten (see providers list)")
     subs.add_parser("doctor", parents=[shared, gpu_selection])
     subs.add_parser(
-        "probe", parents=[shared, gpu_selection], help="test tools on a Modal GPU"
+        "probe", parents=[shared, gpu_selection], help="test tools on a Modal or Baseten GPU"
     )
     setup = subs.add_parser("setup", parents=[shared])
     setup.add_argument("--wait", action="store_true")
@@ -111,7 +114,7 @@ def main(argv=None):
             provider = configuration(args)
         if args.command == "probe":
             if provider.id not in PROBE_PROVIDERS:
-                raise ValueError("probe requires --provider modal")
+                raise ValueError("probe requires --provider modal or baseten")
             emit(provider.probe())
             return 0
         if args.command == "doctor":
