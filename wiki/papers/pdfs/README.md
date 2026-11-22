@@ -1,12 +1,12 @@
 # Preserved paper sources
 
-This folder contains 21 original arXiv PDFs and 22 full-text Markdown documents for the selected collection, frozen on 2026-11-20. Entry 21 is a web article with saved HTML and no fabricated PDF. The analyses live separately in [../analysis/](../analysis/README.md).
+This folder contains 31 original arXiv PDFs and 33 full-text Markdown documents for the selected collection. Entries 1–22 were frozen on 2026-11-20 and entries 23–33 on 2026-11-21. Entries 21 and 23 are web articles with saved HTML and no fabricated PDF. The analyses live separately in [../analysis/](../analysis/README.md).
 
 ## Contents and preferred reading order
 
 - `NN-slug.md`: full source text converted for LLM retrieval, with metadata, headings, tables, code, references, and TeX math where available. These are full texts, not the analysis notes.
-- `NN-slug.pdf`: the original downloaded arXiv PDF for each of the 21 papers. Use it for authoritative layout, diagram/code figures, equations, or suspicious extraction.
-- [manifest.json](manifest.json): all 22 identities, versions, source URLs, saved paths, conversion details, PDF page counts and SHA-256 hashes. Optional fields differ for the web article.
+- `NN-slug.pdf`: the original downloaded arXiv PDF for each of the 31 papers. Use it for authoritative layout, diagram/code figures, equations, or suspicious extraction.
+- [manifest.json](manifest.json): all 33 identities, versions, source URLs, saved paths, conversion details, PDF page counts and SHA-256 hashes. Optional fields differ for the two web articles, and each entry carries its own `retrieved_date`.
 - `sources/`: original downloaded HTML and per-work metadata supporting provenance and re-conversion.
 - `assets/`: locally downloaded figures grouped by work. Markdown image links resolve into these directories; plots may need visual inspection.
 
@@ -17,6 +17,8 @@ Start with Markdown for search and text comprehension. Follow figure links or in
 Complex tables can retain raw HTML rather than flattening merged cells. Figure captions do not transcribe the information inside every chart, screenshot, taxonomy, or code listing. Multi-column reading order, hidden alignment characters, author parsing, footnote markers, and equation rendering can also be imperfect. Some source artifacts themselves contain inconsistent numbers or labels.
 
 The per-paper analyses record material issues encountered while reading. Their citation labels match the linked Markdown/HTML or explicitly identified PDF, whose numbering can differ. A missing Markdown figure body is a reason to open the preserved asset or PDF, not to infer its contents. Bibliographic metadata is a retrieval aid; consult the visible author block when identity matters.
+
+Entries 23–33 were converted on 2026-11-21 with a separate script written for that batch, because the original converter is not kept in this repository. The output follows the same conventions, but small formatting differences from entries 1–22 are possible. Each entry's conversion warnings are recorded in the manifest. In particular, the TensorLean page (entry 23) draws its nine charts as inline SVG: the Markdown keeps only each chart's label and embedded text, so read chart values from the saved HTML. It also omits eight duplicate small-screen copies of those charts. Some arXiv figures in this batch are SVG files whose text is stored as outlines, so their values cannot be searched as text. In entry 33, ten superscripts of the form `[i](j)` were rewritten as `[i]{(j)}` so Markdown does not read them as links; the rendered math is the same and the saved HTML is untouched.
 
 ## Preservation policy
 
@@ -68,3 +70,24 @@ Do not edit the original PDFs or silently replace a source revision. Keep future
 
 22. **LARK: Lean-Assisted Reasoning for LLM-Generated GPU Kernels** — `2611.02028v1`. [Full text](22-lark.md) · [PDF](22-lark.pdf) · [Original online source](https://arxiv.org/abs/2611.02028) · [Analysis](../analysis/22-lark.md)
 
+23. **TensorLean: Formal Verification of Production GPU Kernels** — `web snapshot 2026-11-21`. [Full text](23-tensorlean.md) · [Original online source](https://tensorlean.ai/) · [Analysis](../analysis/23-tensorlean.md)
+
+24. **K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model** — `2602.19128v2`. [Full text](24-k-search.md) · [PDF](24-k-search.pdf) · [Original online source](https://arxiv.org/abs/2602.19128) · [Analysis](../analysis/24-k-search.md)
+
+25. **FlashInfer-Bench: Building the Virtuous Cycle for AI-driven LLM Systems** — `2601.00227v1`. [Full text](25-flashinfer-bench.md) · [PDF](25-flashinfer-bench.pdf) · [Original online source](https://arxiv.org/abs/2601.00227) · [Analysis](../analysis/25-flashinfer-bench.md)
+
+26. **VERINA: Benchmarking Verifiable Code Generation** — `2505.23135v3`. [Full text](26-verina.md) · [PDF](26-verina.pdf) · [Original online source](https://arxiv.org/abs/2505.23135) · [Analysis](../analysis/26-verina.md)
+
+27. **Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?** — `2607.01211v2`. [Full text](27-performance-benchmark-reliability.md) · [PDF](27-performance-benchmark-reliability.pdf) · [Original online source](https://arxiv.org/abs/2607.01211) · [Analysis](../analysis/27-performance-benchmark-reliability.md)
+
+28. **AuXSpec: Learning to Autoformalize Program Specifications via Executable Postconditions** — `2611.21421v1`. [Full text](28-auxspec.md) · [PDF](28-auxspec.pdf) · [Original online source](https://arxiv.org/abs/2611.21421) · [Analysis](../analysis/28-auxspec.md)
+
+29. **ClarifyGPT: Empowering LLM-based Code Generation with Intention Clarification** — `2310.10996v1`. [Full text](29-clarifygpt.md) · [PDF](29-clarifygpt.pdf) · [Original online source](https://arxiv.org/abs/2310.10996) · [Analysis](../analysis/29-clarifygpt.md)
+
+30. **KernelFoundry: Hardware-aware evolutionary GPU kernel optimization** — `2603.12440v2`. [Full text](30-kernelfoundry.md) · [PDF](30-kernelfoundry.pdf) · [Original online source](https://arxiv.org/abs/2603.12440) · [Analysis](../analysis/30-kernelfoundry.md)
+
+31. **CudaForge: An Agent Framework with Hardware Feedback for CUDA Kernel Optimization** — `2511.01884v2`. [Full text](31-cudaforge.md) · [PDF](31-cudaforge.pdf) · [Original online source](https://arxiv.org/abs/2511.01884) · [Analysis](../analysis/31-cudaforge.md)
+
+32. **Kevin: Multi-Turn RL for Generating CUDA Kernels** — `2507.11948v1`. [Full text](32-kevin.md) · [PDF](32-kevin.pdf) · [Original online source](https://arxiv.org/abs/2507.11948) · [Analysis](../analysis/32-kevin.md)
+
+33. **Robust benchmarking in noisy environments** — `1608.04295v1`. [Full text](33-robust-benchmarking-noisy-environments.md) · [PDF](33-robust-benchmarking-noisy-environments.pdf) · [Original online source](https://arxiv.org/abs/1608.04295) · [Analysis](../analysis/33-robust-benchmarking-noisy-environments.md)

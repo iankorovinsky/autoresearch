@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
   "collection_date": "2026-11-20",
-  "index_date": "2026-11-20",
+  "index_date": "2026-11-21",
   "path_base": "wiki/papers/analysis/ (all relative paths resolve from this directory)",
-  "entry_count": 22,
+  "entry_count": 33,
   "review_status_definition": "reviewed = full-text reading by assigned analyst, editorial/structural checks, and targeted source spot-checks; not experimental reproduction or independent verification of every claim",
+  "draft_status_definition": "draft = full-text reading by one assigned analyst plus structural checks and a targeted quote and number spot-check; no second-reader review yet (entries 23-33, added 2026-11-21)",
   "entries": [
     {
       "paper_id": "01",
@@ -804,6 +805,433 @@
       ],
       "bullet_count": 130,
       "word_count_approx": 4514
+    },
+    {
+      "paper_id": "23",
+      "title": "TensorLean: Formal Verification of Production GPU Kernels",
+      "source_version": "web snapshot 2026-11-21",
+      "source_markdown": "../pdfs/23-tensorlean.md",
+      "source_pdf": null,
+      "source_url": "https://tensorlean.ai/",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "formal-verification",
+        "lean",
+        "ptx",
+        "floating-point",
+        "numerical-correctness",
+        "race-freedom",
+        "trust-boundary",
+        "correctness",
+        "flashattention",
+        "loop-invariants"
+      ],
+      "summary": "TensorLean is announced as a Lean/SMT framework proving that compiled PTX meets a tensor-level real-number specification within a stated tolerance on every input and schedule; all results are unreplicated author claims with no released artifact or paper at snapshot.",
+      "analysis_file": "23-tensorlean.md",
+      "source_original_html": "../pdfs/sources/23-tensorlean.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 93,
+      "word_count_approx": 3502
+    },
+    {
+      "paper_id": "24",
+      "title": "K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model",
+      "source_version": "2602.19128v2",
+      "source_markdown": "../pdfs/24-k-search.md",
+      "source_pdf": "../pdfs/24-k-search.pdf",
+      "source_url": "https://arxiv.org/abs/2602.19128",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "planning",
+        "world-model",
+        "tree-search",
+        "evolutionary-search",
+        "agent-scaffolding",
+        "execution-feedback",
+        "iterative-refinement",
+        "cuda",
+        "triton",
+        "inference-serving"
+      ],
+      "summary": "K-Search has an LLM maintain a search tree of optimization intents and instantiates each by sampling evaluator-scored kernels; evidence is four FlashInfer kernels (three runs per method) and one TriMul task, with trace-based correctness testing and no ablations.",
+      "analysis_file": "24-k-search.md",
+      "source_original_html": "../pdfs/sources/24-k-search.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 127,
+      "word_count_approx": 4823
+    },
+    {
+      "paper_id": "25",
+      "title": "FlashInfer-Bench: Building the Virtuous Cycle for AI-driven LLM Systems",
+      "source_version": "2601.00227v1",
+      "source_markdown": "../pdfs/25-flashinfer-bench.md",
+      "source_pdf": "../pdfs/25-flashinfer-bench.pdf",
+      "source_url": "https://arxiv.org/abs/2601.00227",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "benchmarking",
+        "inference-serving",
+        "trace-schema",
+        "kernel-substitution",
+        "cuda",
+        "triton",
+        "correctness",
+        "coding-agents",
+        "execution-feedback",
+        "benchmark-validity"
+      ],
+      "summary": "FlashInfer-Bench defines a JSON Trace schema, a serving-derived kernel dataset, a tolerance-gated benchmark and an apply() dispatcher for LLM-generated GPU kernels; tolerance values are unstated, and its one end-to-end test shows no generated kernel beating FlashInfer.",
+      "analysis_file": "25-flashinfer-bench.md",
+      "source_original_html": "../pdfs/sources/25-flashinfer-bench.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 135,
+      "word_count_approx": 5655
+    },
+    {
+      "paper_id": "26",
+      "title": "VERINA: Benchmarking Verifiable Code Generation",
+      "source_version": "2505.23135v3",
+      "source_markdown": "../pdfs/26-verina.md",
+      "source_pdf": "../pdfs/26-verina.pdf",
+      "source_url": "https://arxiv.org/abs/2505.23135",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "benchmarking",
+        "formal-verification",
+        "lean",
+        "verifiable-code-generation",
+        "specification-generation",
+        "proof-agents",
+        "correctness",
+        "iterative-refinement",
+        "execution-feedback",
+        "evaluation",
+        "benchmark-validity"
+      ],
+      "summary": "VERINA is a 189-task Lean 4 benchmark for code, specification and proof generation; specifications are scored mostly by tests against a ground-truth specification, and single-trial proof success is at most 4.9% for general-purpose models.",
+      "analysis_file": "26-verina.md",
+      "source_original_html": "../pdfs/sources/26-verina.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 151,
+      "word_count_approx": 4832
+    },
+    {
+      "paper_id": "27",
+      "title": "Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?",
+      "source_version": "2607.01211v2",
+      "source_markdown": "../pdfs/27-performance-benchmark-reliability.md",
+      "source_pdf": "../pdfs/27-performance-benchmark-reliability.pdf",
+      "source_url": "https://arxiv.org/abs/2607.01211",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "benchmark-validity",
+        "benchmarking",
+        "measurement-validity",
+        "repository-optimization",
+        "coding-agents",
+        "reproducibility",
+        "statistics",
+        "evaluation",
+        "scoring-rules",
+        "cross-machine-replay",
+        "leaderboards"
+      ],
+      "summary": "Audits SWE-Perf, GSO and SWE-fficiency by replaying 740 reference patches on four Google Cloud CPU machine types and re-scoring public submissions, finding unstable reference signals and scoring-rule-dependent rankings; it covers repository-level CPU benchmarks, not GPU kernels.",
+      "analysis_file": "27-performance-benchmark-reliability.md",
+      "source_original_html": "../pdfs/sources/27-performance-benchmark-reliability.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 138,
+      "word_count_approx": 5486
+    },
+    {
+      "paper_id": "28",
+      "title": "AuXSpec: Learning to Autoformalize Program Specifications via Executable Postconditions",
+      "source_version": "2611.21421v1",
+      "source_markdown": "../pdfs/28-auxspec.md",
+      "source_pdf": "../pdfs/28-auxspec.pdf",
+      "source_url": "https://arxiv.org/abs/2611.21421",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "lean",
+        "formal-verification",
+        "specification-autoformalization",
+        "executable-specifications",
+        "execution-feedback",
+        "reinforcement-learning",
+        "supervised-fine-tuning",
+        "llm-as-a-judge",
+        "trust-boundary",
+        "benchmark-validity",
+        "evaluation"
+      ],
+      "summary": "AuXSpec pairs each declarative Lean postcondition with an executable Boolean check so frozen test cases can score generated specifications and reward RL training; test agreement plus LLM judges is evidence of intent capture, not proof, on LeetCode-style problems.",
+      "analysis_file": "28-auxspec.md",
+      "source_original_html": "../pdfs/sources/28-auxspec.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 144,
+      "word_count_approx": 5362
+    },
+    {
+      "paper_id": "29",
+      "title": "ClarifyGPT: Empowering LLM-based Code Generation with Intention Clarification",
+      "source_version": "2310.10996v1",
+      "source_markdown": "../pdfs/29-clarifygpt.md",
+      "source_pdf": "../pdfs/29-clarifygpt.pdf",
+      "source_url": "https://arxiv.org/abs/2310.10996",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "code-generation",
+        "requirement-clarification",
+        "ambiguity-detection",
+        "clarifying-questions",
+        "user-simulation",
+        "human-evaluation",
+        "execution-feedback",
+        "differential-testing",
+        "evaluation",
+        "measurement-validity"
+      ],
+      "summary": "ClarifyGPT flags a requirement as ambiguous when sampled solutions disagree on generated test inputs, asks targeted questions and regenerates code; Pass@1 gains on HumanEval/MBPP use answers from humans or an LLM that both see ground-truth tests.",
+      "analysis_file": "29-clarifygpt.md",
+      "source_original_html": "../pdfs/sources/29-clarifygpt.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 128,
+      "word_count_approx": 4861
+    },
+    {
+      "paper_id": "30",
+      "title": "KernelFoundry: Hardware-aware evolutionary GPU kernel optimization",
+      "source_version": "2603.12440v2",
+      "source_markdown": "../pdfs/30-kernelfoundry.md",
+      "source_pdf": "../pdfs/30-kernelfoundry.pdf",
+      "source_url": "https://arxiv.org/abs/2603.12440",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "evolutionary-search",
+        "quality-diversity",
+        "map-elites",
+        "prompt-evolution",
+        "hardware-awareness",
+        "sycl",
+        "cuda",
+        "kernelbench",
+        "execution-feedback",
+        "benchmarking"
+      ],
+      "summary": "KernelFoundry combines a 64-cell MAP-Elites kernel archive, transition-derived mutation hints, meta-prompt evolution and templated parameter tuning for SYCL and CUDA kernels; results rest on sampled relative-tolerance correctness and report no repeated runs or variance estimates.",
+      "analysis_file": "30-kernelfoundry.md",
+      "source_original_html": "../pdfs/sources/30-kernelfoundry.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 143,
+      "word_count_approx": 5673
+    },
+    {
+      "paper_id": "31",
+      "title": "CudaForge: An Agent Framework with Hardware Feedback for CUDA Kernel Optimization",
+      "source_version": "2511.01884v2",
+      "source_markdown": "../pdfs/31-cudaforge.md",
+      "source_pdf": "../pdfs/31-cudaforge.pdf",
+      "source_url": "https://arxiv.org/abs/2511.01884",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "cuda",
+        "kernelbench",
+        "agent-scaffolding",
+        "llm-as-a-judge",
+        "profiling",
+        "hardware-awareness",
+        "execution-feedback",
+        "iterative-refinement",
+        "cost-effectiveness",
+        "test-time-compute"
+      ],
+      "summary": "CudaForge is a training-free Coder–Judge loop that feeds test errors and a 24-metric Nsight Compute subset to an LLM Judge to optimize KernelBench CUDA kernels; evidence is single-run, fixed-test, 1e-4-tolerance speedup over PyTorch, mostly with OpenAI-o3.",
+      "analysis_file": "31-cudaforge.md",
+      "source_original_html": "../pdfs/sources/31-cudaforge.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 149,
+      "word_count_approx": 5720
+    },
+    {
+      "paper_id": "32",
+      "title": "Kevin: Multi-Turn RL for Generating CUDA Kernels",
+      "source_version": "2507.11948v1",
+      "source_markdown": "../pdfs/32-kevin.md",
+      "source_pdf": "../pdfs/32-kevin.pdf",
+      "source_url": "https://arxiv.org/abs/2507.11948",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "gpu-kernels",
+        "cuda",
+        "kernelbench",
+        "reinforcement-learning",
+        "multi-turn-rl",
+        "reward-hacking",
+        "iterative-refinement",
+        "test-time-compute",
+        "execution-feedback",
+        "benchmark-validity",
+        "correctness"
+      ],
+      "summary": "Kevin fine-tunes QwQ-32B with multi-turn GRPO on 180 KernelBench Level 1-2 tasks and reports 82% best@16 correctness and 1.10x mean speedup on 100 held-out tasks, measured at fixed input sizes on H200 GPUs with 16 trajectories of 8 turns.",
+      "analysis_file": "32-kevin.md",
+      "source_original_html": "../pdfs/sources/32-kevin.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 130,
+      "word_count_approx": 5686
+    },
+    {
+      "paper_id": "33",
+      "title": "Robust benchmarking in noisy environments",
+      "source_version": "1608.04295v1",
+      "source_markdown": "../pdfs/33-robust-benchmarking-noisy-environments.md",
+      "source_pdf": "../pdfs/33-robust-benchmarking-noisy-environments.pdf",
+      "source_url": "https://arxiv.org/abs/1608.04295",
+      "analysis_date": "2026-11-21",
+      "analysis_status": "draft",
+      "topics": [
+        "benchmarking",
+        "statistics",
+        "measurement-validity",
+        "reproducibility",
+        "timing-noise",
+        "minimum-estimator",
+        "microbenchmarks",
+        "cpu-timing",
+        "performance-regression",
+        "julia"
+      ],
+      "summary": "Models CPU timing noise as non-negative delays, argues for the minimum as run-time estimator, and gives a heuristic for executions per measurement in Julia's BenchmarkTools; evidence is four Julia microbenchmarks on undescribed hardware, with no decision rule or GPU analysis.",
+      "analysis_file": "33-robust-benchmarking-noisy-environments.md",
+      "source_original_html": "../pdfs/sources/33-robust-benchmarking-noisy-environments.html",
+      "sections": [
+        "1. Paper identity and scope",
+        "2. Concepts and terminology",
+        "3. Methodology and experimental setup",
+        "4. Results and evidence",
+        "5. Authors' conclusions",
+        "6. Limitations and open questions",
+        "7. Relevance to this project — interpretation",
+        "8. Retrieval notes",
+        "9. Source coverage and verification notes"
+      ],
+      "bullet_count": 94,
+      "word_count_approx": 3432
     }
   ],
   "by_topic": {
@@ -816,13 +1244,18 @@
     ],
     "agent-scaffolding": [
       "07",
-      "21"
+      "21",
+      "24",
+      "31"
     ],
     "agents": [
       "19"
     ],
     "alignment": [
       "13"
+    ],
+    "ambiguity-detection": [
+      "29"
     ],
     "api-selection": [
       "20"
@@ -841,7 +1274,12 @@
     ],
     "benchmark-validity": [
       "08",
-      "21"
+      "21",
+      "25",
+      "26",
+      "27",
+      "28",
+      "32"
     ],
     "benchmarking": [
       "01",
@@ -853,7 +1291,12 @@
       "08",
       "14",
       "16",
-      "21"
+      "21",
+      "25",
+      "26",
+      "27",
+      "30",
+      "33"
     ],
     "benchmarks": [
       "13"
@@ -875,14 +1318,20 @@
     "chain-of-thought": [
       "15"
     ],
+    "clarifying-questions": [
+      "29"
+    ],
     "code-generation": [
-      "05"
+      "05",
+      "29"
     ],
     "code-optimization": [
       "18"
     ],
     "coding-agents": [
-      "07"
+      "07",
+      "25",
+      "27"
     ],
     "context-management": [
       "10"
@@ -891,20 +1340,37 @@
       "01",
       "02",
       "06",
-      "07"
+      "07",
+      "23",
+      "25",
+      "26",
+      "32"
     ],
     "cost-effectiveness": [
-      "21"
+      "21",
+      "31"
+    ],
+    "cpu-timing": [
+      "33"
+    ],
+    "cross-machine-replay": [
+      "27"
     ],
     "cuda": [
       "01",
-      "22"
+      "22",
+      "24",
+      "25",
+      "30",
+      "31",
+      "32"
     ],
     "decoding": [
       "20"
     ],
     "differential-testing": [
-      "09"
+      "09",
+      "29"
     ],
     "dynamic-profiling": [
       "04"
@@ -927,17 +1393,34 @@
       "14",
       "15",
       "19",
-      "20"
+      "20",
+      "26",
+      "27",
+      "28",
+      "29"
     ],
     "evolutionary-search": [
-      "08"
+      "08",
+      "24",
+      "30"
     ],
     "exact-arithmetic": [
       "22"
     ],
+    "executable-specifications": [
+      "28"
+    ],
     "execution-feedback": [
       "01",
-      "10"
+      "10",
+      "24",
+      "25",
+      "26",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32"
     ],
     "feedback": [
       "12",
@@ -946,11 +1429,18 @@
     "few-shot-prompting": [
       "11"
     ],
+    "flashattention": [
+      "23"
+    ],
     "floating-point": [
-      "09"
+      "09",
+      "23"
     ],
     "formal-verification": [
-      "22"
+      "22",
+      "23",
+      "26",
+      "28"
     ],
     "gpu-efficiency": [
       "05"
@@ -965,7 +1455,13 @@
       "08",
       "09",
       "21",
-      "22"
+      "22",
+      "23",
+      "24",
+      "25",
+      "30",
+      "31",
+      "32"
     ],
     "grounding": [
       "11"
@@ -975,7 +1471,9 @@
     ],
     "hardware-awareness": [
       "01",
-      "04"
+      "04",
+      "30",
+      "31"
     ],
     "hardware-efficiency": [
       "02"
@@ -996,6 +1494,9 @@
       "12",
       "15"
     ],
+    "human-evaluation": [
+      "29"
+    ],
     "human-in-the-loop": [
       "17"
     ],
@@ -1003,20 +1504,35 @@
       "16"
     ],
     "inference-serving": [
-      "07"
+      "07",
+      "24",
+      "25"
     ],
     "iterative-refinement": [
       "02",
-      "18"
+      "18",
+      "24",
+      "26",
+      "31",
+      "32"
     ],
     "judge-training": [
       "12",
       "13",
       "16"
     ],
+    "julia": [
+      "33"
+    ],
+    "kernel-substitution": [
+      "25"
+    ],
     "kernelbench": [
       "01",
-      "21"
+      "21",
+      "30",
+      "31",
+      "32"
     ],
     "kernelcraft": [
       "22"
@@ -1024,8 +1540,14 @@
     "language-modeling": [
       "20"
     ],
+    "leaderboards": [
+      "27"
+    ],
     "lean": [
-      "22"
+      "22",
+      "23",
+      "26",
+      "28"
     ],
     "llm-as-a-judge": [
       "12",
@@ -1033,7 +1555,9 @@
       "15",
       "16",
       "17",
-      "18"
+      "18",
+      "28",
+      "31"
     ],
     "llm-as-judge": [
       "03",
@@ -1045,14 +1569,29 @@
     "lm-eval": [
       "14"
     ],
+    "loop-invariants": [
+      "23"
+    ],
+    "map-elites": [
+      "30"
+    ],
     "matrix-cores": [
       "09"
     ],
     "measurement-validity": [
-      "14"
+      "14",
+      "27",
+      "29",
+      "33"
     ],
     "memory-efficiency": [
       "03"
+    ],
+    "microbenchmarks": [
+      "33"
+    ],
+    "minimum-estimator": [
+      "33"
     ],
     "mma-sim": [
       "09"
@@ -1066,6 +1605,9 @@
     "multi-turn": [
       "16"
     ],
+    "multi-turn-rl": [
+      "32"
+    ],
     "multilingual-evaluation": [
       "13"
     ],
@@ -1077,7 +1619,8 @@
     ],
     "numerical-correctness": [
       "08",
-      "09"
+      "09",
+      "23"
     ],
     "pairwise-evaluation": [
       "16",
@@ -1089,8 +1632,12 @@
     "performance-generalization": [
       "08"
     ],
+    "performance-regression": [
+      "33"
+    ],
     "planning": [
-      "11"
+      "11",
+      "24"
     ],
     "portability": [
       "02"
@@ -1099,10 +1646,14 @@
       "17"
     ],
     "profiling": [
-      "01"
+      "01",
+      "31"
     ],
     "program-synthesis": [
       "19"
+    ],
+    "prompt-evolution": [
+      "30"
     ],
     "prompt-optimization": [
       "08"
@@ -1111,17 +1662,23 @@
       "14"
     ],
     "proof-agents": [
-      "22"
+      "22",
+      "26"
     ],
     "ptx": [
       "04",
-      "22"
+      "22",
+      "23"
+    ],
+    "quality-diversity": [
+      "30"
     ],
     "quantization": [
       "02"
     ],
     "race-freedom": [
-      "22"
+      "22",
+      "23"
     ],
     "reasoning": [
       "13",
@@ -1136,15 +1693,25 @@
     "reflection": [
       "19"
     ],
+    "reinforcement-learning": [
+      "28",
+      "32"
+    ],
     "repair-learning": [
       "04"
     ],
     "repository-optimization": [
-      "07"
+      "07",
+      "27"
     ],
     "reproducibility": [
       "09",
-      "14"
+      "14",
+      "27",
+      "33"
+    ],
+    "requirement-clarification": [
+      "29"
     ],
     "retrieval": [
       "05",
@@ -1153,7 +1720,8 @@
       "20"
     ],
     "reward-hacking": [
-      "03"
+      "03",
+      "32"
     ],
     "reward-models": [
       "12"
@@ -1162,6 +1730,9 @@
       "12",
       "13",
       "15"
+    ],
+    "scoring-rules": [
+      "27"
     ],
     "self-feedback": [
       "18"
@@ -1178,18 +1749,30 @@
     "software-engineering": [
       "10"
     ],
+    "specification-autoformalization": [
+      "28"
+    ],
+    "specification-generation": [
+      "26"
+    ],
     "statistics": [
-      "14"
+      "14",
+      "27",
+      "33"
     ],
     "summarization": [
       "15"
     ],
     "supervised-fine-tuning": [
       "04",
-      "05"
+      "05",
+      "28"
     ],
     "survey": [
       "13"
+    ],
+    "sycl": [
+      "30"
     ],
     "synthetic-data": [
       "12",
@@ -1201,10 +1784,15 @@
     "test-time-compute": [
       "01",
       "18",
-      "21"
+      "21",
+      "31",
+      "32"
     ],
     "tf32": [
       "03"
+    ],
+    "timing-noise": [
+      "33"
     ],
     "tokenization": [
       "14"
@@ -1216,21 +1804,40 @@
       "11",
       "20"
     ],
+    "trace-schema": [
+      "25"
+    ],
     "training-data": [
       "21"
     ],
+    "tree-search": [
+      "24"
+    ],
     "triton": [
       "02",
-      "05"
+      "05",
+      "24",
+      "25"
     ],
     "trust-boundary": [
-      "22"
+      "22",
+      "23",
+      "28"
     ],
     "uncertainty": [
       "17"
     ],
+    "user-simulation": [
+      "29"
+    ],
+    "verifiable-code-generation": [
+      "26"
+    ],
     "vllm": [
       "07"
+    ],
+    "world-model": [
+      "24"
     ]
   },
   "question_routes": [
@@ -1245,7 +1852,8 @@
         "06",
         "07",
         "08",
-        "21"
+        "21",
+        "25"
       ],
       "scope": "Task definitions, baselines, sampling budgets, correctness gates, performance aggregation, and hardware/task coverage."
     },
@@ -1256,7 +1864,10 @@
         "04",
         "08",
         "09",
-        "22"
+        "22",
+        "23",
+        "26",
+        "28"
       ],
       "scope": "Hidden tests, runtime instruction checks, soft verification, hardware floating-point models, and formal proof assumptions."
     },
@@ -1279,7 +1890,11 @@
         "04",
         "07",
         "08",
-        "21"
+        "21",
+        "24",
+        "30",
+        "31",
+        "32"
       ],
       "scope": "Execution/profiler feedback, refinement trajectories, candidate selection, repository optimization, and resource budgets."
     },
@@ -1302,7 +1917,9 @@
         "03",
         "16",
         "17",
-        "21"
+        "21",
+        "27",
+        "33"
       ],
       "scope": "Prompt/metric implementation, uncertainty, baseline configuration, tie handling, denominators, and aggregation."
     },
@@ -1311,9 +1928,21 @@
       "paper_ids": [
         "07",
         "21",
-        "22"
+        "22",
+        "25"
       ],
       "scope": "Repository patches, application-level extrapolation, production-kernel adaptation, and limits of benchmark-to-deployment inference."
+    },
+    {
+      "name": "Requirement clarification and formal specifications",
+      "paper_ids": [
+        "29",
+        "26",
+        "28",
+        "23",
+        "22"
+      ],
+      "scope": "Ambiguity detection, clarifying questions, writing and checking Lean specifications, and what a specification or proof leaves trusted."
     }
   ]
 }

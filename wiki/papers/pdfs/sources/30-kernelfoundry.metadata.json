@@ -1,0 +1,32 @@
+{
+  "number": 30,
+  "title": "KernelFoundry: Hardware-aware evolutionary GPU kernel optimization",
+  "arxiv_id": "2603.12440",
+  "retrieved_date": "2026-11-21",
+  "markdown": "30-kernelfoundry.md",
+  "warnings": [],
+  "version": "2603.12440v2",
+  "authors": [
+    "Wiedemann, Nina",
+    "Leboutet, Quentin",
+    "Paulitsch, Michael",
+    "Wofk, Diana",
+    "Ummenhofer, Benjamin"
+  ],
+  "pdf_pages": 23,
+  "pdf_text_characters": 86010,
+  "pdf": "30-kernelfoundry.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2603.12440v2",
+  "pdf_sha256": "907e000b3f538978e651df7a73d14cbe5d1372cad6dd3cb3676fac542a48738c",
+  "math_expressions": 131,
+  "data_tables": 12,
+  "code_listings": 3,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 6,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2603.12440v2",
+  "original_html": "sources/30-kernelfoundry.html",
+  "source_url": "https://arxiv.org/abs/2603.12440",
+  "markdown_characters": 110264
+}

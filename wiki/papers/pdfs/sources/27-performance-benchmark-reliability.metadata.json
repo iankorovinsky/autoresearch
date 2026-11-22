@@ -1,0 +1,32 @@
+{
+  "number": 27,
+  "title": "Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?",
+  "arxiv_id": "2607.01211",
+  "retrieved_date": "2026-11-21",
+  "markdown": "27-performance-benchmark-reliability.md",
+  "warnings": [],
+  "version": "2607.01211v2",
+  "authors": [
+    "Chen, Zhi",
+    "Sun, Zhensu",
+    "Shi, Yuling",
+    "Lo, David",
+    "Jiang, Lingxiao"
+  ],
+  "pdf_pages": 12,
+  "pdf_text_characters": 68530,
+  "pdf": "27-performance-benchmark-reliability.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2607.01211v2",
+  "pdf_sha256": "158e3baf87b42faa481ce5b53f82c94618c61f014ef37c9b63b858cd997f942a",
+  "math_expressions": 67,
+  "data_tables": 9,
+  "code_listings": 0,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 7,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2607.01211v2",
+  "original_html": "sources/27-performance-benchmark-reliability.html",
+  "source_url": "https://arxiv.org/abs/2607.01211",
+  "markdown_characters": 82960
+}

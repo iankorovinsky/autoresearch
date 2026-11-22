@@ -1,0 +1,32 @@
+{
+  "number": 32,
+  "title": "Kevin: Multi-Turn RL for Generating CUDA Kernels",
+  "arxiv_id": "2507.11948",
+  "retrieved_date": "2026-11-21",
+  "markdown": "32-kevin.md",
+  "warnings": [],
+  "version": "2507.11948v1",
+  "authors": [
+    "Baronio, Carlo",
+    "Marsella, Pietro",
+    "Pan, Ben",
+    "Guo, Simon",
+    "Alberti, Silas"
+  ],
+  "pdf_pages": 27,
+  "pdf_text_characters": 74168,
+  "pdf": "32-kevin.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2507.11948v1",
+  "pdf_sha256": "05849c4017ef957b110acc096c2cfc2d4bdb8596fa5d6b370ba8921cad1b43c6",
+  "math_expressions": 44,
+  "data_tables": 2,
+  "code_listings": 8,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 13,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2507.11948v1",
+  "original_html": "sources/32-kevin.html",
+  "source_url": "https://arxiv.org/abs/2507.11948",
+  "markdown_characters": 87986
+}

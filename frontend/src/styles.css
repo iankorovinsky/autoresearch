@@ -512,7 +512,7 @@ button:disabled {
 .assistant-message p {
   margin-bottom: 17px;
 }
-.codex-response {
+.streamed-response {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }

@@ -57,6 +57,8 @@ const tabs = [
   "Code",
 ] as const;
 type Tab = (typeof tabs)[number];
+const agentLabels = { claude: "Claude", codex: "Codex" } as const;
+export type LocalAgent = keyof typeof agentLabels;
 function Brand({ small = false }: { small?: boolean }) {
   return (
     <span className={`brand-mark ${small ? "small" : ""}`} aria-hidden="true">
@@ -118,9 +120,11 @@ function loadThreads(storageKey: string): Thread[] {
 export default function App({
   userId,
   email,
+  agents,
 }: {
   userId: string;
   email: string;
+  agents: LocalAgent[];
 }) {
   const [threads, setThreads] = useState<Thread[]>(initialThreads);
   const [restored, setRestored] = useState(false);
@@ -137,6 +141,8 @@ export default function App({
   } | null>(null);
   const [draft, setDraft] = useState("");
   const [auto, setAuto] = useState(true);
+  const [agent, setAgent] = useState<LocalAgent>(agents[0] ?? "claude");
+  const agentLabel = agentLabels[agent];
   const [runningThreadId, setRunningThreadId] = useState<string | null>(null);
   const running = runningThreadId !== null;
   const [responseError, setResponseError] = useState<{
@@ -322,14 +328,15 @@ export default function App({
     setRunningThreadId(id);
 
     try {
-      const response = await fetch("/api/codex", {
+      const response = await fetch(`/api/${agent}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ threadId: id, input: message.text }),
         signal: controller.signal,
       });
       if (!response.ok) throw new Error(await response.text());
-      if (!response.body) throw new Error("Codex did not return a response.");
+      if (!response.body)
+        throw new Error(`${agentLabel} did not return a response.`);
 
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
@@ -375,13 +382,16 @@ export default function App({
       } finally {
         await reader.cancel().catch(() => {});
       }
-      if (!completed) throw new Error("The Codex response disconnected.");
+      if (!completed)
+        throw new Error(`The ${agentLabel} response disconnected.`);
     } catch (error) {
       if (!controller.signal.aborted) {
         setResponseError({
           threadId: id,
           message:
-            error instanceof Error ? error.message : "Could not reach Codex.",
+            error instanceof Error
+              ? error.message
+              : `Could not reach ${agentLabel}.`,
         });
       }
     } finally {
@@ -745,7 +755,7 @@ export default function App({
                         <p
                           className={
                             m.role === "assistant"
-                              ? "codex-response"
+                              ? "streamed-response"
                               : undefined
                           }
                         >
@@ -763,7 +773,7 @@ export default function App({
                 )}
                 {runningThreadId === active.id && (
                   <div className="thinking" role="status">
-                    <LoaderCircle size={15} className="spin" /> Codex is
+                    <LoaderCircle size={15} className="spin" /> {agentLabel} is
                     responding…
                   </div>
                 )}
@@ -863,7 +873,28 @@ export default function App({
                       </span>
                       Auto research
                     </button>
-                    <span className="model-button">Codex</span>
+                    {agents.length > 1 ? (
+                      <select
+                        aria-label="Assistant"
+                        className="model-button"
+                        disabled={running}
+                        value={agent}
+                        onChange={(event) => {
+                          const selected = agents.find(
+                            (option) => option === event.target.value,
+                          );
+                          if (selected) setAgent(selected);
+                        }}
+                      >
+                        {agents.map((option) => (
+                          <option key={option} value={option}>
+                            {agentLabels[option]}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <span className="model-button">{agentLabel}</span>
+                    )}
                     <button
                       className={`send-button ${running ? "running" : ""}`}
                       disabled={!running && !draft.trim()}
