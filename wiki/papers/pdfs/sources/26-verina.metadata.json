@@ -1,0 +1,33 @@
+{
+  "number": 26,
+  "title": "VERINA: Benchmarking Verifiable Code Generation",
+  "arxiv_id": "2505.23135",
+  "retrieved_date": "2026-11-21",
+  "markdown": "26-verina.md",
+  "warnings": [],
+  "version": "2505.23135v3",
+  "authors": [
+    "Ye, Zhe",
+    "Yan, Zhengxu",
+    "He, Jingxuan",
+    "Kasriel, Timothe",
+    "Yang, Kaiyu",
+    "Song, Dawn"
+  ],
+  "pdf_pages": 40,
+  "pdf_text_characters": 123998,
+  "pdf": "26-verina.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2505.23135v3",
+  "pdf_sha256": "3e9a1a659dca8de9da61addc63ced3e9057fc578620f9cf450528887f9f5a78d",
+  "math_expressions": 114,
+  "data_tables": 20,
+  "code_listings": 23,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 17,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2505.23135v3",
+  "original_html": "sources/26-verina.html",
+  "source_url": "https://arxiv.org/abs/2505.23135",
+  "markdown_characters": 148901
+}

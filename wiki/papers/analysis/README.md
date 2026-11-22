@@ -1,12 +1,12 @@
 # Paper analyses and retrieval guide
 
-Start here when answering questions about the collected literature. This folder has one detailed, source-linked analysis for each of 22 works, including the METR web article and LARK. The notes prioritize coverage of concepts, mechanisms, methods, findings, conclusions, limitations, and substantive appendices.
+Start here when answering questions about the collected literature. This folder has one detailed, source-linked analysis for each of 33 works, including two web articles (METR and TensorLean) and LARK. Entries 01–22 are `reviewed`; entries 23–33, added on 2026-11-21, are `draft` and have had a narrower check, described in [REVIEW.md](REVIEW.md). The notes prioritize coverage of concepts, mechanisms, methods, findings, conclusions, limitations, and substantive appendices.
 
 ## What is here
 
 - `NN-slug.md`: one analysis per work. The same basename under [../pdfs/](../pdfs/README.md) is its full source text, not another summary.
 - [index.json](index.json): structured retrieval index containing stable IDs, titles, versions, local analysis/source paths, summaries, topic tags, section names, and descriptive bullet/word counts. `by_topic` maps each tag to paper IDs; `question_routes` groups useful starting points. All paths resolve relative to this directory.
-- [REVIEW.md](REVIEW.md): reading/review scope, completed checks, and remaining limitations. `reviewed` means editorial and targeted source review; it does not mean the experiments were reproduced or every source claim independently verified.
+- [REVIEW.md](REVIEW.md): reading/review scope, completed checks, and remaining limitations. `reviewed` means editorial and targeted source review; it does not mean the experiments were reproduced or every source claim independently verified. `draft` means one analyst's full-text reading plus structural checks and a quote and number spot-check, with no second-reader review.
 - This README: question routing, analysis schema, catalog, and maintenance instructions.
 
 ## Retrieval workflow
@@ -27,13 +27,13 @@ These groups are navigation aids, not cross-paper rankings or synthesized scient
 
 Task definitions, baselines, sampling budgets, correctness gates, performance aggregation, and hardware/task coverage.
 
-[01 — KernelBench](01-kernelbench.md), [02 — KernelBenchX](02-kernelbench-x.md), [03 — KernelBench-Verified](03-kernelbench-verified.md), [04 — PTXBench](04-ptxbench.md), [05 — TritonBench](05-tritonbench.md), [06 — MultiKernelBench](06-multikernelbench.md), [07 — ISO-Bench](07-iso-bench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md).
+[01 — KernelBench](01-kernelbench.md), [02 — KernelBenchX](02-kernelbench-x.md), [03 — KernelBench-Verified](03-kernelbench-verified.md), [04 — PTXBench](04-ptxbench.md), [05 — TritonBench](05-tritonbench.md), [06 — MultiKernelBench](06-multikernelbench.md), [07 — ISO-Bench](07-iso-bench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md), [25 — FlashInfer-Bench](25-flashinfer-bench.md).
 
 ### Correctness, numerical behavior, and proof boundaries
 
 Hidden tests, runtime instruction checks, soft verification, hardware floating-point models, and formal proof assumptions.
 
-[03 — KernelBench-Verified](03-kernelbench-verified.md), [04 — PTXBench](04-ptxbench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [09 — Bit-Accurate Modeling of GPU Matrix Multiply-Accumulate Units](09-bit-accurate-gpu-mma.md), [22 — LARK](22-lark.md).
+[03 — KernelBench-Verified](03-kernelbench-verified.md), [04 — PTXBench](04-ptxbench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [09 — Bit-Accurate Modeling of GPU Matrix Multiply-Accumulate Units](09-bit-accurate-gpu-mma.md), [22 — LARK](22-lark.md), [23 — TensorLean](23-tensorlean.md), [26 — VERINA](26-verina.md), [28 — AuXSpec](28-auxspec.md).
 
 ### Agents, tools, and iterative improvement
 
@@ -45,7 +45,7 @@ Agent interfaces, reasoning/action loops, self-feedback, episodic memory, and le
 
 Execution/profiler feedback, refinement trajectories, candidate selection, repository optimization, and resource budgets.
 
-[01 — KernelBench](01-kernelbench.md), [02 — KernelBenchX](02-kernelbench-x.md), [04 — PTXBench](04-ptxbench.md), [07 — ISO-Bench](07-iso-bench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md).
+[01 — KernelBench](01-kernelbench.md), [02 — KernelBenchX](02-kernelbench-x.md), [04 — PTXBench](04-ptxbench.md), [07 — ISO-Bench](07-iso-bench.md), [08 — Towards Robust Agentic CUDA Kernel Benchmarking, Verification, and Optimization](08-robust-agentic-cuda.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md), [24 — K-Search](24-k-search.md), [30 — KernelFoundry](30-kernelfoundry.md), [31 — CudaForge](31-cudaforge.md), [32 — Kevin](32-kevin.md).
 
 ### LLM judges, rubrics, and bias
 
@@ -57,13 +57,19 @@ Judge training, scoring protocols, agreement measures, order/verbosity/self-pref
 
 Prompt/metric implementation, uncertainty, baseline configuration, tie handling, denominators, and aggregation.
 
-[14 — Lessons from the Trenches on Reproducible Evaluation of Language Models](14-reproducible-lm-evaluation.md), [01 — KernelBench](01-kernelbench.md), [03 — KernelBench-Verified](03-kernelbench-verified.md), [16 — Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](16-mt-bench-chatbot-arena.md), [17 — Large Language Models are not Fair Evaluators](17-fair-evaluators.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md).
+[14 — Lessons from the Trenches on Reproducible Evaluation of Language Models](14-reproducible-lm-evaluation.md), [01 — KernelBench](01-kernelbench.md), [03 — KernelBench-Verified](03-kernelbench-verified.md), [16 — Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](16-mt-bench-chatbot-arena.md), [17 — Large Language Models are not Fair Evaluators](17-fair-evaluators.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md), [27 — Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?](27-performance-benchmark-reliability.md), [33 — Robust benchmarking in noisy environments](33-robust-benchmarking-noisy-environments.md).
 
 ### Inference optimization in larger systems
 
 Repository patches, application-level extrapolation, production-kernel adaptation, and limits of benchmark-to-deployment inference.
 
-[07 — ISO-Bench](07-iso-bench.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md), [22 — LARK](22-lark.md).
+[07 — ISO-Bench](07-iso-bench.md), [21 — Measuring Automated Kernel Engineering](21-measuring-automated-kernel-engineering.md), [22 — LARK](22-lark.md), [25 — FlashInfer-Bench](25-flashinfer-bench.md).
+
+### Requirement clarification and formal specifications
+
+Ambiguity detection, clarifying questions, writing and checking Lean specifications, and what a specification or proof leaves trusted.
+
+[29 — ClarifyGPT](29-clarifygpt.md), [26 — VERINA](26-verina.md), [28 — AuXSpec](28-auxspec.md), [23 — TensorLean](23-tensorlean.md), [22 — LARK](22-lark.md).
 
 ## Consistent analysis structure
 
@@ -266,6 +272,94 @@ Topics: `gpu-kernels`, `benchmarking`, `agent-scaffolding`, `test-time-compute`,
 Version: `2611.02028v1`. LARK uses Lean-checked race-freedom, segmentation and equivalence proofs to certify supported GPU kernels relative to a pinned machine model and task interface, while leaving floating-point fidelity and host-allocation safety outside its theorem.
 
 Topics: `gpu-kernels`, `formal-verification`, `lean`, `exact-arithmetic`, `race-freedom`, `trust-boundary`, `proof-agents`, `kernelcraft`, `ptx`, `cuda`, `hip`.
+
+### 23. TensorLean: Formal Verification of Production GPU Kernels
+
+[Analysis](23-tensorlean.md) · [Full text](../pdfs/23-tensorlean.md) · [Online source](https://tensorlean.ai/)
+
+Version: `web snapshot 2026-11-21`. Status: `draft`. TensorLean is announced as a Lean/SMT framework proving that compiled PTX meets a tensor-level real-number specification within a stated tolerance on every input and schedule; all results are unreplicated author claims with no released artifact or paper at snapshot.
+
+Topics: `gpu-kernels`, `formal-verification`, `lean`, `ptx`, `floating-point`, `numerical-correctness`, `race-freedom`, `trust-boundary`, `correctness`, `flashattention`, `loop-invariants`.
+
+### 24. K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model
+
+[Analysis](24-k-search.md) · [Full text](../pdfs/24-k-search.md) · [PDF](../pdfs/24-k-search.pdf) · [Online source](https://arxiv.org/abs/2602.19128)
+
+Version: `2602.19128v2`. Status: `draft`. K-Search has an LLM maintain a search tree of optimization intents and instantiates each by sampling evaluator-scored kernels; evidence is four FlashInfer kernels (three runs per method) and one TriMul task, with trace-based correctness testing and no ablations.
+
+Topics: `gpu-kernels`, `planning`, `world-model`, `tree-search`, `evolutionary-search`, `agent-scaffolding`, `execution-feedback`, `iterative-refinement`, `cuda`, `triton`, `inference-serving`.
+
+### 25. FlashInfer-Bench: Building the Virtuous Cycle for AI-driven LLM Systems
+
+[Analysis](25-flashinfer-bench.md) · [Full text](../pdfs/25-flashinfer-bench.md) · [PDF](../pdfs/25-flashinfer-bench.pdf) · [Online source](https://arxiv.org/abs/2601.00227)
+
+Version: `2601.00227v1`. Status: `draft`. FlashInfer-Bench defines a JSON Trace schema, a serving-derived kernel dataset, a tolerance-gated benchmark and an apply() dispatcher for LLM-generated GPU kernels; tolerance values are unstated, and its one end-to-end test shows no generated kernel beating FlashInfer.
+
+Topics: `gpu-kernels`, `benchmarking`, `inference-serving`, `trace-schema`, `kernel-substitution`, `cuda`, `triton`, `correctness`, `coding-agents`, `execution-feedback`, `benchmark-validity`.
+
+### 26. VERINA: Benchmarking Verifiable Code Generation
+
+[Analysis](26-verina.md) · [Full text](../pdfs/26-verina.md) · [PDF](../pdfs/26-verina.pdf) · [Online source](https://arxiv.org/abs/2505.23135)
+
+Version: `2505.23135v3`. Status: `draft`. VERINA is a 189-task Lean 4 benchmark for code, specification and proof generation; specifications are scored mostly by tests against a ground-truth specification, and single-trial proof success is at most 4.9% for general-purpose models.
+
+Topics: `benchmarking`, `formal-verification`, `lean`, `verifiable-code-generation`, `specification-generation`, `proof-agents`, `correctness`, `iterative-refinement`, `execution-feedback`, `evaluation`, `benchmark-validity`.
+
+### 27. Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?
+
+[Analysis](27-performance-benchmark-reliability.md) · [Full text](../pdfs/27-performance-benchmark-reliability.md) · [PDF](../pdfs/27-performance-benchmark-reliability.pdf) · [Online source](https://arxiv.org/abs/2607.01211)
+
+Version: `2607.01211v2`. Status: `draft`. Audits SWE-Perf, GSO and SWE-fficiency by replaying 740 reference patches on four Google Cloud CPU machine types and re-scoring public submissions, finding unstable reference signals and scoring-rule-dependent rankings; it covers repository-level CPU benchmarks, not GPU kernels.
+
+Topics: `benchmark-validity`, `benchmarking`, `measurement-validity`, `repository-optimization`, `coding-agents`, `reproducibility`, `statistics`, `evaluation`, `scoring-rules`, `cross-machine-replay`, `leaderboards`.
+
+### 28. AuXSpec: Learning to Autoformalize Program Specifications via Executable Postconditions
+
+[Analysis](28-auxspec.md) · [Full text](../pdfs/28-auxspec.md) · [PDF](../pdfs/28-auxspec.pdf) · [Online source](https://arxiv.org/abs/2611.21421)
+
+Version: `2611.21421v1`. Status: `draft`. AuXSpec pairs each declarative Lean postcondition with an executable Boolean check so frozen test cases can score generated specifications and reward RL training; test agreement plus LLM judges is evidence of intent capture, not proof, on LeetCode-style problems.
+
+Topics: `lean`, `formal-verification`, `specification-autoformalization`, `executable-specifications`, `execution-feedback`, `reinforcement-learning`, `supervised-fine-tuning`, `llm-as-a-judge`, `trust-boundary`, `benchmark-validity`, `evaluation`.
+
+### 29. ClarifyGPT: Empowering LLM-based Code Generation with Intention Clarification
+
+[Analysis](29-clarifygpt.md) · [Full text](../pdfs/29-clarifygpt.md) · [PDF](../pdfs/29-clarifygpt.pdf) · [Online source](https://arxiv.org/abs/2310.10996)
+
+Version: `2310.10996v1`. Status: `draft`. ClarifyGPT flags a requirement as ambiguous when sampled solutions disagree on generated test inputs, asks targeted questions and regenerates code; Pass@1 gains on HumanEval/MBPP use answers from humans or an LLM that both see ground-truth tests.
+
+Topics: `code-generation`, `requirement-clarification`, `ambiguity-detection`, `clarifying-questions`, `user-simulation`, `human-evaluation`, `execution-feedback`, `differential-testing`, `evaluation`, `measurement-validity`.
+
+### 30. KernelFoundry: Hardware-aware evolutionary GPU kernel optimization
+
+[Analysis](30-kernelfoundry.md) · [Full text](../pdfs/30-kernelfoundry.md) · [PDF](../pdfs/30-kernelfoundry.pdf) · [Online source](https://arxiv.org/abs/2603.12440)
+
+Version: `2603.12440v2`. Status: `draft`. KernelFoundry combines a 64-cell MAP-Elites kernel archive, transition-derived mutation hints, meta-prompt evolution and templated parameter tuning for SYCL and CUDA kernels; results rest on sampled relative-tolerance correctness and report no repeated runs or variance estimates.
+
+Topics: `gpu-kernels`, `evolutionary-search`, `quality-diversity`, `map-elites`, `prompt-evolution`, `hardware-awareness`, `sycl`, `cuda`, `kernelbench`, `execution-feedback`, `benchmarking`.
+
+### 31. CudaForge: An Agent Framework with Hardware Feedback for CUDA Kernel Optimization
+
+[Analysis](31-cudaforge.md) · [Full text](../pdfs/31-cudaforge.md) · [PDF](../pdfs/31-cudaforge.pdf) · [Online source](https://arxiv.org/abs/2511.01884)
+
+Version: `2511.01884v2`. Status: `draft`. CudaForge is a training-free Coder–Judge loop that feeds test errors and a 24-metric Nsight Compute subset to an LLM Judge to optimize KernelBench CUDA kernels; evidence is single-run, fixed-test, 1e-4-tolerance speedup over PyTorch, mostly with OpenAI-o3.
+
+Topics: `gpu-kernels`, `cuda`, `kernelbench`, `agent-scaffolding`, `llm-as-a-judge`, `profiling`, `hardware-awareness`, `execution-feedback`, `iterative-refinement`, `cost-effectiveness`, `test-time-compute`.
+
+### 32. Kevin: Multi-Turn RL for Generating CUDA Kernels
+
+[Analysis](32-kevin.md) · [Full text](../pdfs/32-kevin.md) · [PDF](../pdfs/32-kevin.pdf) · [Online source](https://arxiv.org/abs/2507.11948)
+
+Version: `2507.11948v1`. Status: `draft`. Kevin fine-tunes QwQ-32B with multi-turn GRPO on 180 KernelBench Level 1-2 tasks and reports 82% best@16 correctness and 1.10x mean speedup on 100 held-out tasks, measured at fixed input sizes on H200 GPUs with 16 trajectories of 8 turns.
+
+Topics: `gpu-kernels`, `cuda`, `kernelbench`, `reinforcement-learning`, `multi-turn-rl`, `reward-hacking`, `iterative-refinement`, `test-time-compute`, `execution-feedback`, `benchmark-validity`, `correctness`.
+
+### 33. Robust benchmarking in noisy environments
+
+[Analysis](33-robust-benchmarking-noisy-environments.md) · [Full text](../pdfs/33-robust-benchmarking-noisy-environments.md) · [PDF](../pdfs/33-robust-benchmarking-noisy-environments.pdf) · [Online source](https://arxiv.org/abs/1608.04295)
+
+Version: `1608.04295v1`. Status: `draft`. Models CPU timing noise as non-negative delays, argues for the minimum as run-time estimator, and gives a heuristic for executions per measurement in Julia's BenchmarkTools; evidence is four Julia microbenchmarks on undescribed hardware, with no decision rule or GPU analysis.
+
+Topics: `benchmarking`, `statistics`, `measurement-validity`, `reproducibility`, `timing-noise`, `minimum-estimator`, `microbenchmarks`, `cpu-timing`, `performance-regression`, `julia`.
 
 ## Maintenance and review
 

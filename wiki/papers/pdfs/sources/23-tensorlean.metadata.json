@@ -1,0 +1,22 @@
+{
+  "number": 23,
+  "title": "TensorLean: Formal Verification of Production GPU Kernels",
+  "arxiv_id": null,
+  "retrieved_date": "2026-11-21",
+  "markdown": "23-tensorlean.md",
+  "warnings": [
+    "9 inline SVG figure(s) are represented only by their label and embedded text; 8 responsive 'compact' duplicate(s) omitted"
+  ],
+  "math_expressions": 85,
+  "data_tables": 1,
+  "code_listings": 15,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 0,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://tensorlean.ai/",
+  "original_html": "sources/23-tensorlean.html",
+  "type": "web research article",
+  "source_url": "https://tensorlean.ai/",
+  "markdown_characters": 46430
+}

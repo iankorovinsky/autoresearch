@@ -1,0 +1,31 @@
+{
+  "number": 33,
+  "title": "Robust benchmarking in noisy environments",
+  "arxiv_id": "1608.04295",
+  "retrieved_date": "2026-11-21",
+  "markdown": "33-robust-benchmarking-noisy-environments.md",
+  "warnings": [
+    "Markdown repair 2026-11-21: 10 superscripts written [i](j) in the LaTeXML TeX were rewritten as [i]{(j)} so Markdown does not parse them as links; the rendered math is unchanged and the saved HTML keeps the original."
+  ],
+  "version": "1608.04295v1",
+  "authors": [
+    "Chen, Jiahao",
+    "Revels, Jarrett"
+  ],
+  "pdf_pages": 7,
+  "pdf_text_characters": 35227,
+  "pdf": "33-robust-benchmarking-noisy-environments.pdf",
+  "pdf_url": "https://arxiv.org/pdf/1608.04295v1",
+  "pdf_sha256": "bff7960511b9bb113618cddfd61917a671aaa05ce16ee08413a06729dd393965",
+  "math_expressions": 192,
+  "data_tables": 0,
+  "code_listings": 1,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 8,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/1608.04295v1",
+  "original_html": "sources/33-robust-benchmarking-noisy-environments.html",
+  "source_url": "https://arxiv.org/abs/1608.04295",
+  "markdown_characters": 42316
+}

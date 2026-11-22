@@ -1,0 +1,33 @@
+{
+  "number": 31,
+  "title": "CudaForge: An Agent Framework with Hardware Feedback for CUDA Kernel Optimization",
+  "arxiv_id": "2511.01884",
+  "retrieved_date": "2026-11-21",
+  "markdown": "31-cudaforge.md",
+  "warnings": [],
+  "version": "2511.01884v2",
+  "authors": [
+    "Zhang, Zijian",
+    "Wang, Rong",
+    "Li, Shiyang",
+    "Luo, Yuebo",
+    "Hong, Mingyi",
+    "Ding, Caiwen"
+  ],
+  "pdf_pages": 33,
+  "pdf_text_characters": 78821,
+  "pdf": "31-cudaforge.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2511.01884v2",
+  "pdf_sha256": "e33ba906fff2ac64b2898c3e0960bfaaa11f6b9dfd0591115970bcd40c9cdd61",
+  "math_expressions": 187,
+  "data_tables": 8,
+  "code_listings": 30,
+  "removed_html_style_diagnostics": 0,
+  "downloaded_images": 9,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2511.01884v2",
+  "original_html": "sources/31-cudaforge.html",
+  "source_url": "https://arxiv.org/abs/2511.01884",
+  "markdown_characters": 90507
+}

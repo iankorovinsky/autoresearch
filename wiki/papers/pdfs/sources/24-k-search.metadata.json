@@ -1,0 +1,31 @@
+{
+  "number": 24,
+  "title": "K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model",
+  "arxiv_id": "2602.19128",
+  "retrieved_date": "2026-11-21",
+  "markdown": "24-k-search.md",
+  "warnings": [],
+  "version": "2602.19128v2",
+  "authors": [
+    "Cao, Shiyi",
+    "Mao, Ziming",
+    "Gonzalez, Joseph E.",
+    "Stoica, Ion"
+  ],
+  "pdf_pages": 15,
+  "pdf_text_characters": 55637,
+  "pdf": "24-k-search.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2602.19128v2",
+  "pdf_sha256": "bb7c52042664173039bf8c453f105c19ae3a1ce6116d7307bfaed2e806926cef",
+  "math_expressions": 158,
+  "data_tables": 3,
+  "code_listings": 2,
+  "removed_html_style_diagnostics": 2,
+  "downloaded_images": 5,
+  "asset_errors": [],
+  "conversion": "HTML to Markdown with TeX math",
+  "full_text_url": "https://arxiv.org/html/2602.19128v2",
+  "original_html": "sources/24-k-search.html",
+  "source_url": "https://arxiv.org/abs/2602.19128",
+  "markdown_characters": 62734
+}

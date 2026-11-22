@@ -59,3 +59,27 @@ The assigned analyst read the full substantive survey and appendices, recovered 
 ## Future updates
 
 Record substantive changes here or in a dated successor record, naming the source version, affected analyses, exact check scope, and remaining uncertainty. Revalidate local links, source-version alignment, indexes, and source hashes after changes. Use [the collection maintenance procedure](../README.md) when adding or replacing source versions.
+
+## Addendum: entries 23–33
+
+Date: 2026-11-21. Scope: the 11 works added as entries 23–33 at the versions in [the source manifest](../pdfs/manifest.json). All 11 analyses are `analysis_status: draft`. The sections above describe entries 01–22 only.
+
+### What was done
+
+- One assigned analyst per work read the full converted Markdown, including appendices, and wrote the note. Each note's final section records what was read, what was taken from figures, and what was skipped.
+- All 11 notes were checked by script for metadata, matching ID and source version, the nine-section structure, and existing local citation targets.
+- Every number in each note's results section was searched for verbatim in the matching source Markdown. Notes 23, 28, 29, 30 and 32 had no unmatched numbers. The unmatched numbers in notes 24, 25, 26, 27, 31 and 33 are values the analysts read or computed from figures; the notes label them as figure readings or derived values.
+- A targeted check confirmed that 68 quoted source passages behind headline claims (four to eight per work) appear verbatim in the source Markdown. Examples are TensorLean's 83 proved and 66 buggy kernel counts, VERINA's 189 tasks and 4.9% proof ceiling, CudaForge's main results row, and Kevin's 16-trajectory, 8-turn budget.
+- All 31 PDF hashes, including the 10 new ones, were checked against the manifest. The repository documentation check was run after the catalogs and index were updated.
+
+### What was not done
+
+- No second reader reviewed any of these notes, which is why they remain `draft`. The quote check shows that the passages exist; it does not show that each note interprets them correctly.
+- Figure-derived values were not independently re-read. This matters most for VERINA (note 26), where Figure 8 and error-bar values were computed from SVG path coordinates, and for the K-Search, FlashInfer-Bench, CudaForge and timing-noise notes, which read values off plots.
+- Cited physical PDF pages were not checked page by page, and the converted Markdown was not compared with the PDFs line by line.
+- The analyst run for VERINA ended without a final report. The note is complete and passed the same checks, but its unresolved-question list was not handed over separately.
+- TensorLean (entry 23) is a project web page with no paper or released artifact at the snapshot date. Its results are unreplicated author claims.
+- Entry 28 (AuXSpec) is a first arXiv version from the month of collection, and entry 27 is a v2 preprint; later revisions may change their numbers.
+- No experiment, proof, or benchmark was run.
+
+To promote a note to `reviewed`, re-read its source, check its consequential numbers and figure readings against the PDF, and record the scope here.

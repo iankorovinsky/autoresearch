@@ -1,6 +1,6 @@
 # Papers and analyses
 
-This collection separates preserved source evidence from derived reading notes. It covers the 21 entries supplied through Notion plus LARK, for 22 works total. Entry 21, *Measuring Automated Kernel Engineering*, is a METR web article rather than an arXiv paper. LARK is entry 22, arXiv 2611.02028v1.
+This collection separates preserved source evidence from derived reading notes. It covers the 21 entries supplied through Notion plus LARK (22 works, collected 2026-11-20) and 11 works added on 2026-11-21 as entries 23–33, for 33 works total. Entry 21, *Measuring Automated Kernel Engineering*, is a METR web article rather than an arXiv paper. LARK is entry 22, arXiv 2611.02028v1. Entry 23, *TensorLean*, is also a web article with no PDF. Entries 23–33 fill gaps in requirement clarification, Lean specification, kernel search, benchmark reliability, and timing statistics; their analyses are `draft` until reviewed.
 
 ## Directory roles
 
