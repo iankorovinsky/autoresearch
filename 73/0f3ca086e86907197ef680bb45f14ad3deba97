@@ -1,0 +1,303 @@
+wiki/papers/pdfs/README.md
+  s_ca294b3e491cfa::t_17819db4bcb31b 3,8-9,21-22,73-93
+wiki/papers/analysis/README.md
+  s_ca294b3e491cfa::t_17819db4bcb31b 3,9,30,36,48,60,66-72,276-363
+wiki/papers/analysis/REVIEW.md
+  s_ca294b3e491cfa::t_17819db4bcb31b 62-85
+wiki/papers/README.md
+  s_ca294b3e491cfa::t_17819db4bcb31b 3
+wiki/papers/analysis/23-tensorlean.md
+  s_5cf471cbd6d220::t_56e3b542c03b69 1-160
+wiki/papers/analysis/24-k-search.md
+  s_b5dccb14574dd4::t_9eef155a0b2028 1-209
+wiki/papers/analysis/25-flashinfer-bench.md
+  s_8cfa9787e0e494::t_45db69dc35a7fc 1-217
+wiki/papers/analysis/27-performance-benchmark-reliability.md
+  s_5cf471cbd6d220::t_b0632bce8ea9dc 1-240
+wiki/papers/analysis/28-auxspec.md
+  s_b5dccb14574dd4::t_a7bd93c96f7bf7 1-232
+wiki/papers/analysis/29-clarifygpt.md
+  s_8841d340a7b285::t_5b875890a8d0a5 1-212
+wiki/papers/analysis/30-kernelfoundry.md
+  s_8841d340a7b285::t_9a7ce6e2be12c4 1-231
+wiki/papers/analysis/31-cudaforge.md
+  s_b5dccb14574dd4::t_8650bd9c0084e5 1-243
+wiki/papers/analysis/33-robust-benchmarking-noisy-environments.md
+  s_ba18ab747628b1::t_f65dd094e6a8e6 1-220
+wiki/papers/analysis/index.json
+  s_ca294b3e491cfa::t_fdcf6e97e8574e 4,6,8,808-1234,1247-1249,1257-1259,1277-1282,1294-1299,1321-1323,1325-1326,1332-1334,1343-1347,1350-1357,1361-1366,1372-1373,1396-1400,1403-1405,1410-1412,1415-1423,1432-1434,1436-1437,1440-1443,1458-1464,1474-1476,1497-1499,1507-1509,1513-1517,1524-1529,1532-1535,1543-1545,1547-1550,1558-1560,1572-1577,1582-1585,1590-1595,1608-1610,1622-1623,1635-1637,1639-1640,1649-1650,1655-1657,1665-1666,1670-1674,1680-1681,1696-1699,1704-1705,1709-1714,1723-1724,1734-1736,1752-1757,1759-1761,1768-1769,1774-1776,1787-1789,1794-1796,1807-1809,1813-1815,1818-1820,1823-1825,1830-1835,1838-1840,1855-1856,1867-1870,1893-1897,1920-1922,1931-1932,1935-1945
+wiki/papers/pdfs/23-tensorlean.md
+  s_ca294b3e491cfa::t_c660ef51f2cdcf 1-625
+wiki/papers/pdfs/24-k-search.md
+  s_ca294b3e491cfa::t_adfec4500a87f2 1-719
+wiki/papers/pdfs/24-k-search.pdf
+  s_ca294b3e491cfa::t_5bbf59d5646519 1-7039
+wiki/papers/pdfs/25-flashinfer-bench.md
+  s_ca294b3e491cfa::t_40cd6116a54a91 1-3275
+wiki/papers/pdfs/26-verina.md
+  s_ca294b3e491cfa::t_73c043dbe6d0e0 1-3691
+wiki/papers/pdfs/26-verina.pdf
+  s_ca294b3e491cfa::t_cca84c51e78506 1-13422
+wiki/papers/pdfs/27-performance-benchmark-reliability.md
+  s_ca294b3e491cfa::t_0cadc4bc46c38e 1-1578
+wiki/papers/pdfs/28-auxspec.md
+  s_ca294b3e491cfa::t_1bcae1edea31c9 1-5460
+wiki/papers/pdfs/29-clarifygpt.md
+  s_ca294b3e491cfa::t_7109e632a7c414 1-1151
+wiki/papers/pdfs/30-kernelfoundry.md
+  s_ca294b3e491cfa::t_b6766366962eb9 1-2110
+wiki/papers/pdfs/31-cudaforge.md
+  s_ca294b3e491cfa::t_bd603e26497702 1-1486
+wiki/papers/pdfs/32-kevin.md
+  s_ca294b3e491cfa::t_0f912c86d81072 1-2041
+wiki/papers/pdfs/33-robust-benchmarking-noisy-environments.md
+  s_ca294b3e491cfa::t_9210852c2b60f4 1-872
+wiki/papers/pdfs/assets/24-k-search/figure-002.svg
+  s_ca294b3e491cfa::t_5d56bb61c67d9f 1-1303
+wiki/papers/pdfs/assets/24-k-search/figure-003.svg
+  s_ca294b3e491cfa::t_7de1979f4119ef 1-900
+wiki/papers/pdfs/assets/24-k-search/figure-004.svg
+  s_ca294b3e491cfa::t_107100a589c921 1-4773
+wiki/papers/pdfs/assets/24-k-search/figure-005.svg
+  s_ca294b3e491cfa::t_1850c9d48ccd56 1-935
+wiki/papers/pdfs/assets/25-flashinfer-bench/figure-006.svg
+  s_ca294b3e491cfa::t_6e647fde6a91a2 1-5345
+wiki/papers/pdfs/assets/25-flashinfer-bench/figure-007.svg
+  s_ca294b3e491cfa::t_b68d0ba504a0b0 1-332
+wiki/papers/pdfs/assets/25-flashinfer-bench/figure-008.svg
+  s_ca294b3e491cfa::t_b9e30634557717 1-837
+wiki/papers/pdfs/assets/26-verina/figure-001.svg
+  s_ca294b3e491cfa::t_dd331b567c3d44 1-195
+wiki/papers/pdfs/assets/26-verina/figure-002.svg
+  s_ca294b3e491cfa::t_94901ba39ae47c 1-65
+wiki/papers/pdfs/assets/26-verina/figure-003.svg
+  s_ca294b3e491cfa::t_d483dd5b701169 1-223
+wiki/papers/pdfs/assets/26-verina/figure-004.svg
+  s_ca294b3e491cfa::t_7f4e020abae343 1-905
+wiki/papers/pdfs/assets/26-verina/figure-005.svg
+  s_ca294b3e491cfa::t_1c6d55b5db54b6 1-488
+wiki/papers/pdfs/assets/26-verina/figure-006.svg
+  s_ca294b3e491cfa::t_1515a9a8807845 1-467
+wiki/papers/pdfs/assets/26-verina/figure-007.svg
+  s_ca294b3e491cfa::t_bbe15831cfa296 1-605
+wiki/papers/pdfs/assets/26-verina/figure-008.svg
+  s_ca294b3e491cfa::t_cdf6ee60f221da 1-1137
+wiki/papers/pdfs/assets/26-verina/figure-009.svg
+  s_ca294b3e491cfa::t_567b115e789d0e 1-611
+wiki/papers/pdfs/assets/26-verina/figure-010.svg
+  s_ca294b3e491cfa::t_6167a309d92d38 1-336
+wiki/papers/pdfs/assets/26-verina/figure-011.svg
+  s_ca294b3e491cfa::t_4f88b7f5eab0c7 1-568
+wiki/papers/pdfs/assets/26-verina/figure-012.svg
+  s_ca294b3e491cfa::t_28d58554d2d50b 1-2791
+wiki/papers/pdfs/assets/26-verina/figure-013.svg
+  s_ca294b3e491cfa::t_3652c95760c20d 1-2094
+wiki/papers/pdfs/assets/26-verina/figure-014.svg
+  s_ca294b3e491cfa::t_5c8066259bd8e1 1-3477
+wiki/papers/pdfs/assets/26-verina/figure-015.svg
+  s_ca294b3e491cfa::t_182ebd42d70bd7 1-1484
+wiki/papers/pdfs/assets/26-verina/figure-016.svg
+  s_ca294b3e491cfa::t_f505f2865d436f 1-533
+wiki/papers/pdfs/assets/26-verina/figure-017.svg
+  s_ca294b3e491cfa::t_0343b0417f30c2 1-1331
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-001.svg
+  s_ca294b3e491cfa::t_a5e9c9bf3775f5 1-322
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-002.svg
+  s_ca294b3e491cfa::t_c973cf0e67b055 1-974
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-003.svg
+  s_ca294b3e491cfa::t_e3a9015bbb869a 1-413
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-004.svg
+  s_ca294b3e491cfa::t_e0dac0f462436f 1-278
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-005.svg
+  s_ca294b3e491cfa::t_a252cb8bab182e 1-284
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-006.svg
+  s_ca294b3e491cfa::t_37041355419e6a 1-271
+wiki/papers/pdfs/assets/27-performance-benchmark-reliability/figure-007.svg
+  s_ca294b3e491cfa::t_e1f40572a95e8a 1-881
+wiki/papers/pdfs/assets/28-auxspec/figure-001.svg
+  s_ca294b3e491cfa::t_6a3a60b467f5ce 1-1320
+wiki/papers/pdfs/assets/28-auxspec/figure-002.svg
+  s_ca294b3e491cfa::t_acd0d5803de1dd 1-334
+wiki/papers/pdfs/assets/28-auxspec/figure-003.svg
+  s_ca294b3e491cfa::t_441466c67eab90 1-3052
+wiki/papers/pdfs/assets/28-auxspec/figure-004.svg
+  s_ca294b3e491cfa::t_c3e020608de04b 1-326
+wiki/papers/pdfs/assets/28-auxspec/figure-005.svg
+  s_ca294b3e491cfa::t_4f306a52badaec 1-678
+wiki/papers/pdfs/assets/28-auxspec/figure-006.svg
+  s_ca294b3e491cfa::t_ed9d04a57c8396 1-416
+wiki/papers/pdfs/assets/28-auxspec/figure-007.svg
+  s_ca294b3e491cfa::t_81d21431bddc42 1-389
+wiki/papers/pdfs/assets/28-auxspec/figure-008.svg
+  s_ca294b3e491cfa::t_d1473cfd2465f4 1-599
+wiki/papers/pdfs/assets/28-auxspec/figure-009.svg
+  s_ca294b3e491cfa::t_7738bea8058634 1-486
+wiki/papers/pdfs/assets/28-auxspec/figure-010.svg
+  s_ca294b3e491cfa::t_bd685a2095c1da 1-1462
+wiki/papers/pdfs/assets/28-auxspec/figure-012.svg
+  s_ca294b3e491cfa::t_e50a5f257d71d6 1-492
+wiki/papers/pdfs/assets/28-auxspec/figure-013.svg
+  s_ca294b3e491cfa::t_d91c2b7ca921a8 1-474
+wiki/papers/pdfs/assets/28-auxspec/figure-014.svg
+  s_ca294b3e491cfa::t_f6ffe3aa2261bc 1-390
+wiki/papers/pdfs/assets/28-auxspec/figure-015.svg
+  s_ca294b3e491cfa::t_674376082aaaf1 1-273
+wiki/papers/pdfs/assets/28-auxspec/figure-016.svg
+  s_ca294b3e491cfa::t_a3165739c818bc 1-232
+wiki/papers/pdfs/assets/28-auxspec/figure-017.svg
+  s_ca294b3e491cfa::t_e7b2fce40c6a2e 1-397
+wiki/papers/pdfs/assets/28-auxspec/figure-018.svg
+  s_ca294b3e491cfa::t_b25e1ddc681113 1-361
+wiki/papers/pdfs/assets/28-auxspec/figure-019.svg
+  s_ca294b3e491cfa::t_1a4822c398ea8e 1-200
+wiki/papers/pdfs/assets/28-auxspec/figure-020.svg
+  s_ca294b3e491cfa::t_2d9aafc599e84e 1-264
+wiki/papers/pdfs/assets/28-auxspec/figure-021.svg
+  s_ca294b3e491cfa::t_7407981b527c4f 1-851
+wiki/papers/pdfs/assets/30-kernelfoundry/figure-003.svg
+  s_ca294b3e491cfa::t_8e13db0c28584b 1-610
+wiki/papers/pdfs/assets/31-cudaforge/figure-001.svg
+  s_ca294b3e491cfa::t_ce09868e321be1 1-540
+wiki/papers/pdfs/assets/31-cudaforge/figure-007.svg
+  s_ca294b3e491cfa::t_30b2086f6d0efb 1-315
+wiki/papers/pdfs/assets/31-cudaforge/figure-009.svg
+  s_ca294b3e491cfa::t_0de2d8380c4c80 1-354
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-001.svg
+  s_ca294b3e491cfa::t_3a0624c4f160f9 1-789
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-002.svg
+  s_ca294b3e491cfa::t_6c7fd9391c0dfc 1-785
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-003.svg
+  s_ca294b3e491cfa::t_8c2b0146976e4e 1-785
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-004.svg
+  s_ca294b3e491cfa::t_f288bf28da833e 1-773
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-005.svg
+  s_ca294b3e491cfa::t_27f0ed4b47cbaa 1-6771
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-006.svg
+  s_ca294b3e491cfa::t_65b49b6c383684 1-3006
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-007.svg
+  s_ca294b3e491cfa::t_89d6be34361663 1-809
+wiki/papers/pdfs/assets/33-robust-benchmarking-noisy-environments/figure-008.svg
+  s_ca294b3e491cfa::t_664742cf8a5237 1-150
+wiki/papers/pdfs/manifest.json
+  s_ca294b3e491cfa::t_548f64f6825722 788-1142
+wiki/papers/pdfs/sources/23-tensorlean.html
+  s_ca294b3e491cfa::t_30ddf2ac3fc264 1-1160
+wiki/papers/pdfs/sources/23-tensorlean.metadata.json
+  s_ca294b3e491cfa::t_5a860278767593 1-22
+wiki/papers/pdfs/sources/24-k-search.abstract.html
+  s_ca294b3e491cfa::t_26dada84061059 1-596
+wiki/papers/pdfs/sources/24-k-search.html
+  s_ca294b3e491cfa::t_626d09e4d8e258 1-1970
+wiki/papers/pdfs/sources/24-k-search.metadata.json
+  s_ca294b3e491cfa::t_11ca8b44c254f5 1-31
+wiki/papers/pdfs/sources/25-flashinfer-bench.abstract.html
+  s_ca294b3e491cfa::t_e32473b9a96757 1-597
+wiki/papers/pdfs/sources/25-flashinfer-bench.html
+  s_ca294b3e491cfa::t_a3c9e42e74b21a 1-4271
+wiki/papers/pdfs/sources/25-flashinfer-bench.metadata.json
+  s_ca294b3e491cfa::t_5e7f6dfdf90bdf 1-40
+wiki/papers/pdfs/sources/26-verina.abstract.html
+  s_ca294b3e491cfa::t_e412c40a8b4aa7 1-622
+wiki/papers/pdfs/sources/26-verina.html
+  s_ca294b3e491cfa::t_c7f1bcec70aa36 1-7501
+wiki/papers/pdfs/sources/26-verina.metadata.json
+  s_ca294b3e491cfa::t_177b2bafdcf93c 1-33
+wiki/papers/pdfs/sources/27-performance-benchmark-reliability.abstract.html
+  s_ca294b3e491cfa::t_ad3ce86f0240a8 1-604
+wiki/papers/pdfs/sources/27-performance-benchmark-reliability.html
+  s_ca294b3e491cfa::t_934a15b53c19a9 1-2645
+wiki/papers/pdfs/sources/27-performance-benchmark-reliability.metadata.json
+  s_ca294b3e491cfa::t_01c15f438d8096 1-32
+wiki/papers/pdfs/sources/28-auxspec.abstract.html
+  s_ca294b3e491cfa::t_ffe5ef0fd22ee1 1-602
+wiki/papers/pdfs/sources/28-auxspec.html
+  s_ca294b3e491cfa::t_eb6ed4e0af3d32 1-7758
+wiki/papers/pdfs/sources/28-auxspec.metadata.json
+  s_ca294b3e491cfa::t_7b116c97b6d010 1-34
+wiki/papers/pdfs/sources/29-clarifygpt.abstract.html
+  s_ca294b3e491cfa::t_4d503a601373f6 1-597
+wiki/papers/pdfs/sources/29-clarifygpt.html
+  s_ca294b3e491cfa::t_0fdae97ffebf05 1-2037
+wiki/papers/pdfs/sources/29-clarifygpt.metadata.json
+  s_ca294b3e491cfa::t_1fb28246dd36db 1-35
+wiki/papers/pdfs/sources/30-kernelfoundry.abstract.html
+  s_ca294b3e491cfa::t_7b1b88bbbca2c1 1-604
+wiki/papers/pdfs/sources/30-kernelfoundry.html
+  s_ca294b3e491cfa::t_93f4d366a5ede8 1-4126
+wiki/papers/pdfs/sources/30-kernelfoundry.metadata.json
+  s_ca294b3e491cfa::t_2b0d4de261c923 1-32
+wiki/papers/pdfs/sources/31-cudaforge.abstract.html
+  s_ca294b3e491cfa::t_5af3eee722d777 1-616
+wiki/papers/pdfs/sources/31-cudaforge.html
+  s_ca294b3e491cfa::t_604bf2880c89fc 1-2509
+wiki/papers/pdfs/sources/31-cudaforge.metadata.json
+  s_ca294b3e491cfa::t_0b623a3eea4e64 1-33
+wiki/papers/pdfs/sources/32-kevin.abstract.html
+  s_ca294b3e491cfa::t_ee905a27c540db 1-617
+wiki/papers/pdfs/sources/32-kevin.html
+  s_ca294b3e491cfa::t_c17ad3ee6aa153 1-4947
+wiki/papers/pdfs/sources/32-kevin.metadata.json
+  s_ca294b3e491cfa::t_1b7626b6678af9 1-32
+wiki/papers/pdfs/sources/33-robust-benchmarking-noisy-environments.abstract.html
+  s_ca294b3e491cfa::t_87a111266458ff 1-612
+wiki/papers/pdfs/sources/33-robust-benchmarking-noisy-environments.html
+  s_ca294b3e491cfa::t_0a08e9ae312d2f 1-1357
+wiki/papers/pdfs/sources/33-robust-benchmarking-noisy-environments.metadata.json
+  s_ca294b3e491cfa::t_c51ed61a69d116 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "730f3ca086e86907197ef680bb45f14ad3deba97",
+  "prompts": {},
+  "sessions": {
+    "s_5cf471cbd6d220": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ca35a622-d361-4800-a710-e81b8a3b0c9f",
+        "model": "claude-fable-5-2-high"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_8841d340a7b285": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "800b2e5e-a4cb-47f9-a8ed-ba8192f42e97",
+        "model": "claude-fable-5-2-high"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_8cfa9787e0e494": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "0d637abe-8359-4cc1-83a0-d80f4aa04002",
+        "model": "claude-fable-5-2-high"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_b5dccb14574dd4": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "435838a8-abd5-4b2d-aa41-ee7a3f41cd52",
+        "model": "claude-fable-5-2-high"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_ba18ab747628b1": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b6958e01-8aa0-4647-aa5e-f81c8b56e49e",
+        "model": "claude-fable-5-2-high"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    },
+    "s_ca294b3e491cfa": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "520a8f18-d077-4758-bc85-ef99d901017e",
+        "model": "claude-fable-5-2"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
