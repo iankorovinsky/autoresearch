@@ -8,28 +8,43 @@ from pathlib import Path
 
 from kernel_compute.common import TERMINAL, digest
 from kernel_compute.models import WaterlooConfig
+from kernel_compute.providers import environment_lock
 from kernel_compute.providers.base import ProviderError
-from kernel_compute.providers.waterloo_datasci import WaterlooProvider, environment_lock
+from kernel_compute.providers.baseten_backend import BasetenConfig, BasetenProvider
+from kernel_compute.providers.modal_backend import ModalConfig, ModalProvider
+from kernel_compute.providers.waterloo_datasci import WaterlooProvider
 from kernel_compute.service import ExecutionService
 from kernel_compute.store import RunStore
 
+PROBE_PROVIDERS = ("modal", "baseten")
+PROVIDERS = ("waterloo-datasci", *PROBE_PROVIDERS)
+
 
 def provider_factory(provider_id, config):
+    if provider_id == "baseten":
+        return BasetenProvider(BasetenConfig.model_validate(config))
+    if provider_id == "modal":
+        return ModalProvider(ModalConfig.model_validate(config))
     if provider_id != "waterloo-datasci":
         raise ValueError(f"unknown provider: {provider_id}")
     return WaterlooProvider(WaterlooConfig.model_validate(config))
 
 
-def configuration(args):
+def configuration(args, provider_id=None):
+    provider_id = provider_id or args.provider
     path = Path(args.config).expanduser()
     config = (
-        tomllib.loads(path.read_text()).get("providers", {}).get(args.provider, {})
+        tomllib.loads(path.read_text()).get("providers", {}).get(provider_id, {})
         if path.exists()
         else {}
     )
-    if os.environ.get("KCOMPUTE_SSH_USER"):
+    if provider_id == "waterloo-datasci" and os.environ.get("KCOMPUTE_SSH_USER"):
         config["user"] = os.environ["KCOMPUTE_SSH_USER"]
-    return provider_factory(args.provider, config)
+    if getattr(args, "gpu", None) is not None:
+        if provider_id not in PROBE_PROVIDERS:
+            raise ValueError("--gpu requires --provider modal or baseten")
+        config["gpu"] = args.gpu
+    return provider_factory(provider_id, config)
 
 
 def parser():
@@ -42,16 +57,21 @@ def parser():
         "--config", default=os.environ.get("KCOMPUTE_CONFIG", "~/.config/kcompute/config.toml")
     )
     shared.add_argument("--state-dir", type=Path)
-    shared.add_argument("--provider", default="waterloo-datasci")
+    shared.add_argument("--provider", choices=PROVIDERS)
     subs = root.add_subparsers(dest="command", required=True)
     providers = subs.add_parser("providers", parents=[shared])
     providers.add_argument("action", choices=["list"])
-    subs.add_parser("doctor", parents=[shared])
+    gpu_selection = argparse.ArgumentParser(add_help=False)
+    gpu_selection.add_argument("--gpu", help="GPU type for Modal or Baseten (see providers list)")
+    subs.add_parser("doctor", parents=[shared, gpu_selection])
+    subs.add_parser(
+        "probe", parents=[shared, gpu_selection], help="test tools on a Modal or Baseten GPU"
+    )
     setup = subs.add_parser("setup", parents=[shared])
     setup.add_argument("--wait", action="store_true")
     setup.add_argument("--wait-timeout", type=float, default=1500)
     for name in ("submit", "run"):
-        command = subs.add_parser(name, parents=[shared])
+        command = subs.add_parser(name, parents=[shared, gpu_selection])
         command.add_argument("manifests", type=Path, nargs="+" if name == "submit" else 1)
         command.add_argument("--attempt-of", help="link an explicit new attempt to an earlier run")
         if name == "run":
@@ -84,13 +104,24 @@ def main(argv=None):
             raise ValueError("poll interval must be positive")
         if getattr(args, "wait_timeout", None) is not None and args.wait_timeout < 0:
             raise ValueError("wait timeout must be nonnegative")
-        provider = configuration(args)
         if args.command == "providers":
-            emit([provider.describe()])
+            provider_ids = [args.provider] if args.provider else PROVIDERS
+            emit([configuration(args, provider_id).describe() for provider_id in provider_ids])
+            return 0
+        if args.provider is None:
+            args.provider = "modal" if args.command == "probe" else "waterloo-datasci"
+        if args.command in {"doctor", "setup", "probe", "submit", "run"}:
+            provider = configuration(args)
+        if args.command == "probe":
+            if provider.id not in PROBE_PROVIDERS:
+                raise ValueError("probe requires --provider modal or baseten")
+            emit(provider.probe())
             return 0
         if args.command == "doctor":
             result = provider.doctor()
             emit(result)
+            if provider.id in PROBE_PROVIDERS:
+                return 0 if result["ready"] else 1
             return 0 if result["environment_ready"] and result["node"] else 1
         if args.command == "setup":
             result = provider.setup()

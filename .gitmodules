@@ -38,3 +38,11 @@
 	path = wiki/codebases/reference-kernels
 	url = https://github.com/gpu-mode/reference-kernels.git
 	branch = main
+[submodule "wiki/codebases/gn-kernels"]
+	path = wiki/codebases/gn-kernels
+	url = https://github.com/gau-nernst/gn-kernels.git
+	branch = main
+[submodule "wiki/codebases/flashinfer-competition"]
+	path = wiki/codebases/flashinfer-competition
+	url = https://github.com/AndreSlavescu/flashinfer-competition.git
+	branch = main

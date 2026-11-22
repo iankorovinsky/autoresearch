@@ -5,7 +5,7 @@ import pytest
 
 from kernel_compute.common import failure_result
 from kernel_compute.models import JobHandle, Observation
-from kernel_compute.providers.base import AmbiguousSubmission, ProviderError
+from kernel_compute.providers.base import AmbiguousSubmission, ProviderError, RejectedSubmission
 from kernel_compute.service import ExecutionService
 from kernel_compute.store import RunStore
 from kernel_compute.worker.measure import summarize
@@ -97,6 +97,19 @@ def test_lost_ack_recovers_after_new_service_without_resubmit(rig):
     response = restarted.submit_batch(batch["batch_id"])
     assert response["runs"][0]["handle"]["native_id"] == "1"
     assert provider.submissions == 1
+
+
+def test_rejected_submission_finishes_without_polling(rig, monkeypatch):
+    service, provider, batch = rig
+
+    def reject(*_):
+        raise RejectedSubmission("image build failed")
+
+    monkeypatch.setattr(provider, "submit", reject)
+    run_id = batch["run_ids"][0]
+    response = service.submit_batch(batch["batch_id"])
+    assert response["runs"][0]["state"] == "failed"
+    assert service.result(run_id)["execution"]["error"]["reason"] == "submission_rejected"
 
 
 def test_missing_result_never_becomes_success(rig, monkeypatch):

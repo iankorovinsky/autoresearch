@@ -12,6 +12,10 @@ class AmbiguousSubmission(ProviderError):
     """Acceptance is unknown; never automatically launch a replacement."""
 
 
+class RejectedSubmission(ProviderError):
+    """The provider can establish that no job was launched."""
+
+
 class InvalidArtifact(ValueError):
     """A finalized artifact violates the protocol; retrying execution is unsafe."""
 

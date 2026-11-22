@@ -1,6 +1,6 @@
 # Kernel compute CLI
 
-`kcompute` queues kernel workloads on a compute provider and retrieves versioned profiling results. The first provider is **Waterloo Data Science Cluster** (`waterloo-datasci`), pinned by default to **`gpu-8-vm`**. A shared Python worker performs execution and measurement; the provider handles scheduling and transport. The coordinator runs on Mac/Linux without PyTorch or a GPU.
+`kcompute` queues kernel workloads on a compute provider and retrieves versioned profiling results. The default provider is **Waterloo Data Science Cluster** (`waterloo-datasci`), pinned to **`gpu-8-vm`**. **Modal** (`modal`) and **Baseten** (`baseten`) provide selectable GPU types. A shared Python worker performs execution and measurement. The provider handles scheduling and transport. The coordinator runs on Mac/Linux without PyTorch or a GPU.
 
 ## Install and configure
 
@@ -37,6 +37,108 @@ uv run kcompute doctor
 `setup` submits a bounded, 20-minute Slurm environment setup job. It creates a user-owned environment addressed by the SHA-256 of the dependency lock, installs hash-checked wheels, checks PyTorch GPU execution, and compiles/runs a small CUDA program on the selected node. Dependencies include PyTorch **2.9.1+cu130**, Triton **3.5.1**, NumPy **2.3.5**, and Ninja **1.13.0**. CUDA Toolkit **13.2** is supplied by the cluster; framework CUDA **13.0** and driver-supported CUDA **13.2** are different version fields. The tested Python on the node is **3.12.3**.
 
 Setup returns an existing ready environment or the existing setup receipt when repeated; it does not silently resubmit an ambiguous/failed setup. Failed setup output identifies its job and remote logs. Inspect that attempt before manually clearing a failed setup receipt/intent and retrying. Ordinary runs do not install packages. Workers verify the installed package inventory against the setup record before loading task code.
+
+## Use Modal
+
+Authenticate with `uv run modal token new` or use an existing Modal SDK profile.
+Modal requires a payment method for GPU allocations. The optional profile below
+sets the default GPU and selects a Modal environment. The CLI `--gpu` option
+overrides the profile for that invocation.
+
+```toml
+[providers.modal]
+gpu = "T4"
+# environment_name = "main"
+# app_name = "kcompute"
+# volume_name = "kcompute-artifacts-v2"
+```
+
+```bash
+uv run kcompute providers list --provider modal
+uv run kcompute setup --provider modal
+uv run kcompute probe --provider modal --gpu T4
+uv run kcompute run examples/vector-add/task.toml --provider modal --gpu T4
+uv run kcompute submit examples/vector-add/task.toml --provider modal --gpu L4
+```
+
+Modal setup prepares a CUDA 13.0 development image and a Modal App and Volume.
+Runs and probes can also prepare their dependencies on first use. `T4` is the
+default and the lowest-priced GPU in [Modal's published pricing](https://modal.com/pricing).
+The provider lists every documented [Modal GPU selector](https://modal.com/docs/guide/gpu),
+including aliases and variants. Each task requests one full GPU. Its manifest
+sets CPU, host memory, minimum GPU memory, and wall time (up to 24 hours on
+Modal). Keep the same Modal workspace and environment active when retrieving or
+cancelling a run.
+
+`probe` launches one bounded GPU Sandbox and returns JSON with the requested
+and actual GPU and a result for each check. It measures a CUDA event interval,
+runs a compiled CUDA kernel and a Triton kernel, checks NVIDIA management data,
+and looks for CUDA activity in PyTorch Profiler and Nsight Systems. Nsight
+Compute must return a numeric GPU hardware counter to pass. It runs with GPU
+clock locking disabled. Tool results can
+vary across GPU types or workspaces. The probe is separate from task timing
+and reports tool failures in its JSON.
+
+On the Modal T4 with PyTorch 2.9.1 and CUDA 13.0, Kineto disables CUPTI's
+default per-thread activity buffering before it flushes the first trace,
+which loses CUDA kernel events. The probe completes a separate warm-up
+profiler session in the same process, then checks the exported trace from the
+next session for CUDA kernel events. Use the same two-session pattern when
+profiling your own workload on this image. See the [Kineto buffer-flush fix](https://github.com/pytorch/kineto/commit/19283706e915).
+
+Modal submissions survive CLI exit. The scheduler reports a Sandbox as pending
+or running until it exits. Final worker results, samples, and logs are retained
+on the configured Modal Volume. The CLI reads worker logs after they have been
+published and can fetch the artifacts in a separate process.
+
+## Use Baseten
+
+For local development, put your workspace key with access to Training Jobs in
+`compute/.env` as `BASETEN_API_KEY=your_key_here`. The repository ignores this
+file. From the `compute` directory, use `--env-file .env` to load it.
+
+```bash
+uv sync --locked --extra baseten
+uv run --extra baseten --env-file .env kcompute providers list --provider baseten
+uv run --extra baseten --env-file .env kcompute setup --provider baseten
+uv run --extra baseten --env-file .env kcompute probe --provider baseten --gpu A10G
+uv run --extra baseten --env-file .env kcompute run examples/vector-add/task.toml --provider baseten --gpu A10G
+```
+
+```toml
+[providers.baseten]
+gpu = "A10G"
+project_name = "kcompute"
+# project_id = "your-existing-project-id"
+```
+
+The first submission or `setup` creates the project if needed. Set `project_id`
+to use a specific existing project. Each job requests one GPU, with CPU and host
+memory from the task manifest. Use `mig = "allow"` or `mig = "require"` for the
+`H100MIG` selector. Workspace access and Training Jobs capacity determine which
+GPU requests Baseten accepts.
+
+`providers list` shows the public NVIDIA GPU families and additional NVIDIA
+selectors from Truss. With a key it also shows the workspace's instance sizes
+and prices from the Management API. Baseten publishes the T4 at $0.01052/min.
+The Training Jobs API rejected T4 in our workspace and suggested A10G or H100.
+The default is A10G at $0.02012/min, the cheaper of those two. The probe
+requests one GPU with 4 vCPUs and 16 GiB of host RAM.
+[GPU catalog](https://docs.baseten.co/deployment/resources#instance-type-reference) ·
+[Pricing](https://www.baseten.co/pricing/) ·
+[Training Jobs guide](https://docs.baseten.co/training/concepts/basics#compute-resources)
+
+The JSON probe reports the actual GPU and tests `nvidia-smi`, CUDA event
+timing, CUDA compilation, a Triton kernel, PyTorch Profiler, Nsight Systems,
+and Nsight Compute. Nsight Compute only passes when it reads a numeric hardware
+counter. Baseten installs the hash-locked worker dependencies in each job.
+Benchmark results, samples, and worker logs are retrieved from job checkpoints
+after completion. Use the Baseten dashboard for container startup and dependency
+installation logs.
+
+In a live A10G probe, CUDA event timing, `nvcc`, Triton, PyTorch Profiler,
+Nsight Systems CUDA tracing, and `nvidia-smi` passed. Nsight Compute started
+but the runtime denied access to GPU counters (`ERR_NVGPUCTRPERM`).
 
 ## Run or queue tasks
 
@@ -129,7 +231,7 @@ Timing includes everything between two events around the Python callable on its 
 
 Local state defaults to `~/.local/state/kcompute/` (`KCOMPUTE_STATE_DIR` or `--state-dir` overrides it). SQLite stores lifecycle metadata; `runs/RUN_ID/` contains the frozen bundle, final service result, and downloaded `artifacts/` with request, worker result, samples, logs, and checksum manifest. The provider verifies identities/checksums, retries retrieval without rerunning the kernel, and only treats execution as successful when accounting and a valid worker result agree.
 
-Remote data lives under `~/.cache/kcompute/runs/RUN_ID/`. Worker stdout/stderr are capped at 1 MiB each with truncation flags. Temporary build/cache directories are per run. Retention is explicit: no automatic cleanup or retention command is implemented yet, and cluster storage quotas remain unverified. Do not put local state/logs into Git. No GPU process is retained between runs.
+On Waterloo, remote data lives under `~/.cache/kcompute/runs/RUN_ID/`. Worker stdout/stderr are capped at 1 MiB each with truncation flags. Temporary build/cache directories are per run. Retention is explicit: no automatic cleanup or retention command is implemented yet, and cluster storage quotas remain unverified. Do not put local state/logs into Git. No GPU process is retained between runs.
 
 ## Extending and using the service
 
@@ -137,7 +239,7 @@ The reusable [ExecutionService](src/kernel_compute/service.py) takes a [RunStore
 
 The Waterloo adapter uses owner-scoped Slurm job identity checks, persistent submission intents and receipts, and conservative recovery. If acceptance cannot be established after a connection loss, state remains ambiguous rather than resubmitting. This avoids accidental duplicate work but does not claim exactly-once execution. A terminal job without a finalized result becomes a structured failure after a 30-second storage/accounting visibility grace period.
 
-Add another provider by implementing the protocol and registering its configuration/environment mapping. Baseten and Velocity adapters are not implemented; verify their arbitrary-code execution and artifact APIs before doing so. V1 Waterloo uses Slurm's queue, not a second local scheduler, and offers no FIFO/start-time promise. Explicit MIG selection is not implemented. The default remains the tested full GPU on `gpu-8-vm`.
+Add another provider by implementing the protocol and registering its configuration/environment mapping. Waterloo uses Slurm and offers no FIFO/start-time promise. The default remains the tested full GPU on `gpu-8-vm`.
 
 This is a personal/team runner under the submitting user's identity, not an adversarial benchmark service. Per-run processes/directories and scheduler allocations do not isolate malicious code from the user's files or writable environment. Multi-user server deployment requires a separate isolation/authorization design.
 

@@ -9,7 +9,7 @@ from pathlib import Path
 from kernel_compute import bundle
 from kernel_compute.common import TERMINAL, atomic_json, failure_result
 from kernel_compute.models import validate_result
-from kernel_compute.providers.base import AmbiguousSubmission, ProviderError
+from kernel_compute.providers.base import ProviderError, RejectedSubmission
 from kernel_compute.store import RunStore
 
 
@@ -71,7 +71,13 @@ class ExecutionService:
                 handle = provider.submit(
                     record["request"], self.store.directory(run_id) / "bundle.tar"
                 )
-            except (AmbiguousSubmission, ProviderError) as exc:
+            except RejectedSubmission as exc:
+                self.finish(
+                    record,
+                    failure_result(record["request"], "failed", "submission_rejected", str(exc)),
+                )
+                return record
+            except ProviderError as exc:
                 record["error"] = str(exc)
                 record["observation"] = {
                     "state": "unknown",

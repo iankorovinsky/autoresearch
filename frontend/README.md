@@ -30,12 +30,21 @@ Claude Code sign-in, `CLAUDE_CODE_OAUTH_TOKEN`, or `ANTHROPIC_API_KEY`. Set
 specific Claude Code executable. The assistant can read repository files (Read,
 Glob, Grep) but cannot edit files or run commands.
 
+To enable local Codex chat, sign in with ChatGPT using `codex login` and set
+`AUTORESEARCH_CODEX_ENABLED=1` in `.env.local`. The app uses `codex` from your
+PATH by default. Set `AUTORESEARCH_CODEX_BIN` to the absolute path of a compatible
+Codex CLI if needed. Restart Next.js after changing these settings. Codex App
+Server checks the ChatGPT sign-in before sending a turn.
+
+When both integrations are enabled, use the composer’s assistant selector.
+Each assistant keeps its own conversation history for the workspace thread.
+
 ## Included
 
 - Project and thread navigation, workspace search (Cmd/Ctrl+K), and new threads (Cmd/Ctrl+N). Search ranks thread titles, tasks, projects, and saved messages with TanStack match-sorter utilities. TanStack Virtual renders only the visible result rows; a memoized index and deferred updates keep typing responsive. Arrow keys select results, Enter opens the thread or matching message, and Escape closes search. Search currently covers browser-saved workspace data, not Supabase.
 
   Implementation follows the official [TanStack Virtual React API](https://tanstack.com/virtual/latest/docs/framework/react/react-virtual) and [fuzzy matching guide](https://tanstack.com/table/v8/docs/guide/fuzzy-filtering).
-- Research composer with Shift+Enter for newlines, text/code attachments (up to 1 MB each), an auto-research preference, and cancellable streamed Claude replies when enabled.
+- Research composer with Shift+Enter for newlines, text/code attachments (up to 1 MB each), an auto-research preference, and cancellable streamed Claude or Codex replies when enabled.
 - Overview, Timeline, Plan, Workers, Compute, Metrics, and Code views.
 - Interactive runtime chart, candidate selection, code excerpt copying, and Markdown report downloads.
 - Expandable experiment panel, collapsible sidebar, responsive stacked layout, keyboard focus states, and focus-contained dialogs.
@@ -52,6 +61,11 @@ store if you want to resume a chat after restarting the backend. The browser
 sends only the new prompt. The backend runs Claude with read-only tools for
 this chat integration.
 
+Codex App Server also keeps its conversation in local session history. Its
+workspace-thread mappings are stored in `frontend/.codex-local/`, keyed by
+workspace account and thread. Keep that directory and the Codex session store
+to resume after restarting the backend. The app starts Codex in read-only mode.
+
 Seeded experiment measurements, workers, timelines, and code excerpts are
 illustrative. The GPU and auto-research controls are preferences. Text and code
 attachments stay in the browser and only their filenames are saved in messages.
@@ -59,7 +73,7 @@ The current report export contains the sample candidate summary.
 
 ## Verification
 
-The production build type-checks the application. To check the Claude integration, start a new thread and ask Claude to remember a unique synthetic label. Wait for the streamed reply to complete, restart Next.js, and ask for the label in the same thread without including it in the follow-up. The frontend can be evaluated without any Python or GPU dependencies.
+The production build type-checks the application. To check either assistant, start a new thread and ask it to remember a unique synthetic label. Wait for the streamed reply to complete, restart Next.js, and ask the same assistant in the same thread to recall the label. The frontend can be evaluated without any Python or GPU dependencies.
 
 ## Next.js structure and environment
 

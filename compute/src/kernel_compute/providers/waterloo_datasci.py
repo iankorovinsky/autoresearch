@@ -6,11 +6,8 @@ from pathlib import Path
 
 from kernel_compute.common import atomic_json, digest
 from kernel_compute.models import JobHandle, Observation, WaterlooConfig
+from kernel_compute.providers import environment_lock
 from kernel_compute.providers.base import AmbiguousSubmission, InvalidArtifact, ProviderError
-
-
-def environment_lock():
-    return Path(__file__).with_name("worker.lock").read_bytes()
 
 
 class WaterlooProvider:
