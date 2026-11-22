@@ -1,0 +1,76 @@
+frontend/README.md
+  s_bcb8d198a9c77f::t_e0d177287a4a1d 33-42
+frontend/.env.example
+  s_bcb8d198a9c77f::t_b2d6f8e49d8f8d 12-16
+pygpubench/profile_ncu.py
+  s_bcb8d198a9c77f::t_5ec52ce005f139 157,159
+  s_bcb8d198a9c77f::t_686633cf38fa16 1-107,111-156,158,160-194
+  s_bcb8d198a9c77f::t_d97248e3eef3f2 108-110
+kernel_tools/src/kernel_tools/runner.py
+  s_bcb8d198a9c77f::t_f92170a94dfba2 1-69
+kernel_tools/pyproject.toml
+  s_bcb8d198a9c77f::t_6653538add2478 1-23
+pygpubench/evaluate_pygpubench.py
+  s_bcb8d198a9c77f::t_70ed12c2ecc0bd 330-333
+  s_bcb8d198a9c77f::t_6a3e7cb12b18bf 315-316
+frontend/src/lib/claude/events.ts
+  s_bcb8d198a9c77f::t_6554933fc3b692 46-47,53
+  s_bcb8d198a9c77f::t_ceab3d2ee13d10 1-9
+  s_bcb8d198a9c77f::t_0704fe965e33b8 70,73-77
+  s_bcb8d198a9c77f::t_9ae779792ccf2e 30
+frontend/src/App.tsx
+  s_bcb8d198a9c77f::t_327e95db13c4b6 148-151
+  s_bcb8d198a9c77f::t_dce2235c34176e 405
+  s_bcb8d198a9c77f::t_dfef6ee65d8912 782-785
+  s_bcb8d198a9c77f::t_8c4994b2d6ef64 360-363,365
+kernel_tools/src/kernel_tools/evaluate.py
+  s_bcb8d198a9c77f::t_85d5cc8ec4a7c0 1-12,16-38,41-53
+  s_bcb8d198a9c77f::t_0f7983bbf7fdf3 13-15,39-40
+kernel_tools/README.md
+  s_bcb8d198a9c77f::t_0f7983bbf7fdf3 91
+  s_bcb8d198a9c77f::t_1a0734dda60344 1-90,92-113
+frontend/src/lib/agents/stream-route.ts
+  s_bcb8d198a9c77f::t_a1c83abb4c6538 116
+  s_bcb8d198a9c77f::t_594421d0859ead 13-20,28,34
+  s_bcb8d198a9c77f::t_f111e445d29e4a 46,52-53
+frontend/src/lib/claude/agent.ts
+  s_bcb8d198a9c77f::t_594cf3f18c83cb 7,14-19,28-53
+  s_bcb8d198a9c77f::t_f0d89176a666aa 106,113-115,122-124,127-139
+kernel_tools/src/kernel_tools/profile.py
+  s_bcb8d198a9c77f::t_d0cc82d525e611 1-32
+kernel_tools/src/kernel_tools/summarize.py
+  s_bcb8d198a9c77f::t_bc9c628ddf2eec 1-51
+pygpubench/test_ncu_parse.py
+  s_bcb8d198a9c77f::t_b9307cb202c216 25-27
+  s_bcb8d198a9c77f::t_0a395b62a9a118 1-24,28-45
+pygpubench/ncu_parse.py
+  s_bcb8d198a9c77f::t_2abde9ec052851 1-167
+kernel_tools/src/kernel_tools/__init__.py
+  s_bcb8d198a9c77f::t_e8fbdaef853edb 1-11
+frontend/src/app/api/claude/route.ts
+  s_bcb8d198a9c77f::t_69234d51f77894 2,11-12
+kernel_tools/src/kernel_tools/mcp_server.py
+  s_bcb8d198a9c77f::t_0f7983bbf7fdf3 37-38
+  s_bcb8d198a9c77f::t_79f4656e62c613 1-36,39-66
+frontend/tests/claude-agent.test.mjs
+  s_bcb8d198a9c77f::t_a4486d9c5aa9dc 54-65
+kernel_tools/tests/test_kernel_tools.py
+  s_bcb8d198a9c77f::t_02233eb66eb8b3 1-28,30-31,33-64
+  s_bcb8d198a9c77f::t_0f7983bbf7fdf3 29,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3a2654a7052757339a2b0d4ffd3d48de4c24398d",
+  "prompts": {},
+  "sessions": {
+    "s_bcb8d198a9c77f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b427e664-dfb9-4a1f-ab4f-519615feb1d9",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "JuliaIlioukhina001 <jilioukhina@gmail.com>"
+    }
+  }
+}
