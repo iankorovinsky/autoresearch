@@ -22,3 +22,6 @@ yarn-error.log*
 
 # Generated Next.js types
 next-env.d.ts
+
+# Local Claude session mappings
+.claude-local/

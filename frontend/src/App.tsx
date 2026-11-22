@@ -57,6 +57,8 @@ const tabs = [
   "Code",
 ] as const;
 type Tab = (typeof tabs)[number];
+/** The local chat assistant served by `src/app/api/claude/route.ts`. */
+const agentLabel = "Claude";
 function Brand({ small = false }: { small?: boolean }) {
   return (
     <span className={`brand-mark ${small ? "small" : ""}`} aria-hidden="true">
@@ -137,24 +139,26 @@ export default function App({
   } | null>(null);
   const [draft, setDraft] = useState("");
   const [auto, setAuto] = useState(true);
-  const [running, setRunning] = useState(false);
+  const [runningThreadId, setRunningThreadId] = useState<string | null>(null);
+  const running = runningThreadId !== null;
+  const [responseError, setResponseError] = useState<{
+    threadId: string;
+    message: string;
+  } | null>(null);
   const [modal, setModal] = useState<"settings" | "experiments" | null>(null);
   const [toast, setToast] = useState("");
   const [attachments, setAttachments] = useState<
     { name: string; content: string }[]
   >([]);
-  const [model, setModel] = useState("Claude Sonnet");
-  const [modelOpen, setModelOpen] = useState(false);
   const [gpu, setGpu] = useState("NVIDIA T4");
   const [selectedExperiment, setSelectedExperiment] = useState("EXP-012");
   const dialogRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const responseRef = useRef<AbortController | null>(null);
   useEffect(() => {
     setThreads(loadThreads(`ar:${userId}:threads`));
-    setModel(loadPreference(`ar:${userId}:model`, "Claude Sonnet"));
     setGpu(loadPreference(`ar:${userId}:gpu`, "NVIDIA T4"));
     setSidebar(window.innerWidth > 700);
     setRestored(true);
@@ -172,12 +176,11 @@ export default function App({
   useEffect(() => {
     if (!restored) return;
     try {
-      localStorage.setItem(`ar:${userId}:model`, model);
       localStorage.setItem(`ar:${userId}:gpu`, gpu);
     } catch {
       /* Preferences remain in session memory. */
     }
-  }, [model, gpu, restored, userId]);
+  }, [gpu, restored, userId]);
   useEffect(() => {
     if (toast) {
       const t = setTimeout(() => setToast(""), 3500);
@@ -196,7 +199,6 @@ export default function App({
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setModal(null);
-        setModelOpen(false);
         setSearch((s) => !s);
       }
       if ((e.metaKey || e.ctrlKey) && e.key === "n") {
@@ -205,14 +207,13 @@ export default function App({
       }
       if (e.key === "Escape") {
         setModal(null);
-        setModelOpen(false);
         setSearch(false);
       }
     };
     window.addEventListener("keydown", handler);
     return () => {
       window.removeEventListener("keydown", handler);
-      if (timerRef.current) clearTimeout(timerRef.current);
+      responseRef.current?.abort();
     };
   }, []);
   useEffect(() => {
@@ -296,8 +297,10 @@ export default function App({
     setAttachments([]);
     setTimeout(() => inputRef.current?.focus(), 50);
   }
-  function send() {
-    if (!draft.trim() || running) return;
+  async function send() {
+    if (!draft.trim() || responseRef.current) return;
+    const controller = new AbortController();
+    responseRef.current = controller;
     const id = active.id;
     const message: Message = {
       role: "user",
@@ -317,32 +320,80 @@ export default function App({
     );
     setDraft("");
     setAttachments([]);
-    setRunning(true);
-    timerRef.current = setTimeout(() => {
-      setThreads((ts) =>
-        ts.map((t) =>
-          t.id === id
-            ? {
-                ...t,
-                messages: [
-                  ...t.messages,
-                  {
-                    role: "assistant",
-                    text:
-                      "Your research request has been added to this local workspace. " +
-                      (message.files?.length
-                        ? `Attached context: ${message.files.join(", ")}. `
-                        : "") +
-                      "The next step is to establish a baseline, generate candidates, and validate correctness before comparing performance. Connect the research backend to execute this plan; the experiment results shown here are sample data.",
-                  },
-                ],
-              }
-            : t,
-        ),
-      );
-      setRunning(false);
-      setPanel(true);
-    }, 1400);
+    setResponseError(null);
+    setRunningThreadId(id);
+
+    try {
+      const response = await fetch("/api/claude", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ threadId: id, input: message.text }),
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(await response.text());
+      if (!response.body)
+        throw new Error(`${agentLabel} did not return a response.`);
+
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
+      const items = new Map<string, string>();
+      let pending = "";
+      let completed = false;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const lines = (pending + value).split("\n");
+          pending = lines.pop() ?? "";
+          for (const line of lines) {
+            const event = JSON.parse(line);
+            if (event.type === "error") throw new Error(event.message);
+            if (event.type === "done") {
+              completed = true;
+              continue;
+            }
+            if (event.type !== "delta" && event.type !== "message") continue;
+
+            const previous =
+              event.type === "delta" ? (items.get(event.itemId) ?? "") : "";
+            items.set(event.itemId, previous + event.text);
+            const text = [...items.values()].filter(Boolean).join("\n\n");
+            if (!text) continue;
+            setThreads((current) =>
+              current.map((thread) => {
+                if (thread.id !== id) return thread;
+                const messages =
+                  thread.messages.at(-1)?.role === "assistant"
+                    ? thread.messages.slice(0, -1)
+                    : thread.messages;
+                return {
+                  ...thread,
+                  messages: [...messages, { role: "assistant", text }],
+                };
+              }),
+            );
+          }
+        }
+      } finally {
+        await reader.cancel().catch(() => {});
+      }
+      if (!completed)
+        throw new Error(`The ${agentLabel} response disconnected.`);
+    } catch (error) {
+      if (!controller.signal.aborted) {
+        setResponseError({
+          threadId: id,
+          message:
+            error instanceof Error
+              ? error.message
+              : `Could not reach ${agentLabel}.`,
+        });
+      }
+    } finally {
+      responseRef.current = null;
+      setRunningThreadId(null);
+    }
   }
   function exportReport() {
     if (!initialThreads.some((thread) => thread.id === active.id)) {
@@ -697,7 +748,15 @@ export default function App({
                         <div className="message-eyebrow">
                           {m.role === "user" ? "YOU" : "AUTO RESEARCH"}
                         </div>
-                        <p>{m.text}</p>
+                        <p
+                          className={
+                            m.role === "assistant"
+                              ? "streamed-response"
+                              : undefined
+                          }
+                        >
+                          {m.text}
+                        </p>
                         {m.files?.map((f) => (
                           <span className="file-chip" key={f}>
                             <FileText size={12} />
@@ -708,11 +767,16 @@ export default function App({
                     ))}
                   </>
                 )}
-                {running && (
-                  <div className="thinking">
-                    <LoaderCircle size={15} className="spin" /> Preparing a
-                    research plan…
+                {runningThreadId === active.id && (
+                  <div className="thinking" role="status">
+                    <LoaderCircle size={15} className="spin" /> {agentLabel} is
+                    responding…
                   </div>
+                )}
+                {responseError?.threadId === active.id && (
+                  <p className="thinking" role="alert">
+                    {responseError.message}
+                  </p>
                 )}
                 <div ref={bottomRef} />
               </div>
@@ -805,42 +869,16 @@ export default function App({
                       </span>
                       Auto research
                     </button>
-                    <div className="model-picker">
-                      <button
-                        className="model-button"
-                        onClick={() => setModelOpen(!modelOpen)}
-                      >
-                        {model}
-                        <ChevronDown size={11} />
-                      </button>
-                      {modelOpen && (
-                        <div className="model-menu">
-                          {["Claude Sonnet", "Claude Opus", "GPT-5"].map(
-                            (m) => (
-                              <button
-                                key={m}
-                                onClick={() => {
-                                  setModel(m);
-                                  setModelOpen(false);
-                                }}
-                              >
-                                {m}
-                                {model === m && <Check size={13} />}
-                              </button>
-                            ),
-                          )}
-                          <small>Model preference · demo only</small>
-                        </div>
-                      )}
-                    </div>
+                    <span className="model-button" aria-label="Assistant">
+                      {agentLabel}
+                    </span>
                     <button
                       className={`send-button ${running ? "running" : ""}`}
                       disabled={!running && !draft.trim()}
                       aria-label={running ? "Stop response" : "Send message"}
                       onClick={() => {
                         if (running) {
-                          if (timerRef.current) clearTimeout(timerRef.current);
-                          setRunning(false);
+                          responseRef.current?.abort();
                           setToast("Response stopped");
                         } else send();
                       }}
@@ -1391,21 +1429,10 @@ export default function App({
                     <option>NVIDIA A100</option>
                   </select>
                 </label>
-                <label className="field-label">
-                  Preferred model
-                  <select
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                  >
-                    <option>Claude Sonnet</option>
-                    <option>Claude Opus</option>
-                    <option>GPT-5</option>
-                  </select>
-                </label>
                 <div className="connection-state">
                   <Circle size={12} />
                   <div>
-                    <strong>Backend not connected</strong>
+                    <strong>Experiment compute</strong>
                     <p>
                       This workspace uses sample experiments. Thread messages
                       are saved in this browser.
