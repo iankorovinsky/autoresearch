@@ -145,6 +145,10 @@ export default function App({
     threadId: string;
     message: string;
   } | null>(null);
+  const [responseStatus, setResponseStatus] = useState<{
+    threadId: string;
+    text: string;
+  } | null>(null);
   const [modal, setModal] = useState<"settings" | "experiments" | null>(null);
   const [toast, setToast] = useState("");
   const [attachments, setAttachments] = useState<
@@ -353,7 +357,12 @@ export default function App({
               completed = true;
               continue;
             }
+            if (event.type === "status") {
+              setResponseStatus({ threadId: id, text: event.text });
+              continue;
+            }
             if (event.type !== "delta" && event.type !== "message") continue;
+            setResponseStatus(null);
 
             const previous =
               event.type === "delta" ? (items.get(event.itemId) ?? "") : "";
@@ -393,6 +402,7 @@ export default function App({
     } finally {
       responseRef.current = null;
       setRunningThreadId(null);
+      setResponseStatus(null);
     }
   }
   function exportReport() {
@@ -769,8 +779,10 @@ export default function App({
                 )}
                 {runningThreadId === active.id && (
                   <div className="thinking" role="status">
-                    <LoaderCircle size={15} className="spin" /> {agentLabel} is
-                    responding…
+                    <LoaderCircle size={15} className="spin" />{" "}
+                    {responseStatus?.threadId === active.id
+                      ? responseStatus.text
+                      : `${agentLabel} is responding…`}
                   </div>
                 )}
                 {responseError?.threadId === active.id && (

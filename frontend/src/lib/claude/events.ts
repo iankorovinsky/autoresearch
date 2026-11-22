@@ -1,4 +1,12 @@
-import type { AgentText } from "../agents/stream-route";
+import type { AgentEvent } from "../agents/stream-route";
+
+/** Progress text shown while one of the kernel tools runs on a remote GPU. */
+const toolStatus: Record<string, string> = {
+  mcp__autoresearch__evaluate_kernel:
+    "Evaluating the kernel on a Modal GPU (correctness, then timing)…",
+  mcp__autoresearch__profile_kernel:
+    "Profiling the kernel with Nsight Compute on a Modal GPU…",
+};
 
 /**
  * The subset of Claude Agent SDK messages this mapper reads. Kept structural
@@ -19,7 +27,7 @@ export type ClaudeMessageLike =
       type: "assistant";
       parent_tool_use_id: string | null;
       session_id: string;
-      message: { content: { type: string; text?: string }[] };
+      message: { content: { type: string; text?: string; name?: string }[] };
     }
   | { type: string; session_id?: string };
 
@@ -35,13 +43,14 @@ export type ClaudeMessageLike =
  * therefore re-emitted under the IDs of the text blocks streamed for this
  * turn, in order, so the final text replaces the partial stream instead of
  * appearing next to it; then the counter moves on. Subagent output (non-null
- * `parent_tool_use_id`), thinking, and tool blocks are skipped.
+ * `parent_tool_use_id`) and thinking are skipped. A call to one of the kernel
+ * tools becomes a `status` event so the browser can say what is running.
  */
 export function createClaudeTextMapper() {
   let turn = 0;
   /** Item IDs of text blocks streamed since the last complete message. */
   let streamed: string[] = [];
-  return function claudeTextEvents(message: ClaudeMessageLike): AgentText[] {
+  return function claudeTextEvents(message: ClaudeMessageLike): AgentEvent[] {
     if (message.type === "stream_event" && "event" in message) {
       if (message.parent_tool_use_id !== null) return [];
       const { event } = message;
@@ -58,9 +67,14 @@ export function createClaudeTextMapper() {
     }
     if (message.type === "assistant" && "message" in message) {
       if (message.parent_tool_use_id !== null) return [];
-      const events: AgentText[] = [];
+      const events: AgentEvent[] = [];
       let textBlock = 0;
       message.message.content.forEach((block, index) => {
+        if (block.type === "tool_use") {
+          const text = block.name ? toolStatus[block.name] : undefined;
+          if (text) events.push({ type: "status", text });
+          return;
+        }
         if (block.type !== "text") return;
         events.push({
           type: "message",

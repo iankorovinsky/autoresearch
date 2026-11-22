@@ -51,6 +51,18 @@ test('the complete message reuses the streamed item ID when block indexes differ
   ]);
 });
 
+test('kernel tool calls become status events; other tools stay silent', () => {
+  const map = createClaudeTextMapper();
+  assert.deepEqual(map(assistant([{ type: 'tool_use', name: 'mcp__autoresearch__evaluate_kernel' }])), [
+    { type: 'status', text: 'Evaluating the kernel on a Modal GPU (correctness, then timing)…' },
+  ]);
+  assert.deepEqual(map(assistant([{ type: 'tool_use', name: 'mcp__autoresearch__profile_kernel' }])), [
+    { type: 'status', text: 'Profiling the kernel with Nsight Compute on a Modal GPU…' },
+  ]);
+  assert.deepEqual(map(assistant([{ type: 'tool_use', name: 'Read' }])), []);
+  assert.deepEqual(map(assistant([{ type: 'tool_use', name: 'mcp__autoresearch__evaluate_kernel' }], 'tool-1')), []);
+});
+
 test('thinking, tool, subagent, and non-text events produce nothing', () => {
   const map = createClaudeTextMapper();
   assert.deepEqual(map({ type: 'system', session_id: session }), []);

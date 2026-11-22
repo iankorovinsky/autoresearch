@@ -4,11 +4,18 @@ import {
   type SDKMessage,
   type SDKResultMessage,
 } from "@anthropic-ai/claude-agent-sdk";
+import path from "node:path";
 import type { AgentTurn } from "../agents/stream-route";
 import { createClaudeTextMapper } from "./events";
 
 /** Tools the chat assistant may use: read the repository, never change it. */
 const readOnlyTools = ["Read", "Glob", "Grep"];
+
+/** Kernel tools served by `kernel_tools/` over MCP; see its README. */
+const kernelToolNames = [
+  "mcp__autoresearch__evaluate_kernel",
+  "mcp__autoresearch__profile_kernel",
+];
 
 const appendSystemPrompt = [
   "You are the assistant inside the Auto Research workspace, a tool for",
@@ -17,6 +24,32 @@ const appendSystemPrompt = [
   "AGENTS.md explains how to cite them. Answer in this chat. You can read",
   "files to ground an answer, but you cannot edit files or run commands here.",
 ].join(" ");
+
+const kernelToolsPrompt = [
+  "You also have two kernel tools that run on a remote Modal GPU and cost",
+  "money: evaluate_kernel checks a KernelBench candidate for correctness and",
+  "measures its speedup over PyTorch, and profile_kernel runs Nsight Compute",
+  "and summarizes throughput, occupancy, and stall reasons. Pass the full",
+  "source of a file defining ModelNew. Only report speedups that",
+  "evaluate_kernel measured, and say when a run failed or was skipped.",
+].join(" ");
+
+/** True when the local app should attach the kernel tools MCP server. */
+export function kernelToolsEnabled() {
+  return process.env.AUTORESEARCH_CLAUDE_TOOLS === "1";
+}
+
+/** Interpreter for the kernel tools server: the component venv by default. */
+function kernelToolsPython(cwd: string) {
+  if (process.env.AUTORESEARCH_TOOLS_PYTHON) {
+    return process.env.AUTORESEARCH_TOOLS_PYTHON;
+  }
+  const venv =
+    process.platform === "win32"
+      ? ["kernel_tools", ".venv", "Scripts", "python.exe"]
+      : ["kernel_tools", ".venv", "bin", "python"];
+  return path.join(cwd, ...venv);
+}
 
 function resultFailure(result: SDKResultMessage, lastText: string) {
   if (/not logged in|please run \/login/i.test(lastText)) {
@@ -70,22 +103,40 @@ export const runClaudeTurn: AgentTurn = async ({
     const stop = () => controller.abort();
     signal.addEventListener("abort", stop, { once: true });
     const toEvents = createClaudeTextMapper();
+    const tools = kernelToolsEnabled();
     const options: Options = {
       cwd,
       abortController: controller,
       includePartialMessages: true,
       permissionMode: "default",
       tools: readOnlyTools,
-      allowedTools: readOnlyTools,
+      allowedTools: tools
+        ? [...readOnlyTools, ...kernelToolNames]
+        : readOnlyTools,
       settingSources: ["project"],
       maxTurns: 30,
       resume,
       systemPrompt: {
         type: "preset",
         preset: "claude_code",
-        append: appendSystemPrompt,
+        append: tools
+          ? `${appendSystemPrompt} ${kernelToolsPrompt}`
+          : appendSystemPrompt,
       },
     };
+    if (tools) {
+      options.mcpServers = {
+        autoresearch: {
+          type: "stdio",
+          command: kernelToolsPython(cwd),
+          args: ["-m", "kernel_tools.mcp_server"],
+          env: { AUTORESEARCH_REPO_ROOT: cwd, PYTHONUTF8: "1" },
+          // One evaluation or profile can take many minutes on a cold image.
+          timeout: 40 * 60_000,
+          alwaysLoad: true,
+        },
+      };
+    }
     if (process.env.AUTORESEARCH_CLAUDE_MODEL) {
       options.model = process.env.AUTORESEARCH_CLAUDE_MODEL;
     }

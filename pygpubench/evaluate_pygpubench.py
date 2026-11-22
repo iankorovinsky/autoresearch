@@ -312,7 +312,8 @@ except ImportError:
     modal = None
 
 if modal is not None:
-    image = (
+    # Build steps first; `profile_ncu.py` extends `base_image` before adding local files.
+    base_image = (
         modal.Image.from_registry("nvidia/cuda:13.0.1-cudnn-devel-ubuntu24.04", add_python="3.12")
         .entrypoint([])
         .apt_install("libseccomp2")
@@ -326,11 +327,10 @@ if modal is not None:
             "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
             "TORCH_EXTENSIONS_DIR": "/tmp/kb_build",
         })
-        .add_local_dir(
-            str(LOCAL_KERNELBENCH),
-            remote_path="/opt/KernelBench",
-            ignore=["**/__pycache__", "notebooks", "assets", "results", "scripts", ".env*"],
-        )
+    )
+    KERNELBENCH_IGNORE = ["**/__pycache__", "notebooks", "assets", "results", "scripts", ".env*"]
+    image = base_image.add_local_dir(
+        str(LOCAL_KERNELBENCH), remote_path="/opt/KernelBench", ignore=KERNELBENCH_IGNORE,
     )
     app = modal.App("kernelbench-pygpubench", image=image)
 

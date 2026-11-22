@@ -30,6 +30,16 @@ Claude Code sign-in, `CLAUDE_CODE_OAUTH_TOKEN`, or `ANTHROPIC_API_KEY`. Set
 specific Claude Code executable. The assistant can read repository files (Read,
 Glob, Grep) but cannot edit files or run commands.
 
+Set `AUTORESEARCH_CLAUDE_TOOLS=1` to also give the assistant the kernel tools
+from [`kernel_tools/`](../kernel_tools/README.md): `evaluate_kernel` runs the
+KernelBench correctness check and PyGPUBench timing on a Modal L4, and
+`profile_kernel` runs Nsight Compute there and returns a reduced summary. The
+app starts the tools' MCP server from `kernel_tools/.venv` (or
+`AUTORESEARCH_TOOLS_PYTHON`) for each turn, raises the reply timeout to 45
+minutes, and shows what is running under the message. Every call uses the Modal
+account logged in on this machine. The same server attaches to Claude Code,
+Codex, or other MCP clients; see its README.
+
 ## Included
 
 - Project and thread navigation, workspace search (Cmd/Ctrl+K), and new threads (Cmd/Ctrl+N). Search ranks thread titles, tasks, projects, and saved messages with TanStack match-sorter utilities. TanStack Virtual renders only the visible result rows; a memoized index and deferred updates keep typing responsive. Arrow keys select results, Enter opens the thread or matching message, and Escape closes search. Search currently covers browser-saved workspace data, not Supabase.

@@ -10,6 +10,14 @@ export type AgentText = {
   text: string;
 };
 
+/** A short progress note, for example while a long tool call runs. */
+export type AgentStatus = {
+  type: "status";
+  text: string;
+};
+
+export type AgentEvent = AgentText | AgentStatus;
+
 export type AgentTurn = (args: {
   /** Directory the agent may read; the repository root in this app. */
   cwd: string;
@@ -17,12 +25,13 @@ export type AgentTurn = (args: {
   /** Provider conversation ID saved by an earlier turn of this thread. */
   savedId?: string;
   signal: AbortSignal;
-  onText: (event: AgentText) => void;
+  onText: (event: AgentEvent) => void;
   /** Persist the provider conversation ID for this workspace thread. */
   save: (id: string) => Promise<void>;
 }) => Promise<void>;
 
 const maxInputLength = 64 * 1024;
+const defaultTimeoutMs = 300_000;
 
 /**
  * Build the POST handler shared by the local agent routes. Each provider
@@ -34,11 +43,14 @@ export function createAgentRoute({
   enabledEnv,
   stateDir,
   run,
+  timeoutMs = defaultTimeoutMs,
 }: {
   label: string;
   enabledEnv: string;
   stateDir: string;
   run: AgentTurn;
+  /** Wall-clock limit for one reply; raise it when turns may run GPU jobs. */
+  timeoutMs?: number;
 }) {
   const activeThreads = new Set<string>();
 
@@ -101,7 +113,7 @@ export function createAgentRoute({
     const signal = AbortSignal.any([
       request.signal,
       cancel.signal,
-      AbortSignal.timeout(300_000),
+      AbortSignal.timeout(timeoutMs),
     ]);
     const encoder = new TextEncoder();
     const stream = new ReadableStream<Uint8Array>({
